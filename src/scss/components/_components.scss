@@ -1,0 +1,205 @@
+.imoveis {
+  &__box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 30rem;
+    width: 50rem;
+
+    @include boxshadow;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+    &:hover svg {
+      transition: all 0.4s;
+      opacity: 1;
+    }
+  }
+
+  &__left {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    z-index: 20;
+  }
+
+  &__right {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    z-index: 20;
+  }
+
+  &__box:hover &__info {
+    opacity: 0.8;
+    transition: all 0.2s;
+  }
+
+  &__info {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    background-color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 0 0 20%;
+
+    p {
+      color: white;
+      font-family: $text-normal;
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+  }
+
+  &__map {
+  }
+}
+
+.sidenav {
+  position: fixed;
+  width: inherit;
+  padding-right: 1rem;
+
+  &__list {
+    list-style: none;
+    & > *:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__item {
+    // border-bottom: solid 2px var(--color-primary);
+    // width: 85%;
+
+    span {
+      display: block;
+      width: 0;
+      height: 2px;
+      background-color: #faf8f5;
+      transition: all 0.25s;
+      transition-timing-function: ease-in;
+    }
+
+    &:hover span {
+      width: 70%;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 0.8rem;
+    padding-left: 0;
+
+    &:link,
+    &:visited {
+      text-decoration: none;
+      font-size: 1.4rem;
+      color: var(--color-light);
+      text-transform: uppercase;
+      font-family: $text-heading;
+      font-weight: 400;
+    }
+
+    &:hover,
+    &:active {
+    }
+  }
+
+  /////
+  &__checkbox {
+    display: none;
+  }
+
+  &__button {
+    display: inline-block;
+
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    height: 4rem;
+    width: 4rem;
+    position: relative;
+    left: 80%;
+    border-radius: 50%;
+    z-index: 10;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.55s linear;
+  }
+
+  &__icon {
+    position: relative;
+    margin-top: 2rem;
+    &,
+    &::before,
+    &::after {
+      width: 2rem;
+      height: 1.5px;
+      background-color: var(--color-light);
+      display: inline-block;
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+    &::before {
+      top: -0.8rem;
+    }
+    &::after {
+      top: 0.8rem;
+    }
+  }
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+    &::before {
+      top: 0;
+      transform: rotate(-135deg);
+    }
+    &::after {
+      top: 0;
+      transform: rotate(135deg);
+    }
+  }
+
+  &__checkbox:not(:checked) + &__button {
+    left: 15%;
+  }
+}
+
+//ANIMATIONS//@include
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
+}

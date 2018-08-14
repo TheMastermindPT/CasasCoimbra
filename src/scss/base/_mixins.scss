@@ -1,0 +1,12 @@
+%title {
+  text-transform: uppercase;
+  font-family: $text-heading;
+}
+
+@mixin boxshadow {
+  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+@mixin textshadow {
+  text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}

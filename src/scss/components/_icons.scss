@@ -1,0 +1,115 @@
+.header__scroll {
+  position: absolute;
+  height: 20rem;
+  width: 20rem;
+  bottom: 8rem;
+  transform: scaleX(-50%);
+  left: 50%;
+  @include textshadow;
+}
+
+.white {
+  fill: white;
+}
+
+.red {
+  fill: #d93240;
+}
+
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.icon-home {
+  width: 32px;
+  height: 32px;
+  background-position: 0 0;
+}
+
+.icon-cross {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+.icon-profile {
+  width: 32px;
+  height: 32px;
+  background-position: -48px 0;
+}
+.icon-location {
+  width: 32px;
+  height: 32px;
+  background-position: -96px 0;
+}
+.icon-bubble {
+  width: 32px;
+  height: 32px;
+  background-position: -144px 0;
+}
+.icon-bubbles {
+  width: 36px;
+  height: 32px;
+  background-position: -192px 0;
+}
+.icon-spinner3 {
+  width: 32px;
+  height: 32px;
+  background-position: -240px 0;
+}
+.icon-circle-up {
+  width: 32px;
+  height: 32px;
+  background-position: -288px 0;
+}
+.icon-circle-right {
+  width: 3.2rem;
+  height: 3.2rem;
+  background-position: -336px 0;
+}
+.icon-circle-down {
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  transform: scale(1);
+  animation: pulse 0.5s ease-out infinite alternate;
+  background-position: -384px 0;
+}
+
+.icon-circle-left {
+  width: 3.2rem;
+  height: 3.2rem;
+  background-position: -432px 0;
+}
+.icon-mail4 {
+  width: 32px;
+  height: 32px;
+  background-position: -480px 0;
+}
+.icon-google-plus3 {
+  width: 32px;
+  height: 32px;
+  background-position: -528px 0;
+}
+.icon-facebook {
+  width: 32px;
+  height: 32px;
+  background-position: -576px 0;
+}
+.icon-twitter {
+  width: 32px;
+  height: 32px;
+  background-position: -624px 0;
+}
+.icon-rss {
+  width: 32px;
+  height: 32px;
+  background-position: -672px 0;
+}
+.icon-linkedin {
+  width: 32px;
+  height: 32px;
+  background-position: -720px 0;
+}
