@@ -1,9 +1,10 @@
 require('babel-runtime/regenerator');
 require('webpack-hot-middleware/client?reload=true');
+
 require('../scss/main.scss');
 require('../index.html');
 
-$(document).ready(() => {
+$(window).ready(() => {
   $('.sidenav__list').css('display', 'none');
 
   $('#scrollToAbout').on('click', () => {
@@ -81,5 +82,10 @@ $(document).ready(() => {
       $('#navigator').switchClass('navigator', 'navigator--closed', 500, 'linear');
       $('.sidenav__list').css('display', 'none');
     }
+  });
+
+  $('#accordion').accordion({
+    active: 0,
+    heightStyle: 'content',
   });
 });

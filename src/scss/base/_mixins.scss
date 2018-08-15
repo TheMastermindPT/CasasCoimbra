@@ -10,3 +10,12 @@
 @mixin textshadow {
   text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
 }
+
+@mixin spanAnimated {
+  display: block;
+  width: 0;
+  height: 2px;
+  transition: all 0.25s;
+  transition-timing-function: ease-in;
+  @content;
+}

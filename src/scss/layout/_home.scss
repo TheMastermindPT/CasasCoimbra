@@ -185,3 +185,36 @@
     flex: 0 0 40%;
   }
 }
+.faq {
+  padding: 2rem 8rem 2rem 2rem;
+  &__accordion {
+    overflow-y: auto;
+    h3 {
+      font-family: $text-heading;
+      font-size: 2rem;
+      color: var(--color-light);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      outline: none;
+      cursor: pointer;
+      background-color: var(--color-secondary);
+      padding: 1rem;
+    }
+  }
+  &__collapse {
+    border-radius: 5px;
+  }
+  &__list {
+    margin-left: 4rem;
+  }
+  &__item {
+    margin-bottom: 1rem;
+    p {
+      font-family: $text-normal;
+      font-size: 1.8rem;
+      line-height: 1.8;
+      width: 100%;
+      font-weight: 400;
+    }
+  }
+}
