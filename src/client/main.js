@@ -88,4 +88,17 @@ $(window).ready(() => {
     active: 0,
     heightStyle: 'content',
   });
+
+  $('.servicos__accordion').accordion({
+    active: 0,
+    heightStyle: 'content',
+  });
+
+  $(document).mouseup((e) => {
+    const popup = $('.popup');
+    // if the target of the click isn't the container nor a descendant of the container
+    if (popup.is(e.target) && popup.has(e.target).length === 0) {
+      window.history.back();
+    }
+  });
 });

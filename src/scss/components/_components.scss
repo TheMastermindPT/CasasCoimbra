@@ -1,14 +1,14 @@
 .imoveis {
-  a {
-  }
   &__box {
     position: relative;
     overflow: hidden;
     border-radius: 5px;
-    margin-bottom: 4rem;
+
     // height: 30rem;
     // width: 50rem;
-
+    &:nth-child(-n + 3) {
+      margin-bottom: 4rem;
+    }
     flex: 0 0 30%;
 
     @include boxshadow;
@@ -91,22 +91,6 @@
   }
 
   &__item {
-    // border-bottom: solid 2px var(--color-primary);
-    // width: 85%;
-
-    // span {
-    //   display: block;
-    //   width: 0;
-    //   height: 2px;
-    //   background-color: #faf8f5;
-    //   transition: all 0.25s;
-    //   transition-timing-function: ease-in;
-    // }
-
-    // &:hover span {
-    //   width: 70%;
-    // }
-
     span {
       @include spanAnimated {
         background-color: white;
@@ -205,6 +189,15 @@
   &__checkbox:not(:checked) + &__button {
     left: 15%;
   }
+}
+
+.contactme {
+  position: fixed;
+  right: 8rem;
+  top: 8rem;
+  z-index: 1000;
+  filter: drop-shadow(5px 3px 0.5rem #000);
+  fill: white;
 }
 
 //ANIMATIONS//@include

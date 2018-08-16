@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900|Neuton" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900|Neuton:400,400i" rel="stylesheet">
     <title>Casas Coimbra</title>
 
 </head>
 
 <body>
-
     <div class="container" id="container">
         <nav class="navigator--closed" id="navigator">
 
@@ -41,7 +40,7 @@
                     </li>
 
                     <li class="sidenav__item">
-                        <a class="sidenav__link" href="#faq" id="sidenav__faq">Perguntas Frequentes</a>
+                        <a class="sidenav__link" href="#faq" id="sidenav__faq">Termos de Serviço</a>
                         <span></span>
                     </li>
                 </ul>
@@ -81,27 +80,71 @@
                     </svg>
                 </div>
                 <div class="servicos view" id="servicos">
+                    <!-- <div class="header">
+                        <h1>
+                            <span class="header__title">Casas Coimbra</span>
+                            <span class="header__subtitle">Uma cena qualquer</span>
+                        </h1>
+                    </div> -->
                     <div class="servicos__box">
-                        <div class="servicos__card center">
-                            <h2 class="servicos__title">Gestão Completa
+                        <div class="servicos__card">
+                            <h2 class="servicos__title">Gestão de Visitas
                             </h2>
-                            <p class="servicos__description justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui corporis optio quos placeat quaerat
-                                dignissimos tenetur odio quisquam quas incidunt.</p>
+                            <blockquote class="servicos__description justify">"Mantenha a gestão do seu próprio imóvel e deixo-nos encontrar o inquilino ideal para o imóvel."</blockquote>
+                            <div class="servicos__accordion">
+                                <h3 class="servicos__sub">Apartamento Completo</h3>
+                                <div class="servicos__sub-box">
+                                    <ul class="servicos__list">
+                                        <li class="servicos__item">Fotografias e publicidade tanto física como on-line</li>
+                                        <li class="servicos__item">Gestão de visitas e contactos</li>
+                                        <li class="servicos__item">Elaboração de contracto</li>
+                                        <li class="servicos__item">Entrega das chaves</li>
+                                        <li class="servicos__item">Serviço pago por 6 meses</li>
+                                    </ul>
+                                </div>
+                                <h3 class="servicos__sub">Quartos</h3>
+                                <div class="servicos__sub-box">
+                                    <ul class="servicos__list">
+                                        <li class="servicos__item">Incluí todos os serviços descritos anteriormente com adição dos seguintes</li>
+                                        <li class="servicos__item">Controlo dos serviços de limpeza (staff/consumíveis)
+                                        </li>
+                                        <li class="servicos__item">Pagamento e controlo de contas e despesas</li>
+                                    </ul>
+                                </div>
+                                <h3 class="servicos__sub">Airbnb </h3>
+                                <div class="servicos__sub-box">
+                                    <ul class="servicos__list">
+                                        <li class="servicos__item">Acompanhar e entrada e saída dos hospedes</li>
+                                        <li class="servicos__item">Gestão dos serviços de lavandaria
+                                        </li>
+                                        <li class="servicos__item">Manutenção de consumíveis</li>
+                                        <li class="servicos__item">Serviços de transfere </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="servicos__box">
-                        <div class="servicos__card center">
+                        <div class="servicos__card">
                             <h2 class="servicos__title">Gestão de Visitas</h2>
-                            <p class="servicos__description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui corporis optio quos placeat quaerat
-                                dignissimos tenetur odio quisquam quas incidunt.</p>
+                            <blockquote class="servicos__description justify">"Garanta que o seu imóvel é bem cuidado, que os seus inquilinos estão satisfeitos e que o seu
+                                rendimento é pago a horas enquanto disfruta do tempo livre de ter um grupo de profissionais
+                                a gerir todo o processo."</blockquote>
+                            <ul class="servicos__list">
+                                <li class="servicos__item">Fotografias e publicidade tanto física como on-line</li>
+                                <li class="servicos__item">Gestão de visitas e contactos</li>
+                                <li class="servicos__item">Elaboração de contracto</li>
+                                <li class="servicos__item">Entrega das chaves</li>
+                                <li class="servicos__item">Serviço pago por 6 meses</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="servicos__box">
-                        <div class="servicos__card center">
+                        <div class="servicos__card">
                             <h2 class="servicos__title">Serviços Pontuais
                             </h2>
-                            <p class="servicos__description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui corporis optio quos placeat quaerat
-                                dignissimos tenetur odio quisquam quas incidunt.</p>
+                            <blockquote class="servicos__description justify">"Sem qualquer compromisso, qualquer que seja o problema do seu imóvel use os nossos serviços
+                                ou os dos nossos parceiros especializados."</blockquote>
                         </div>
                     </div>
                     <svg class="header__scroll white icon icon-circle-down" id="scrollToImoveis">
@@ -172,7 +215,7 @@
                         <a href="#popup">
                             <div class="imoveis__info">
 
-                                <p>Quartos: 4</p>
+                                <p>Quartos: 3</p>
 
                             </div>
                             <img src="imgs/quarto-2.jpg" alt="quarto1">
@@ -185,13 +228,12 @@
         <div class="popup" id="popup">
             <div class="popup__box">
                 <div class="popup__photos">
-                    <svg class="icon white icon-circle-left imoveis__left">
+                    <svg class="icon white icon-circle-left popup__left">
                         <use xlink:href="#icon-circle-left"></use>
                     </svg>
-                    <svg class="icon white icon-circle-right imoveis__right">
+                    <svg class="icon white icon-circle-right popup__right">
                         <use xlink:href="#icon-circle-right"></use>
-                    </svg>
-                    <img src="imgs/quarto-1.jpg" alt="foto1">
+                        <img src="imgs/quarto-1.jpg" alt="foto1">
                 </div>
                 <div class="popup__info">
                     <a href="#imoveis">
@@ -311,15 +353,109 @@
 
                         </ul>
                     </div>
-                </div>
 
-                <a href="javascript:history.back()">
-                    <svg class="icon icon-cross popup__close">
-                        <use xlink:href="#icon-cross"></use>
-                    </svg>
-                </a>
+                    <h3 class="hvr-round-corners">Direitos do Senhorio</h3>
+                    <div class="faq__collapse">
+
+                        <ul class="faq__list">
+                            <li class="faq__item">
+                                <p>No caso de arrendamento a quartos o senhorio ou seu representante reservam-se ao direito
+                                    de ter livre acesso às áreas comuns do apartamento, e de o poder visitar/mostrar, desde
+                                    que em horário razoável sempre que assim o entenderem.</p>
+                            </li>
+                            <li class="faq__item">
+                                <p>No caso de arrendamento do imóvel completo o senhorio ou seu representante reservam-se ao
+                                    direito, após comunicação prévia ter livre acesso às áreas comuns do apartamento, e de
+                                    o poder visitar/mostrar, desde que em horário razoável e com comunicação previa.
+
+                                </p>
+                            </li>
+                    </div>
+
+                    <h3 class="hvr-round-corners">Direitos dos Residentes</h3>
+                    <div class="faq__collapse">
+
+
+                        <ul class="faq__list">
+                            <li class="faq__item">
+                                <p>Todos os residentes têm o direito à sua privacidade não tendo o senhorio ou seu representante
+                                    o direito de entrar nas áreas privadas da habitação salvo com autorização do seu ocupante
+                                    ou em caso de emergência ou força maior.</p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de habitabilidade que
+                                    lhe foram apresentadas no início da sua estadia e de exigir a reparação e manutenção
+                                    de todos os equipamentos e mobília desde que o desgaste dos mesmos seja derivado de uma
+                                    utilização responsável.
+                                </p>
+                            </li>
+                    </div>
+
+                    <h3 class="hvr-round-corners">Caução</h3>
+                    <div class="faq__collapse">
+                        <ul class="faq__list">
+                            <li class="faq__item">
+                                <p>É sempre necessário o pagamento de uma caução de valor equivalente a um mês de renda, esta
+                                    caução pode também funcionar para efeitos de reserva do imóvel. A caução não funciona
+                                    como último mês como é muitas vezes tida, estando a sua devolução dependente da entrega
+                                    das chaves e do imóvel por parte do seu ocupante nas mesmas condições de limpeza e manutenção
+                                    em que foi entregue. Motivos que possam justificar a retenção da mesma de forma integral
+                                    ou parcial são enumerados de seguida:</p>
+                            </li>
+                            <li class="faq__item">
+                                <p>No caso de existirem danos no interior dos quartos causados por um uso irresponsável, tanto
+                                    da mobília como do próprio imóvel o custo da reparação dos mesmos será deduzido à caução
+                                    do ocupante.
+
+                                </p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Todos os residentes têm o direito à sua privacidade não tendo o senhorio ou seu representante
+                                    o direito de entrar nas áreas privadas da habitação salvo com autorização do seu ocupante
+                                    ou em caso de emergência ou força maior.</p>
+                            </li>
+                            <li class="faq__item">
+                                <p>No caso de existirem danos nos espaços comuns da habitação, será feita uma tentativa para
+                                    apurar responsabilidades, no caso de tal não ser possível e de ninguém se assumir como
+                                    responsável, a dedução do valor das reparações será repartida entre todos os ocupantes.
+                                </p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Sempre que o imóvel seja arrendado com “despesas Incluídas” é estimado que o valor médio
+                                    mensal das mesmas quando resultante de um consumo responsável ronde os 40€ por ocupante.
+                                    Havendo um desvio significativo deste valor, o senhorio ou seu representante reservam-se
+                                    ao direito de descontar o diferencial das cauções dos seus ocupantes.</p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Sempre as condições de limpeza do imóvel seja motivo de reclamação por parte de algum dos
+                                    ocupantes ou no caso de as mesmas impossibilitarem a concretização de visitas ao imóvel,
+                                    o senhorio ou seu representante reservam-se ao direito da contratação de um serviço adicional
+                                    de limpeza cujo custo será deduzido da caução dos ocupantes.
+                                </p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Marcas ou cheiros derivados da presença de um fumador no imóvel constituem justificação para
+                                    ser descontado o valor da reparação dos mesmos.
+
+                                </p>
+                            </li>
+
+                            <li class="faq__item">
+                                <p>A devolução da caução está dependente da notificação prévia da intenção de saída com uma
+                                    antecedência nunca inferior a 30 dias.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <a href="javascript:history.back()">
+                <svg class="icon icon-cross popup__close">
+                    <use xlink:href="#icon-cross"></use>
+                </svg>
+            </a>
         </div>
+    </div>
     </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -331,10 +467,6 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
-        <symbol id="icon-cross" viewBox="0 0 32 32">
-            <title>cross</title>
-            <path d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path>
-        </symbol>
         <symbol id="icon-home" viewBox="0 0 32 32">
             <title>home</title>
             <path d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"></path>
@@ -346,6 +478,10 @@
         <symbol id="icon-location" viewBox="0 0 32 32">
             <title>location</title>
             <path d="M16 0c-5.523 0-10 4.477-10 10 0 10 10 22 10 22s10-12 10-22c0-5.523-4.477-10-10-10zM16 16c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z"></path>
+        </symbol>
+        <symbol id="icon-mobile" viewBox="0 0 32 32">
+            <title>mobile</title>
+            <path d="M23 0h-14c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h14c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 1.5h8v1h-8v-1zM16 30c-1.105 0-2-0.895-2-2s0.895-2 2-2 2 0.895 2 2-0.895 2-2 2zM24 24h-16v-20h16v20z"></path>
         </symbol>
         <symbol id="icon-bubble" viewBox="0 0 32 32">
             <title>bubble</title>
@@ -369,6 +505,10 @@
             <path d="M23.27 12.736c-0.322 0-0.636-0.167-0.809-0.466-0.258-0.446-0.105-1.016 0.341-1.274l4.846-2.798c0.446-0.257 1.016-0.105 1.274 0.341s0.105 1.016-0.341 1.274l-4.846 2.798c-0.147 0.085-0.307 0.125-0.465 0.125z"></path>
             <path d="M9.004 29.397c-0.218 0-0.438-0.055-0.64-0.172-0.613-0.354-0.823-1.138-0.469-1.752l2.798-4.846c0.354-0.613 1.138-0.823 1.752-0.469s0.823 1.138 0.469 1.752l-2.798 4.846c-0.237 0.411-0.668 0.641-1.112 0.641z"></path>
             <path d="M20.196 9.664c-0.158 0-0.319-0.040-0.465-0.125-0.446-0.258-0.599-0.828-0.341-1.274l2.798-4.846c0.258-0.446 0.828-0.599 1.274-0.341s0.599 0.828 0.341 1.274l-2.798 4.846c-0.173 0.299-0.486 0.466-0.809 0.466z"></path>
+        </symbol>
+        <symbol id="icon-cross" viewBox="0 0 32 32">
+            <title>cross</title>
+            <path d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path>
         </symbol>
         <symbol id="icon-circle-up" viewBox="0 0 32 32">
             <title>circle-up</title>

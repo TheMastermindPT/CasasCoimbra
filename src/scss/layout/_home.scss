@@ -18,7 +18,7 @@
 
     .header__background {
       width: 100%;
-      height: inherit;
+      min-height: 100vh;
       background-image: url(../imgs/houses.jpg);
       background-size: cover;
       filter: brightness(50%) blur(0.5px);
@@ -94,58 +94,100 @@
   }
 
   .servicos {
-    // background-color: var(--color-secondary);
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(#000, 0.1),
+        rgba(#000, 0.9)
+      ),
+      url(../imgs/bg.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+
     position: relative;
-    ///BG
-    background: #2193b0; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #6dd5ed,
-      #2193b0
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    // ////
     padding: 8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     &__box {
       flex: 0 0 30%;
-      @include boxshadow;
     }
     &__card {
       background-color: var(--color-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       box-sizing: content-box;
-      padding: 2rem;
       border-radius: 5px;
+      overflow: hidden;
+      padding: 2rem;
+      height: 48rem;
     }
     &__title {
-      color: var(--color-primary);
+      width: 100%;
+      color: var(--color-light);
       font-family: $text-heading;
       text-transform: uppercase;
-      margin-bottom: 2rem;
+      height: 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2rem;
       font-weight: 600;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #000;
+      background-color: var(--color-dark);
     }
     &__description {
       color: var(--color-dark);
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-family: $text-normal;
       line-height: 1.8;
+      padding: 2rem;
+      font-style: italic;
+    }
+
+    &__accordion {
+      width: 100%;
+      padding-left: 2rem;
+    }
+
+    &__sub {
+      display: block;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      font-family: $text-heading;
+      font-weight: 600;
+      color: var(--color-secondary);
+      outline: none;
+      cursor: pointer;
+    }
+
+    &__sub-box {
+    }
+
+    &__list {
+      list-style: none;
+      padding-left: 2rem;
+    }
+    &__item {
+      margin-bottom: 2rem;
+      font-family: $text-normal;
+      font-size: 1.5rem;
+      font-weight: 400;
+      &::before {
+        content: "\2192";
+        margin-right: 1rem;
+        color: var(--color-primary);
+      }
     }
   }
-  .imoveis {
-    min-height: 100vh;
-    display: flex;
-    padding: 4rem;
-    justify-content: space-evenly;
-    align-content: space-around;
-    flex-wrap: wrap;
-    background-color: var(--color-light);
-  }
+}
+.imoveis {
+  min-height: 100vh;
+  display: flex;
+  padding: 4rem;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: var(--color-light);
 }
 .popup {
   visibility: hidden;
@@ -160,8 +202,28 @@
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
+  &__left {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    z-index: 20;
+  }
+  &__right {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    z-index: 20;
+  }
   &:target {
     visibility: visible;
+    opacity: 1;
+  }
+  &:target &__box {
+    transform: scale(1);
+    transition-duration: 0.3s;
+    transition-property: transform, opacity;
     opacity: 1;
   }
   &__box {
@@ -171,6 +233,8 @@
     border-radius: 5px;
     display: flex;
     overflow: hidden;
+    transform: scale(0.4);
+    opacity: 0.2;
   }
   &__photos {
     position: relative;
@@ -192,12 +256,12 @@
     h3 {
       font-family: $text-heading;
       font-size: 2rem;
-      color: var(--color-light);
+      color: var(--color-dark);
       font-weight: 600;
       margin-bottom: 2rem;
       outline: none;
       cursor: pointer;
-      background-color: var(--color-secondary);
+
       padding: 1rem;
     }
   }
@@ -205,7 +269,8 @@
     border-radius: 5px;
   }
   &__list {
-    margin-left: 4rem;
+    margin-left: 3rem;
+    list-style: none;
   }
   &__item {
     margin-bottom: 1rem;
@@ -215,6 +280,12 @@
       line-height: 1.8;
       width: 100%;
       font-weight: 400;
+
+      &::before {
+        content: "\2192";
+        margin-right: 1rem;
+        color: var(--color-dark);
+      }
     }
   }
 }
