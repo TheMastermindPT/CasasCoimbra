@@ -74,6 +74,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new OptimizeCssAssetsPlugin(),
     new MiniCSSExtractPlugin({
       filename: 'styles/[name].css',
@@ -82,4 +83,7 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
+  externals: {
+    jquery: 'jQuery',
+  },
 };
