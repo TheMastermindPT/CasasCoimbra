@@ -16,17 +16,33 @@
   fill: #d93240;
 }
 
+.dark {
+  fill: var(--color-dark);
+}
+
+.footer__svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
 .icon {
   display: inline-block;
   background-repeat: no-repeat;
 }
 
 .icon-cross {
+  box-sizing: content-box;
+  padding: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
   position: absolute;
-  right: 2rem;
-  top: 2rem;
+  z-index: 1000;
+  right: -1.3rem;
+  top: -1.3rem;
+  fill: white !important;
+  background-color: var(--color-dark);
+  border-radius: 50%;
+  border: 1px solid white;
 }
 
 .icon-circle-down {

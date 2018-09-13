@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,900|Neuton:400,400i" rel="stylesheet">
     <title>Casas Coimbra</title>
-
 </head>
 
 <body>
@@ -40,7 +38,7 @@
                     </li>
 
                     <li class="sidenav__item">
-                        <a class="sidenav__link" href="#faq" id="sidenav__faq">Termos de Serviço</a>
+                        <a class="sidenav__link" href="#faq" id="sidenav__faq">Perguntas Frequentes</a>
                         <span></span>
                     </li>
                 </ul>
@@ -48,7 +46,7 @@
         </nav>
         <div class="content">
             <header>
-                <div class="header__container view">
+                <div class="header__container view" id="home-">
 
                     <div class="header__background" id="header">
                     </div>
@@ -58,12 +56,14 @@
                             <span class="header__subtitle">Uma cena qualquer</span>
                         </h1>
                     </div>
-                    <svg class="header__scroll white icon icon-circle-down" id="scrollToAbout">
-                        <use xlink:href="#icon-circle-down"></use>
-                    </svg>
+                    <div class="header__btn">
+                        <button class="btn btn--casa" id="casa">Procura casa?</button>
+                        <button class="btn btn--proprietario" id="proprietario">É proprietário?</button>
+                    </div>
                 </div>
             </header>
             <main>
+
                 <div class="about view" id="about">
 
                     <h1 class="about__title">
@@ -80,17 +80,12 @@
                     </svg>
                 </div>
                 <div class="servicos view" id="servicos">
-                    <!-- <div class="header">
-                        <h1>
-                            <span class="header__title">Casas Coimbra</span>
-                            <span class="header__subtitle">Uma cena qualquer</span>
-                        </h1>
-                    </div> -->
                     <div class="servicos__box">
                         <div class="servicos__card">
-                            <h2 class="servicos__title">Gestão de Visitas
+                            <h2 class="servicos__title">Gestão Completa
                             </h2>
-                            <blockquote class="servicos__description justify">"Mantenha a gestão do seu próprio imóvel e deixo-nos encontrar o inquilino ideal para o imóvel."</blockquote>
+                            <blockquote class="servicos__description justify">"Mantenha a gestão do seu próprio imóvel e
+                                deixo-nos encontrar o inquilino ideal para o imóvel."</blockquote>
                             <div class="servicos__accordion">
                                 <h3 class="servicos__sub">Apartamento Completo</h3>
                                 <div class="servicos__sub-box">
@@ -105,7 +100,8 @@
                                 <h3 class="servicos__sub">Quartos</h3>
                                 <div class="servicos__sub-box">
                                     <ul class="servicos__list">
-                                        <li class="servicos__item">Incluí todos os serviços descritos anteriormente com adição dos seguintes</li>
+                                        <li class="servicos__item">Incluí todos os serviços descritos anteriormente com adição
+                                            dos seguintes</li>
                                         <li class="servicos__item">Controlo dos serviços de limpeza (staff/consumíveis)
                                         </li>
                                         <li class="servicos__item">Pagamento e controlo de contas e despesas</li>
@@ -127,9 +123,9 @@
                     <div class="servicos__box">
                         <div class="servicos__card">
                             <h2 class="servicos__title">Gestão de Visitas</h2>
-                            <blockquote class="servicos__description justify">"Garanta que o seu imóvel é bem cuidado, que os seus inquilinos estão satisfeitos e que o seu
-                                rendimento é pago a horas enquanto disfruta do tempo livre de ter um grupo de profissionais
-                                a gerir todo o processo."</blockquote>
+                            <blockquote class="servicos__description justify">"Garanta que o seu imóvel é bem cuidado, que
+                                os seus inquilinos estão satisfeitos e que o seu rendimento é pago a horas enquanto disfruta
+                                do tempo livre de ter um grupo de profissionais a gerir todo o processo."</blockquote>
                             <ul class="servicos__list">
                                 <li class="servicos__item">Fotografias e publicidade tanto física como on-line</li>
                                 <li class="servicos__item">Gestão de visitas e contactos</li>
@@ -143,13 +139,15 @@
                         <div class="servicos__card">
                             <h2 class="servicos__title">Serviços Pontuais
                             </h2>
-                            <blockquote class="servicos__description justify">"Sem qualquer compromisso, qualquer que seja o problema do seu imóvel use os nossos serviços
-                                ou os dos nossos parceiros especializados."</blockquote>
+                            <blockquote class="servicos__description justify">"Sem qualquer compromisso, qualquer que seja
+                                o problema do seu imóvel use os nossos serviços ou os dos nossos parceiros especializados."</blockquote>
                             <ul class="servicos__list">
-                                <li class="servicos__item">Visita pontual fora de algum dos planos de serviços anteriores – 15€
+                                <li class="servicos__item">Visita pontual fora de algum dos planos de serviços anteriores
+                                    – 15€
                                 </li>
                                 <li class="servicos__item">Arranjos e manutenção – 25% do valor faturado</li>
-                                <li class="servicos__item">Compra, transporte e montagem de mobiliário e ou eletrodomésticos – 25% do valor faturado</li>
+                                <li class="servicos__item">Compra, transporte e montagem de mobiliário e ou eletrodomésticos
+                                    – 25% do valor faturado</li>
                             </ul>
                         </div>
                     </div>
@@ -157,107 +155,105 @@
                         <use xlink:href="#icon-circle-down"></use>
                     </svg>
                 </div>
-                <div class="imoveis" id="imoveis">
+                <div class="imoveis view" id="imoveis">
 
                     <div class="imoveis__box">
-                        <a href="#popup">
-                            <svg class="icon white icon-circle-left imoveis__left">
-                                <use xlink:href="#icon-circle-left"></use>
-                            </svg>
-                            <svg class="icon white icon-circle-right imoveis__right">
-                                <use xlink:href="#icon-circle-right"></use>
-                            </svg>
-                            <div class="imoveis__info">
-                                <p>Quartos: 4</p>
-                            </div>
-                            <img src="imgs/quarto-1.jpg" alt="quarto1">
-                        </a>
-                    </div>
 
-
-                    <div class="imoveis__box">
                         <a href="#popup">
                             <div class="imoveis__info">
-
-                                <p>Quartos: 4</p>
-
+                                <p class="imoveis__zona">Alta de Coimbra</p>
+                                <p class="imoveis__tipo">Número de Quartos : 6</p>
                             </div>
-                            <img src="imgs/quarto-2.jpg" alt="quarto1">
+                            <img src="imgs/casa1/casa1.jpg" alt="Casa1">
                         </a>
                     </div>
 
                     <div class="imoveis__box">
+
                         <a href="#popup">
                             <div class="imoveis__info">
-
-                                <p>Quartos: 4</p>
-
+                                <p class="imoveis__zona">Hospital da Universidade de Coimbra </p>
+                                <p class="imoveis__tipo">Número de Quartos : 7</p>
                             </div>
-                            <img src="imgs/quarto-2.jpg" alt="quarto1">
+                            <img src="imgs/casa2/quarto3-1.jpg" alt="Casa2">
                         </a>
                     </div>
 
                     <div class="imoveis__box">
+
                         <a href="#popup">
                             <div class="imoveis__info">
-
-                                <p>Quartos: 4</p>
-
+                                <p class="imoveis__zona">Zona</p>
+                                <p class="imoveis__tipo">Apartamento/Quartos</p>
                             </div>
-                            <img src="imgs/quarto-2.jpg" alt="quarto1">
+                            <img src="imgs/casa3/casa3.jpg" alt="quarto1">
                         </a>
                     </div>
-                    <div class="imoveis__box">
-                        <a href="#popup">
-                            <div class="imoveis__info">
-
-                                <p>Quartos: 4</p>
-
-                            </div>
-                            <img src="imgs/quarto-2.jpg" alt="quarto1">
-                        </a>
-                    </div>
-                    <div class="imoveis__box">
-                        <a href="#popup">
-                            <div class="imoveis__info">
-
-                                <p>Quartos: 3</p>
-
-                            </div>
-                            <img src="imgs/quarto-2.jpg" alt="quarto1">
-                        </a>
-                    </div>
-
                 </div>
             </main>
+            <footer>
+                <div class="footer">
+                    <div class="footer__nav">
+                        <a href="https://www.facebook.com/casas.coimbra.735" target="_blank" class="footer__links">
+                            <svg class="icon dark icon-facebook footer__svg">
+                                <use xlink:href="#icon-facebook"></use>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer__links">
+                            <svg class="icon dark icon-mobile footer__svg">
+                                <use xlink:href="#icon-mobile"></use>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                    <div class="footer__copy">
+                        <p>&copy; Todos os direitos reservados 2018</p>
+                    </div>
+                    <a href="https://privacypolicies.com/privacy/view/367e9fc883732e1b36300ac02bdb74b6" target="_blank" class="footer__policy">Termos
+                        de Privacidade</a>
+                </div>
+            </footer>
         </div>
         <div class="popup" id="popup">
             <div class="popup__box">
+                <a href="javascript:history.back()" class="close">
+                    <svg class="icon icon-cross popup__close">
+                        <use xlink:href="#icon-cross"></use>
+                    </svg>
+                </a>
                 <div class="popup__photos">
-                    <svg class="icon white icon-circle-left popup__left">
+                    <svg class="icon white icon-circle-left popup__left" id="leftPhoto">
                         <use xlink:href="#icon-circle-left"></use>
                     </svg>
-                    <svg class="icon white icon-circle-right popup__right">
+                    <svg class="icon white icon-circle-right popup__right" id="rightPhoto">
                         <use xlink:href="#icon-circle-right"></use>
-                        <img src="imgs/quarto-1.jpg" alt="foto1">
+
+
+                        <img src="imgs/casa1/quarto1-1.jpg" alt="foto">
+
+                        <div class="popup__description">
+                            <p class="popup__tipo">Apartamento/Quartos</p>
+                        </div>
                 </div>
                 <div class="popup__info">
                     <a href="#imoveis">
-                        <svg class="icon icon-cross popup__close">
-                            <use xlink:href="#icon-cross"></use>
-                        </svg>
+                        <iframe frameborder="0" style="border:0" src="" allowfullscreen></iframe>
                     </a>
 
-                    <div class="popup__description"></div>
-                    <div class="popup__map"></div>
                 </div>
             </div>
         </div>
 
         <div class="popup" id="faq">
             <div class="popup__box relative faq">
+                <a href="javascript:history.back()" class="close">
+                    <svg class="icon icon-cross popup__close">
+                        <use xlink:href="#icon-cross"></use>
+                    </svg>
+                </a>
                 <div class="faq__accordion" id="accordion">
-                    <h3 class="hvr-round-corners">Reservas
+                    <h3>Reservas
                     </h3>
                     <div class="faq__collapse">
                         <ul class="faq__list">
@@ -267,8 +263,8 @@
                                     ou em caso de emergência ou força maior.</p>
                             </li>
                             <li class="faq__item">
-                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de habitabilidade que
-                                    lhe foram apresentadas no início da sua estadia e de exigir a reparação e manutenção
+                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de habitabilidade
+                                    que lhe foram apresentadas no início da sua estadia e de exigir a reparação e manutenção
                                     de todos os equipamentos e mobília desde que o desgaste dos mesmos seja derivado de uma
                                     utilização responsável.
                                 </p>
@@ -276,7 +272,7 @@
                         </ul>
                     </div>
 
-                    <h3 class="hvr-round-corners">Rendas e Pagamentos</h3>
+                    <h3>Rendas e Pagamentos</h3>
                     <div class="faq__collapse">
                         <ul class="faq__list">
                             <li class="faq__item">
@@ -288,29 +284,29 @@
                             </li>
 
                             <li class="faq__item">
-                                <p>Tendo sido efetuada a reserva do imóvel, no momento de entrega das chaves será apenas necessário
-                                    efetuar o pagamento do valor relativo ao primeiro mês..</p>
+                                <p>Tendo sido efetuada a reserva do imóvel, no momento de entrega das chaves será apenas
+                                    necessário efetuar o pagamento do valor relativo ao primeiro mês..</p>
                             </li>
 
                             <li class="faq__item">
-                                <p>A estadia deverá ser paga adiantada e pelo método acordado, entre o dia 1 e 7 do mês em questão.
-                                    Caso isso não se verifique e não havendo qualquer aviso posterior para este atraso o
-                                    ocupante considera-se notificado para sair e terá até ao dia 20 do mesmo mês para retificar
-                                    a situação podendo para tal ser cobrada uma penalização de 10% do valor mensal. Caso
-                                    o atraso no pagamento não tenha sido regularizado até ao dia 20, o ocupante terá até
-                                    ao final do mesmo mês para devolver as chaves e abandonar o imóvel.</p>
+                                <p>A estadia deverá ser paga adiantada e pelo método acordado, entre o dia 1 e 7 do mês em
+                                    questão. Caso isso não se verifique e não havendo qualquer aviso posterior para este
+                                    atraso o ocupante considera-se notificado para sair e terá até ao dia 20 do mesmo mês
+                                    para retificar a situação podendo para tal ser cobrada uma penalização de 10% do valor
+                                    mensal. Caso o atraso no pagamento não tenha sido regularizado até ao dia 20, o ocupante
+                                    terá até ao final do mesmo mês para devolver as chaves e abandonar o imóvel.</p>
                             </li>
 
                             <li class="faq__item">
-                                <p>Em casos em que a entrada e/ou saída seja feita numa data que não coincida com o início ou
-                                    final dos mês poderá ser feito um acerto do valor da renda para esse mesmo mês. Caso
+                                <p>Em casos em que a entrada e/ou saída seja feita numa data que não coincida com o início
+                                    ou final dos mês poderá ser feito um acerto do valor da renda para esse mesmo mês. Caso
                                     entre a meio do mês apenas será exigido o pagamento de meio mês, etc.</p>
                             </li>
 
                         </ul>
                     </div>
 
-                    <h3 class="hvr-round-corners">Normas de Convivência</h3>
+                    <h3>Normas de Convivência</h3>
                     <div class="faq__collapse">
                         <ul class="faq__list">
                             <li class="faq__item">
@@ -322,15 +318,15 @@
                             </li>
 
                             <li class="faq__item">
-                                <p>É esperado por parte de todos os residentes o respeito pela habitação, vizinhos e por todos
-                                    os restantes ocupantes da mesma. Esta condição em conjunto com a regra de ouro de “não
-                                    faças aos outros o que não queres que te façam a ti” constituem os princípios básicos
-                                    que são esperados de todas as partes..</p>
+                                <p>É esperado por parte de todos os residentes o respeito pela habitação, vizinhos e por
+                                    todos os restantes ocupantes da mesma. Esta condição em conjunto com a regra de ouro
+                                    de “não faças aos outros o que não queres que te façam a ti” constituem os princípios
+                                    básicos que são esperados de todas as partes..</p>
                             </li>
 
                             <li class="faq__item">
-                                <p>Cada residente deverá deixar as zonas comuns em bom estado de limpeza e arrumação após cada
-                                    utilização, de modo a poderem ser usadas pelos restantes ocupantes. As responsabilidades
+                                <p>Cada residente deverá deixar as zonas comuns em bom estado de limpeza e arrumação após
+                                    cada utilização, de modo a poderem ser usadas pelos restantes ocupantes. As responsabilidades
                                     a cargo do proprietário são relativas apenas às limpezas de fundo periódicas e não substituem
                                     a diligência de cada um neste especto. </p>
                             </li>
@@ -347,8 +343,9 @@
                             </li>
 
                             <li class="faq__item">
-                                <p>Não são permitidos animais de estimação qualquer alteração a esta condição terá de ser acordada
-                                    pelo tanto pelo senhorio ou seu representante bem como pelos restantes colegas de casa.</p>
+                                <p>Não são permitidos animais de estimação qualquer alteração a esta condição terá de ser
+                                    acordada pelo tanto pelo senhorio ou seu representante bem como pelos restantes colegas
+                                    de casa.</p>
                             </li>
 
                             <li class="faq__item">
@@ -360,7 +357,7 @@
                         </ul>
                     </div>
 
-                    <h3 class="hvr-round-corners">Direitos do Senhorio</h3>
+                    <h3>Direitos do Senhorio</h3>
                     <div class="faq__collapse">
 
                         <ul class="faq__list">
@@ -370,15 +367,15 @@
                                     que em horário razoável sempre que assim o entenderem.</p>
                             </li>
                             <li class="faq__item">
-                                <p>No caso de arrendamento do imóvel completo o senhorio ou seu representante reservam-se ao
-                                    direito, após comunicação prévia ter livre acesso às áreas comuns do apartamento, e de
-                                    o poder visitar/mostrar, desde que em horário razoável e com comunicação previa.
+                                <p>No caso de arrendamento do imóvel completo o senhorio ou seu representante reservam-se
+                                    ao direito, após comunicação prévia ter livre acesso às áreas comuns do apartamento,
+                                    e de o poder visitar/mostrar, desde que em horário razoável e com comunicação previa.
 
                                 </p>
                             </li>
                     </div>
 
-                    <h3 class="hvr-round-corners">Direitos dos Residentes</h3>
+                    <h3>Direitos dos Residentes</h3>
                     <div class="faq__collapse">
 
 
@@ -389,29 +386,29 @@
                                     ou em caso de emergência ou força maior.</p>
                             </li>
                             <li class="faq__item">
-                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de habitabilidade que
-                                    lhe foram apresentadas no início da sua estadia e de exigir a reparação e manutenção
+                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de habitabilidade
+                                    que lhe foram apresentadas no início da sua estadia e de exigir a reparação e manutenção
                                     de todos os equipamentos e mobília desde que o desgaste dos mesmos seja derivado de uma
                                     utilização responsável.
                                 </p>
                             </li>
                     </div>
 
-                    <h3 class="hvr-round-corners">Caução</h3>
+                    <h3>Caução</h3>
                     <div class="faq__collapse">
                         <ul class="faq__list">
                             <li class="faq__item">
-                                <p>É sempre necessário o pagamento de uma caução de valor equivalente a um mês de renda, esta
-                                    caução pode também funcionar para efeitos de reserva do imóvel. A caução não funciona
+                                <p>É sempre necessário o pagamento de uma caução de valor equivalente a um mês de renda,
+                                    esta caução pode também funcionar para efeitos de reserva do imóvel. A caução não funciona
                                     como último mês como é muitas vezes tida, estando a sua devolução dependente da entrega
                                     das chaves e do imóvel por parte do seu ocupante nas mesmas condições de limpeza e manutenção
                                     em que foi entregue. Motivos que possam justificar a retenção da mesma de forma integral
                                     ou parcial são enumerados de seguida:</p>
                             </li>
                             <li class="faq__item">
-                                <p>No caso de existirem danos no interior dos quartos causados por um uso irresponsável, tanto
-                                    da mobília como do próprio imóvel o custo da reparação dos mesmos será deduzido à caução
-                                    do ocupante.
+                                <p>No caso de existirem danos no interior dos quartos causados por um uso irresponsável,
+                                    tanto da mobília como do próprio imóvel o custo da reparação dos mesmos será deduzido
+                                    à caução do ocupante.
 
                                 </p>
                             </li>
@@ -433,15 +430,15 @@
                                     ao direito de descontar o diferencial das cauções dos seus ocupantes.</p>
                             </li>
                             <li class="faq__item">
-                                <p>Sempre as condições de limpeza do imóvel seja motivo de reclamação por parte de algum dos
-                                    ocupantes ou no caso de as mesmas impossibilitarem a concretização de visitas ao imóvel,
-                                    o senhorio ou seu representante reservam-se ao direito da contratação de um serviço adicional
-                                    de limpeza cujo custo será deduzido da caução dos ocupantes.
+                                <p>Sempre as condições de limpeza do imóvel seja motivo de reclamação por parte de algum
+                                    dos ocupantes ou no caso de as mesmas impossibilitarem a concretização de visitas ao
+                                    imóvel, o senhorio ou seu representante reservam-se ao direito da contratação de um serviço
+                                    adicional de limpeza cujo custo será deduzido da caução dos ocupantes.
                                 </p>
                             </li>
                             <li class="faq__item">
-                                <p>Marcas ou cheiros derivados da presença de um fumador no imóvel constituem justificação para
-                                    ser descontado o valor da reparação dos mesmos.
+                                <p>Marcas ou cheiros derivados da presença de um fumador no imóvel constituem justificação
+                                    para ser descontado o valor da reparação dos mesmos.
 
                                 </p>
                             </li>
@@ -455,19 +452,40 @@
                     </div>
                 </div>
             </div>
-            <a href="javascript:history.back()">
-                <svg class="icon icon-cross popup__close">
-                    <use xlink:href="#icon-cross"></use>
-                </svg>
-            </a>
+
         </div>
     </div>
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Montserrat:400,600,900', 'Neuton:400,400italic']
+            }
+        });
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-        crossorigin="anonymous"></script> -->
+        crossorigin="anonymous"></script>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/pt_PT/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat pulse" attribution=setup_tool page_id="2065874267061909" logged_in_greeting="Olá, como é que podemos ajudar?"
+        logged_out_greeting="Olá, como é que podemos ajudar?">
+    </div>
+
+
+
 </body>
 
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg"

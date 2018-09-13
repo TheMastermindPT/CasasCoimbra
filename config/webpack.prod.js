@@ -81,6 +81,11 @@ module.exports = {
     }),
     new HTMLWebpackPlugin({
       template: './src/index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+      },
     }),
   ],
   externals: {
