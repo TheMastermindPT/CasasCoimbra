@@ -182,6 +182,65 @@ const casas = [
       },
     ],
   },
+  {
+    morada: 'Elísio de Moura 367, 3030-183',
+    mapa:
+      'https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ842yGn75Ig0Ru8_QFXHZs1g&key=AIzaSyDdiMXPuvUamJ2BZfgp0kVrc-p4l85om5Y',
+    divisoes: [
+      {
+        numero: '1',
+        descricao: '',
+        tipo: 'Quarto',
+        fotos: ['imgs/casa3/quarto1-1.jpg', 'imgs/casa3/quarto1-2.jpg', 'imgs/casa3/quarto1-3.jpg'],
+      },
+      {
+        numero: '2',
+        descricao: '',
+        tipo: 'Quarto',
+        fotos: ['imgs/casa3/quarto3-1.jpg', 'imgs/casa3/quarto3-2.jpg', 'imgs/casa3/quarto3-3.jpg'],
+      },
+      {
+        numero: '3',
+        descricao: '',
+        tipo: 'Quarto',
+        fotos: [
+          'imgs/casa3/quarto3-1.jpg',
+          'imgs/casa3/quarto3-2.jpg',
+          'imgs/casa3/quarto3-3.jpg',
+          'imgs/casa3/quarto3-4.jpg',
+        ],
+      },
+      {
+        numero: '4',
+        descricao: '',
+        tipo: 'Quarto',
+        fotos: ['imgs/casa3/quarto4-1.jpg', 'imgs/casa3/quarto4-2.jpg', 'imgs/casa3/quarto4-3.jpg'],
+      },
+      {
+        numero: '5',
+        descricao: '',
+        tipo: 'Quarto',
+        fotos: ['imgs/casa3/quarto5-1.jpg', 'imgs/casa3/quarto5-2.jpg', 'imgs/casa3/quarto5-3.jpg'],
+      },
+      {
+        numero: '1',
+        descricao: '',
+        tipo: 'WC',
+        fotos: ['imgs/casa3/wc1-1.jpg', 'imgs/casa3/wc1-2.jpg'],
+      },
+      {
+        numero: '2',
+        descricao: '',
+        tipo: 'WC',
+        fotos: ['imgs/casa3/wc2-1.jpg', 'imgs/casa3/wc2-2.jpg'],
+      },
+      {
+        descricao: '',
+        tipo: 'Cozinha',
+        fotos: ['imgs/casa3/cozinha.jpg'],
+      },
+    ],
+  },
 ];
 
 export { casas };
