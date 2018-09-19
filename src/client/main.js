@@ -34,7 +34,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-    $('.sidenav__list span').css('background-color', '#d93240');
   });
 
   $('#scrollToServicos').on('click', () => {
@@ -44,7 +43,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-    $('.sidenav__list span').css('background-color', '#2193b0');
   });
 
   $('#scrollToImoveis').on('click', () => {
@@ -54,7 +52,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-    $('.sidenav__list span').css('background-color', '#2193b0');
   });
 
   $('#sidenav__quem').on('click', () => {
@@ -64,8 +61,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-
-    $('.sidenav__list span').css('background-color', '#d93240');
   });
 
   $('#sidenav__servicos').on('click', () => {
@@ -75,8 +70,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-
-    $('.sidenav__list span').css('background-color', '#2193b0');
   });
 
   $('#sidenav__imoveis').on('click', () => {
@@ -86,8 +79,6 @@ $(window).ready(() => {
       },
       'slow',
     );
-
-    $('.sidenav__list span').css('background-color', '#faf8f5');
   });
 
   $('#navi-toggle').on('change', () => {
@@ -115,6 +106,10 @@ $(window).ready(() => {
     heightStyle: 'content',
   });
 
+  $('#sidenav__faq').on('click', () => {
+    $('html').bind('mousewheel', () => false);
+  });
+
   $(document).mouseup((e) => {
     const popup = $('.popup');
     const sidenav = $('.sidenav');
@@ -124,6 +119,7 @@ $(window).ready(() => {
       $('.popup').hide();
       $('#leftPhoto').off();
       $('#rightPhoto').off();
+      $('html').unbind('mousewheel');
     }
 
     if (!sidenav.is(e.target) && sidenav.has(e.target).length === 0 && !popup.is(e.target)) {
@@ -137,6 +133,7 @@ $(window).ready(() => {
     $('#leftPhoto').off();
     $('#rightPhoto').off();
     $('.popup').hide();
+    $('html').unbind('mousewheel');
   });
 
   $('#sidenav__faq').on('click', () => {

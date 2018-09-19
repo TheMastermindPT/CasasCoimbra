@@ -1,16 +1,31 @@
 import { casas } from './casas';
 
+const updateInfo = (box, counterDiv, counterPhotos) => {
+  $('.popup__tipo').html(
+    `${casas[box].divisoes[counterDiv].tipo} ${
+      casas[box].divisoes[counterDiv].numero ? casas[box].divisoes[counterDiv].numero : ''
+    }`,
+  );
+
+  $('.popup__price').html(
+    `${casas[box].divisoes[counterDiv].preco ? `${casas[box].divisoes[counterDiv].preco}` : ''}`,
+  );
+
+  $('.popup__comment').html(`${casas[box].divisoes[counterDiv].descricao}`);
+};
+
 $('.imoveis__box').on('click', function () {
   $('.popup').show();
   const box = $('.imoveis__box').index(this);
   $('.popup__info iframe').attr('src', casas[box].mapa);
+  $('html').bind('mousewheel', () => false);
 
   $('.popup__photos img').attr('src', casas[box].divisoes[0].fotos[0]);
   let counterDiv = 0;
   let counterPhotos = 0;
-  $('.popup__tipo').html(
-    `${casas[box].divisoes[counterDiv].tipo} ${casas[box].divisoes[counterDiv].numero}`,
-  );
+
+  $('.popup__details').html(`${casas[box].info}`);
+  updateInfo(box, counterDiv, counterPhotos);
 
   $('#leftPhoto').on('click', (e) => {
     if (counterDiv >= 0 && counterDiv <= casas[box].divisoes.length) {
@@ -28,13 +43,8 @@ $('.imoveis__box').on('click', function () {
           $('.popup__photos img').attr('src', casas[box].divisoes[counterDiv].fotos[counterPhotos]);
         }
       }
-
-      $('.popup__tipo').html(
-        `${casas[box].divisoes[counterDiv].tipo} ${
-          casas[box].divisoes[counterDiv].numero ? casas[box].divisoes[counterDiv].numero : ''
-        }`,
-      );
     }
+    updateInfo(box, counterDiv, counterPhotos);
   });
 
   $('#rightPhoto').on('click', (e) => {
@@ -55,11 +65,6 @@ $('.imoveis__box').on('click', function () {
         }
       }
     }
-
-    $('.popup__tipo').html(
-      `${casas[box].divisoes[counterDiv].tipo} ${
-        casas[box].divisoes[counterDiv].numero ? casas[box].divisoes[counterDiv].numero : ''
-      }`,
-    );
+    updateInfo(box, counterDiv, counterPhotos);
   });
 });

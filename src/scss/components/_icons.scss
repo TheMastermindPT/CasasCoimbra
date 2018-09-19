@@ -20,16 +20,19 @@
   fill: var(--color-dark);
 }
 
+.bulletpoint {
+  width: 3.2rem;
+  height: 3.2rem;
+  fill: black;
+}
+
 .footer__svg {
   width: 2.2rem;
   height: 2.2rem;
 }
 
 .header__logo {
-  // position: absolute;
-  // top: -5rem;
-  // left: -5rem;
-  transform: scale(1.8);
+  display: block;
 }
 .icon {
   display: inline-block;
