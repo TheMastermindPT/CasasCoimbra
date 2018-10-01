@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126122022-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-126122022-1');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,12 +19,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <title>Casas Coimbra</title>
 </head>
 
 <body>
+    <!--Start of container-->
     <div class="container" id="container">
         <nav class="navigator--closed" id="navigator">
 
@@ -29,13 +40,13 @@
 
                 <ul class="sidenav__list">
                     <li class="sidenav__item">
-                        <a class="sidenav__link" href="#about" id="sidenav__quem">Quem somos?
+                        <a class="sidenav__link" href="#about" id="sidenav__quem">Sobre nós?
 
                         </a>
                         <span></span>
                     </li>
                     <li class="sidenav__item">
-                        <a class="sidenav__link" href="#servicos" id="sidenav__servicos">Serviços</a>
+                        <a class="sidenav__link" href="#servicos" id="sidenav__servicos">Os nossos serviços</a>
                         <span></span>
                     </li>
 
@@ -51,6 +62,7 @@
                 </ul>
             </div>
         </nav>
+        <!--Start of Content-->
         <div class="content">
             <header>
 
@@ -65,156 +77,254 @@
             <main>
 
                 <div class="about view" id="about">
+                    <div class="about__info">
+                        <h1 class="about__title">
+                            Quem somos?
+                        </h1>
+                        <p class="about__text">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id expedita voluptatum, aperiam
+                            consequatur veritatis optio modi
+                            laudantium nobis adipisci nisi sint harum provident dicta molestiae voluptatibus atque
+                            omnis!
+                            Velit
+                            odio veritatis et inventore magni quaerat tempore quo id! Ut nisi alias saepe esse eos
+                            fugit
+                            facere
+                            animi nostrum maiores voluptas provident voluptatibus id fugiat aperiam, dolore quo quae ab
+                            eligendi.
+                        </p>
+                    </div>
+                    <div class="arrow-wrapper">
+                        <svg class="red icon icon-circle-down" id="scrollToServicos">
+                            <use xlink:href="#icon-circle-down"></use>
+                        </svg>
+                    </div>
 
-                    <h1 class="about__title">
-                        O que é a empresa?
-                    </h1>
-                    <p class="about__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id expedita voluptatum, aperiam
-                        consequatur veritatis optio modi
-                        laudantium nobis adipisci nisi sint harum provident dicta molestiae voluptatibus atque omnis!
-                        Velit
-                        odio veritatis et inventore magni quaerat tempore quo id! Ut nisi alias saepe esse eos fugit
-                        facere
-                        animi nostrum maiores voluptas provident voluptatibus id fugiat aperiam, dolore quo quae ab
-                        eligendi.
-                    </p>
-                    <svg class="header__scroll red icon icon-circle-down" id="scrollToServicos">
-                        <use xlink:href="#icon-circle-down"></use>
-                    </svg>
                 </div>
                 <div class="servicos view" id="servicos">
-                    <div class="servicos__box">
-                        <img class="servicos__logo" src="svg/logo-2.svg" alt="cardbglogo">
-                        <img class="servicos__icon" src="svg/lampada.svg" alt="cardicon">
-                        <div class="servicos__bg">
+                    <h1 class="servicos__title">
+                        Os nossos serviços
+                    </h1>
+                    <div class="servicos__wrap">
+                        <div class="servicos__box">
+                            <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
 
+                            <div class="servicos__bg">
+                                <img class="servicos__icon" src="svg/lampada.svg" alt="cardicon">
+
+                                <div class="servicos__bullets">
+                                    <svg class="servicos__bullet red">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                    <svg class="servicos__bullet white">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="servicos__info">
+                                <h2 class="servicos__header">Serviços Pontuais</h2>
+                                <blockquote class="servicos__points">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, voluptas nihil.
+                                    Labore necessitatibus illum debitis quos recusandae eligendi ipsam minima a beatae
+                                    nemo, corrupti dolor.
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="servicos__box">
+                            <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
+
+                            <div class="servicos__bg">
+                                <img class="servicos__icon" src="svg/casacerto.svg" alt="cardicon">
+                                <div class="servicos__bullets">
+                                    <svg class="servicos__bullet red">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                    <svg class="servicos__bullet white">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                    <svg class="servicos__bullet white">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                    <svg class="servicos__bullet white">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="servicos__info">
+                                <h2 class="servicos__header">Gestao de Imóvel</h2>
+                                <blockquote class="servicos__points">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, voluptas nihil.
+                                    Labore necessitatibus illum debitis quos recusandae eligendi ipsam minima a beatae
+                                    nemo, corrupti dolor.
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="servicos__box">
+                            <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
+
+                            <div class="servicos__bg">
+                                <img class="servicos__icon" src="svg/casacerto.svg" alt="cardicon">
+                                <div class="servicos__bullets">
+                                    <svg class="servicos__bullet red">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                    <svg class="servicos__bullet white">
+                                        <use xlink:href="#bullet"></use>
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="servicos__info">
+                                <h2 class="servicos__header">Gestao de Imóvel</h2>
+                                <blockquote class="servicos__points">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, voluptas nihil.
+                                    Labore necessitatibus illum debitis quos recusandae eligendi ipsam minima a beatae
+                                    nemo, corrupti dolor.
+                                </blockquote>
+                            </div>
                         </div>
                     </div>
-                    <div class="
-                                    servicos__box">
-
+                    <div class="arrow-wrapper">
+                        <svg class="white icon icon-circle-down" id="scrollToImoveis">
+                            <use xlink:href="#icon-circle-down"></use>
+                        </svg>
                     </div>
-                    <div class="servicos__box">
 
-                    </div>
-                    <svg class="header__scroll white icon icon-circle-down" id="scrollToImoveis">
-                        <use xlink:href="#icon-circle-down"></use>
-                    </svg>
                 </div>
                 <div class="imoveis view" id="imoveis">
+                    <h1 class="imoveis__title">
+                        Procura casa?
+                    </h1>
 
-                    <div class="imoveis__box">
+                    <svg class="left red" id="changeLeft">
+                        <use xlink:href="#left"></use>
+                    </svg>
 
-                        <a href="#popup">
-                            <div class="imoveis__info">
-                                <ul class="imoveis__list">
-                                    <li class="imoveis__item">
-                                        Tipologia: <span>Moradia T6 com jardim comum</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        WC: <span>2 Privados + 2 Comuns </span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Localização: <span>Alta de Coimbra / Polo 1 </span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Morada: <span>Tv. do Cabido 11, 3000-088</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Mobilado & Equipado: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Próximo: <span>Zona Histórica / Polo 1 / Baixa de Coimbra / Faculdade de
-                                            Direito / Faculdade de Letras</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Net/TV: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Despesas Incluídas c/Limpeza
-                                    </li>
-                                </ul>
-                                <button class="conheça">Saiba mais</button>
+                    <svg class="right red" id="changeRight">
+                        <use xlink:href="#right"></use>
+                    </svg>
+
+                    <div class="viewport-slider">
+                        <div class="imoveis__wrap">
+                            <div class="imoveis__box">
+                                <a href="#popup">
+                                    <div class="imoveis__info">
+                                        <ul class="imoveis__list">
+                                            <li class="imoveis__item">
+                                                Tipologia: <span>Moradia T6 com jardim comum</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                WC: <span>2 Privados + 2 Comuns </span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Localização: <span>Alta de Coimbra / Polo 1 </span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Morada: <span>Tv. do Cabido 11, 3000-088</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Mobilado & Equipado: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Próximo: <span>Zona Histórica / Polo 1 / Baixa de Coimbra / Faculdade
+                                                    de
+                                                    Direito / Faculdade de Letras</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Net/TV: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Despesas Incluídas c/Limpeza
+                                            </li>
+                                        </ul>
+                                        <button class="conheca">Saiba mais</button>
+                                    </div>
+                                    <img src="imgs/casa1/jardim-3.jpg" alt="Casa2">
+                                </a>
                             </div>
-                            <img src="imgs/casa1/casa1.jpg" alt="Casa1">
-                        </a>
+
+                            <div class="imoveis__box">
+
+                                <a href="#popup">
+                                    <div class="imoveis__info">
+                                        <ul class="imoveis__list">
+                                            <li class="imoveis__item">
+                                                Tipologia: <span>Moradia de 3 andares com um total de 7 quartos</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                WC: <span>1 Privado + 3 Comuns </span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Localização: <span>Celas/Sto. António dos Olivais</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Morada: <span>Rua Rodrigues Gusmão nº20, 3000-345</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Mobilado & Equipado: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Próximo: <span>2 min. a pé dos HUC / Escola de Enfermagem, a 10 min. da
+                                                    FEUC /
+                                                    Cruz de Celas /Bairro de Sto. António dos Olivais </span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Net/TV: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Despesas Incluídas c/Limpeza
+                                            </li>
+
+                                        </ul>
+                                        <button class="conheca">Saiba mais</button>
+                                    </div>
+                                    <img src="imgs/casa2/quarto4-2.jpg" alt="Casa2">
+                                </a>
+                            </div>
+
+                            <div class="imoveis__box">
+
+                                <a href="#popup">
+                                    <div class="imoveis__info">
+                                        <ul class="imoveis__list">
+                                            <li class="imoveis__item">
+                                                Tipologia: <span>Apartamento T4</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                WC: <span>2</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Localização: <span>Elísio de Moura /Solum</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Morada: <span>Av. Elísio de Moura 367, 3030-183</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Mobilado & Equipado: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Próximo: <span> A 2 min. a pé de Café / Talho / Padaria, a 15 minutos a
+                                                    pé
+                                                    da
+                                                    Solum / ESEC / Alma shopping, junto aos acessos da Cidade</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Net/TV: <span>Sim</span>
+                                            </li>
+                                            <li class="imoveis__item">
+                                                Despesas Incluídas c/Limpeza
+                                            </li>
+                                        </ul>
+                                        <button class="conheca">Saiba mais</button>
+                                    </div>
+                                    <img src="imgs/casa3/quarto3-2.jpg" alt="quarto1">
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="imoveis__box">
-
-                        <a href="#popup">
-                            <div class="imoveis__info">
-                                <ul class="imoveis__list">
-                                    <li class="imoveis__item">
-                                        Tipologia: <span>Moradia de 3 andares com um total de 7 quartos</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        WC: <span>1 Privado + 3 Comuns </span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Localização: <span>Celas/Sto. António dos Olivais</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Morada: <span>Rua Rodrigues Gusmão nº20, 3000-345</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Mobilado & Equipado: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Próximo: <span>2 min. a pé dos HUC / Escola de Enfermagem, a 10 min. da FEUC /
-                                            Cruz de Celas /Bairro de Sto. António dos Olivais </span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Net/TV: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Despesas Incluídas c/Limpeza
-                                    </li>
-
-                                </ul>
-                                <button class="conheça">Saiba mais</button>
-                            </div>
-                            <img src="imgs/casa2/quarto3-1.jpg" alt="Casa2">
-                        </a>
-                    </div>
-
-                    <div class="imoveis__box">
-
-                        <a href="#popup">
-                            <div class="imoveis__info">
-                                <ul class="imoveis__list">
-                                    <li class="imoveis__item">
-                                        Tipologia: <span>Apartamento T4</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        WC: <span>2</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Localização: <span>Elísio de Moura /Solum</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Morada: <span>Av. Elísio de Moura 367, 3030-183</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Mobilado & Equipado: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Próximo: <span> A 2 min. a pé de Café / Talho / Padaria, a 15 minutos a pé da
-                                            Solum / ESEC / Alma shopping, junto aos acessos da Cidade</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Net/TV: <span>Sim</span>
-                                    </li>
-                                    <li class="imoveis__item">
-                                        Despesas Incluídas c/Limpeza
-                                    </li>
-                                </ul>
-                                <button class="conheça">Saiba mais</button>
-                            </div>
-                            <img src="imgs/casa3/casa3.jpg" alt="quarto1">
-                        </a>
-                    </div>
+                    <a href="#forms" id="form" class="btn btn--procura">Não encontra o que procura?</a>
                 </div>
             </main>
             <footer>
@@ -226,7 +336,7 @@
                             </svg>
                         </a>
                         <a class="footer__links">
-                            <span class="contacto">910211113</span>
+                            <span class="contacto">(+351) 910 211 113</span>
                             <svg class="icon dark icon-mobile footer__svg" id="numero">
                                 <use xlink:href="#icon-mobile"></use>
                             </svg>
@@ -243,6 +353,7 @@
                 </div>
             </footer>
         </div>
+        <!--END of Content-->
         <div class="popup" id="popup">
             <div class="popup__box">
                 <a href="javascript:history.back()" class="close">
@@ -262,7 +373,6 @@
                     <a href="#imoveis">
                         <iframe frameborder="0" style="border:0" src="" allowfullscreen></iframe>
                     </a>
-
                     <div class="popup__description">
                         <p class="popup__tipo">Apartamento/Quartos</p>
                         <p class="popup__price"></p>
@@ -271,8 +381,13 @@
                 </div>
             </div>
         </div>
-
-        <div class="popup" id="faq">
+        <div class="popup" id="forms">
+            <div class="popup__iframe-box">
+                <iframe class="popup__form" src="https://docs.google.com/forms/d/e/1FAIpQLScqNYwLtPN-95aGR6CzgbIdB74cfdsLvFkkSBpatEZXPtcqdg/viewform?embedded=true"
+                    width="640" height="1528" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+            </div>
+        </div>
+        <div class="popup" id="faq">-
             <div class="popup__box relative faq">
                 <a href="javascript:history.back()" class="close">
                     <svg class="icon icon-cross popup__close">
@@ -540,10 +655,10 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-
+            </div>-
         </div>
     </div>
+    <!--END OF CONTAINER-->
     </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -567,19 +682,30 @@
             js.src = 'https://connect.facebook.net/pt_PT/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-
     <!-- Your customer chat code -->
     <div class="fb-customerchat pulse" attribution=setup_tool page_id="2065874267061909" logged_in_greeting="Olá, como é que podemos ajudar?"
         logged_out_greeting="Olá, como é que podemos ajudar?">
     </div>
-
-
-
 </body>
 
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
+        <symbol id="left" viewBox="0 0 320 512">
+            <title>left-</title>
+            <path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
+        </symbol>
+
+        <symbol id="right" viewBox="0 0 320 512">
+            <title>right-</title>
+            <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
+        </symbol>
+
+        <symbol id="bullet" viewBox="0 0 50 50">
+            <title>bullet-</title>
+            <path d="M24.7,1.8c12.813,0,23.2,10.387,23.2,23.2
+            c0,12.813-10.387,23.2-23.2,23.2C11.887,48.2,1.5,37.813,1.5,25C1.5,12.187,11.887,1.8,24.7,1.8z"></path>
+        </symbol>
         <symbol id="icon-home" viewBox="0 0 32 32">
             <title>home</title>
             <path d="M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z"></path>

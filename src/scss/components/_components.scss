@@ -1,16 +1,40 @@
 .imoveis {
+  .viewport-slider {
+    display: flex;
+    flex-direction: row wrap;
+    overflow: hidden;
+    height: 50rem;
+    width: 50%;
+    position: relative;
+    margin: 4rem auto;
+  }
+
   &__box {
     position: relative;
+    height: 100%;
+    &:first-child {
+      position: absolute;
+      left: -100%;
+    }
+
+    &:nth-child(2) {
+      position: absolute;
+      left: 0;
+    }
+
+    &:nth-child(3) {
+      position: absolute;
+      left: 100%;
+    }
     overflow: hidden;
     border-radius: 5px;
-
-    width: 40rem;
+    width: 100%;
+    // margin: 4rem auto;
 
     @include boxshadow;
-    transition: all 0.2s;
-    &:hover {
-      transform: scale(1.05);
-      cursor: pointer;
+
+    &:first-child {
+      float: left;
     }
 
     img {
@@ -25,6 +49,10 @@
     }
   }
 
+  &__box:hover &__info {
+    background-color: rgba(41, 41, 41, 0.8);
+    visibility: visible;
+  }
   &__left {
     opacity: 0;
     position: absolute;
@@ -39,11 +67,6 @@
     top: 50%;
     right: 2rem;
     z-index: 20;
-  }
-
-  &__box:hover &__info {
-    background-color: rgba(41, 41, 41, 0.8);
-    visibility: visible;
   }
 
   &__info {
@@ -113,7 +136,7 @@
   &__item {
     span {
       @include spanAnimated {
-        background-color: var(--color-bg-2);
+        background-color: var(--color-primary);
       }
     }
 
@@ -246,10 +269,24 @@
   }
 
   &--proprietario {
+    align-self: center;
+    margin-top: 8rem;
     background-color: var(--color-primary);
     color: var(--color-light);
     &:hover {
       transform: translateY(-2px);
+    }
+  }
+
+  &--procura {
+    text-decoration: none;
+    align-self: center;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    margin-bottom: 4rem;
+
+    &:hover {
+      transform: translateY(-1.5px);
     }
   }
 }
@@ -268,7 +305,7 @@
 
 //Buttons //
 
-.conheça {
+.conheca {
   position: absolute;
   border: none;
   background-color: var(--color-primary);
@@ -284,6 +321,7 @@
   cursor: pointer;
   outline: none;
   transition: all 0.2s;
+  text-transform: uppercase;
 
   &:hover {
     transform: translateY(-1.5px);

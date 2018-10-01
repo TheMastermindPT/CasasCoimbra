@@ -1,12 +1,12 @@
-.header__scroll {
-  position: absolute;
-  height: 20rem;
-  width: 20rem;
-  bottom: 4rem;
-  transform: scaleX(-50%);
-  left: 50%;
-  @include textshadow;
-}
+// .header__scroll {
+//   position: absolute;
+//   height: 20rem;
+//   width: 20rem;
+//   bottom: 4rem;
+//   transform: scaleX(-50%);
+//   left: 50%;
+//   @include textshadow;
+// }
 
 .white {
   fill: white;
@@ -20,6 +20,15 @@
   fill: var(--color-dark);
 }
 
+.left {
+  @include icon;
+  left: 18%;
+}
+
+.right {
+  @include icon;
+  right: 18%;
+}
 .bulletpoint {
   width: 3.2rem;
   height: 3.2rem;

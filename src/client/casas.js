@@ -210,7 +210,7 @@ const casas = [
         descricao: '',
         tipo: 'Quarto',
         preco: '',
-        fotos: ['imgs/casa3/quarto3-1.jpg', 'imgs/casa3/quarto3-2.jpg', 'imgs/casa3/quarto3-3.jpg'],
+        fotos: ['imgs/casa3/quarto2-1.jpg', 'imgs/casa3/quarto2-2.jpg', 'imgs/casa3/quarto2-3.jpg'],
       },
       {
         numero: '3',

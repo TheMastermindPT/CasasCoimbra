@@ -95,19 +95,86 @@ $(window).ready(() => {
     }
   });
 
+  const third = $('.imoveis__box:first-child').position();
+  const second = $('.imoveis__box:nth-child(2)').position();
+  const first = $('.imoveis__box:nth-child(3)').position();
+  const positions = [first, second, third];
+
+  let slideCounter = 1;
+
+  $('#changeLeft').on('click', () => {
+    slideCounter--;
+
+    if (slideCounter > -1 && slideCounter < 3) {
+      $('.imoveis__wrap').animate(
+        {
+          left: positions[slideCounter].left,
+        },
+        650,
+      );
+
+      return false;
+    }
+
+    $('.imoveis__wrap').animate(
+      {
+        left: positions[2].left,
+      },
+      650,
+    );
+    slideCounter = 2;
+  });
+
+  $('#changeRight').on('click', () => {
+    slideCounter++;
+
+    if (slideCounter > -1 && slideCounter < 3) {
+      $('.imoveis__wrap').animate(
+        {
+          left: positions[slideCounter].left,
+        },
+        650,
+      );
+
+      return false;
+    }
+
+    $('.imoveis__wrap').animate(
+      {
+        left: positions[0].left,
+      },
+      650,
+    );
+    slideCounter = 0;
+  });
+
   $('#accordion').accordion({
     active: 0,
     heightStyle: 'content',
-    collapsible: true,
   });
 
-  $('.servicos__accordion').accordion({
-    active: 0,
-    heightStyle: 'content',
-  });
+  let clicked = $('.faq h3:first-child').get(0);
 
-  $('#sidenav__faq').on('click', () => {
-    $('html').bind('mousewheel', () => false);
+  $('.faq h3').on('click', function (e) {
+    if (clicked !== this) {
+      $(this).animate(
+        {
+          width: '80%',
+        },
+        650,
+      );
+
+      $('.faq h3')
+        .not(this)
+        .animate(
+          {
+            width: '30%',
+          },
+          650,
+        );
+    }
+
+    clicked = this;
   });
 
   $(document).mouseup((e) => {
@@ -115,11 +182,12 @@ $(window).ready(() => {
     const sidenav = $('.sidenav');
 
     if (popup.is(e.target) && popup.has(e.target).length === 0) {
-      window.history.back();
       $('.popup').hide();
+      window.history.back();
+      // window.location.replace('/index.html');
       $('#leftPhoto').off();
       $('#rightPhoto').off();
-      $('html').unbind('mousewheel');
+      $('body').css('overflow', 'scroll');
     }
 
     if (!sidenav.is(e.target) && sidenav.has(e.target).length === 0 && !popup.is(e.target)) {
@@ -133,10 +201,11 @@ $(window).ready(() => {
     $('#leftPhoto').off();
     $('#rightPhoto').off();
     $('.popup').hide();
-    $('html').unbind('mousewheel');
+    $('body').css('overflow', 'scroll');
   });
 
-  $('#sidenav__faq').on('click', () => {
+  $('#sidenav__faq, #form').on('click', () => {
     $('.popup').show();
+    $('body').css('overflow', 'hidden');
   });
 });

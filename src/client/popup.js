@@ -18,7 +18,7 @@ $('.imoveis__box').on('click', function () {
   $('.popup').show();
   const box = $('.imoveis__box').index(this);
   $('.popup__info iframe').attr('src', casas[box].mapa);
-  $('html').bind('mousewheel', () => false);
+  $('body').css('overflow', 'hidden');
 
   $('.popup__photos img').attr('src', casas[box].divisoes[0].fotos[0]);
   let counterDiv = 0;
