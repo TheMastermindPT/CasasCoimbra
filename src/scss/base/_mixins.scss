@@ -21,4 +21,19 @@
   position: absolute;
   top: 50%;
   cursor: pointer;
+  padding: 2rem;
+  box-sizing: content-box;
+  z-index: 10;
+}
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == $big-desktop {
+    @media only screen and (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @media only screen and (max-width: $breakpoint) {
+      @content;
+    }
+  }
 }

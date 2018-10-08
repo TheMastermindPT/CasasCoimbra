@@ -1,46 +1,48 @@
 .imoveis {
   .viewport-slider {
     display: flex;
-    flex-direction: row wrap;
     overflow: hidden;
-    height: 50rem;
-    width: 50%;
+    width: 100%;
     position: relative;
     margin: 4rem auto;
-  }
 
+    @include respond($tab-port) {
+      margin: 4rem auto 2rem;
+      flex-direction: column;
+    }
+  }
   &__box {
+    backface-visibility: hidden;
     position: relative;
     height: 100%;
-    &:first-child {
-      position: absolute;
-      left: -100%;
-    }
-
-    &:nth-child(2) {
-      position: absolute;
-      left: 0;
-    }
-
-    &:nth-child(3) {
-      position: absolute;
-      left: 100%;
-    }
     overflow: hidden;
-    border-radius: 5px;
-    width: 100%;
+    border-radius: 1rem;
+    width: 30%;
+    margin: 0 auto;
+
+    @include respond($tab-port) {
+      margin-bottom: 2rem;
+      width: 50%;
+    }
+
+    @include respond($small) {
+      width: 80%;
+    }
+
     // margin: 4rem auto;
 
-    @include boxshadow;
+    // @include boxshadow;
 
     &:first-child {
       float: left;
     }
 
     img {
+      overflow: hidden;
       position: relative;
       z-index: 1;
       width: 100%;
+      border-radius: 1rem;
       height: 100%;
     }
     &:hover svg {
@@ -50,6 +52,11 @@
   }
 
   &__box:hover &__info {
+    background-color: rgba(41, 41, 41, 0.8);
+    visibility: visible;
+  }
+
+  &__box:active &__info {
     background-color: rgba(41, 41, 41, 0.8);
     visibility: visible;
   }
@@ -81,6 +88,7 @@
     display: flex;
     flex-direction: column;
     flex: 0 0 20%;
+    border-radius: 1rem;
   }
 
   &__list {
@@ -89,6 +97,14 @@
     width: 80%;
     position: absolute;
     top: 4rem;
+
+    @include respond($phone) {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      text-align: center;
+    }
 
     & > *:not(:last-child) {
       margin-bottom: 1rem;
@@ -125,11 +141,22 @@
   width: inherit;
   padding-right: 1rem;
 
+  @include respond($tab-land) {
+    position: static;
+    width: 100%;
+    display: block;
+    padding-right: 0;
+  }
+
   &__list {
     display: none;
     list-style: none;
     & > *:not(:last-child) {
       margin-bottom: 1rem;
+
+      @include respond($tab-land) {
+        margin-bottom: 0.5rem;
+      }
     }
   }
 
@@ -142,6 +169,15 @@
 
     &:hover span {
       width: 80%;
+
+      @include respond($tab-land) {
+        width: 100%;
+      }
+    }
+
+    @include respond($tab-land) {
+      width: 20rem;
+      margin: 0 auto 0.5rem auto;
     }
   }
 
@@ -149,6 +185,9 @@
     display: block;
     padding: 0.8rem;
     padding-left: 0;
+    @include respond($tab-land) {
+      text-align: center;
+    }
 
     &:link,
     &:visited {
@@ -184,6 +223,10 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.55s linear;
+
+    @include respond($tab-land) {
+      left: 90%;
+    }
   }
 
   &__icon {
@@ -231,6 +274,10 @@
 
   &__checkbox:not(:checked) + &__button {
     left: 15%;
+
+    @include respond($tab-land) {
+      left: 90%;
+    }
   }
 }
 
@@ -325,5 +372,9 @@
 
   &:hover {
     transform: translateY(-1.5px);
+  }
+
+  @include respond($tab-port) {
+    display: none;
   }
 }

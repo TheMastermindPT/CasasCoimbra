@@ -7,6 +7,10 @@ require('../scss/main.scss');
 require('../index.html');
 
 $(window).ready(() => {
+  $('img').on('dragstart', (event) => {
+    event.preventDefault();
+  });
+
   $('.sidenav__list').css('display', 'none');
 
   $('#casa').on('click', () => {
@@ -81,8 +85,12 @@ $(window).ready(() => {
     );
   });
 
+  const width = $(window).width();
+  const state = $('#navi-toggle').is(':checked');
+
   $('#navi-toggle').on('change', () => {
     const state = $('#navi-toggle').is(':checked');
+    console.log(state);
     if (state) {
       $('#navigator').switchClass('navigator--closed', 'navigator', 500, 'linear');
 
@@ -164,36 +172,61 @@ $(window).ready(() => {
         650,
       );
 
-      $('.faq h3')
-        .not(this)
-        .animate(
-          {
-            width: '30%',
-          },
-          650,
-        );
+      if (width <= 400) {
+        $('.faq h3')
+          .not(this)
+          .animate(
+            {
+              width: '80%',
+            },
+            650,
+          );
+      } else if (width > 400) {
+        $('.faq h3')
+          .not(this)
+          .animate(
+            {
+              width: '60%',
+            },
+            650,
+          );
+      }
     }
 
     clicked = this;
   });
 
+  $('#numero').on('click', (e) => {
+    $('.footer__mobile').css('display', 'block');
+  });
+
   $(document).mouseup((e) => {
     const popup = $('.popup');
     const sidenav = $('.sidenav');
+    const svg = $('#imoveis').find('svg');
+    const contacto = $('#numero');
 
     if (popup.is(e.target) && popup.has(e.target).length === 0) {
       $('.popup').hide();
       window.history.back();
-      // window.location.replace('/index.html');
       $('#leftPhoto').off();
       $('#rightPhoto').off();
       $('body').css('overflow', 'scroll');
     }
 
-    if (!sidenav.is(e.target) && sidenav.has(e.target).length === 0 && !popup.is(e.target)) {
-      $('#navi-toggle').prop('checked', false);
+    if (!contacto.is(e.target) && contacto.has(e.target).length === 0) {
+      $('.footer__mobile').css('display', 'none');
+    }
+
+    if (
+      !sidenav.is(e.target)
+      && sidenav.has(e.target).length === 0
+      && !popup.is(e.target)
+      && !svg.is(e.target)
+    ) {
       $('#navigator').switchClass('navigator', 'navigator--closed', 500, 'linear');
       $('.sidenav__list').css('display', 'none');
+      $('.sidenav__checkbox').prop('checked', false);
     }
   });
 
@@ -207,5 +240,12 @@ $(window).ready(() => {
   $('#sidenav__faq, #form').on('click', () => {
     $('.popup').show();
     $('body').css('overflow', 'hidden');
+  });
+
+  $('.btn--procura').on('click', (e) => {
+    if (width <= 700) {
+      e.preventDefault();
+      window.open('https://goo.gl/forms/9vlsm07atToEu7ql1', '_blank');
+    }
   });
 });

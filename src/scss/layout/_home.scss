@@ -4,10 +4,28 @@
   padding: 2.5rem 1rem;
   background-color: var(--color-dark);
 
+  @include respond($tab-land) {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 1.5rem 0.5rem;
+    height: 22rem;
+  }
+
   &--closed {
     width: 8rem;
     padding: 2.5rem 1rem;
     background-color: var(--color-dark);
+
+    @include respond($tab-land) {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 1.5rem 0.5rem;
+      height: 7rem;
+    }
   }
 }
 
@@ -26,6 +44,13 @@
     &__logo {
       transform: scale(2);
       align-self: center;
+
+      @include respond($phone) {
+        transform: scale(1);
+      }
+      @include respond($tab-port) {
+        transform: scale(1.4);
+      }
     }
 
     &__subtitle {
@@ -63,7 +88,6 @@
       font-size: 3rem;
       font-weight: 600;
       padding-top: 8rem;
-      text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
     }
 
     &__text {
@@ -73,9 +97,8 @@
       padding: 4rem 0;
       font-family: $text-normal;
       font-weight: 400;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       line-height: 2.5;
-      text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
     }
   }
 
@@ -87,8 +110,6 @@
       ),
       url(../imgs/bg.jpg); */
     background-color: #d14b56;
-    background-size: cover;
-    background-attachment: fixed;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -99,6 +120,10 @@
       flex: 1;
       justify-content: space-evenly;
       align-items: center;
+
+      @include respond($tab-port) {
+        flex-direction: column;
+      }
     }
     &__title {
       text-transform: uppercase;
@@ -106,7 +131,7 @@
       font-size: 3rem;
       font-weight: 600;
       padding-top: 8rem;
-      text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
+
       color: var(--color-light);
       text-align: center;
     }
@@ -122,14 +147,18 @@
       box-sizing: content-box;
       border-radius: 1rem;
       overflow: hidden;
-      // padding: 2rem;
       height: 44rem;
-      // border: solid 1px #0b1b1f;
+
+      @include respond($tab-port) {
+        margin-bottom: 2rem;
+      }
     }
 
     &__bg {
       position: relative;
       width: 100%;
+      border-radius: 1rem;
+      overflow: hidden;
       height: 65%;
       clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
       background-color: var(--color-bg);
@@ -137,7 +166,7 @@
 
     &__logo {
       position: absolute;
-      z-index: 10;
+      z-index: 2;
       transform: scale(2.7);
       left: 5.5rem;
       bottom: 10rem;
@@ -146,10 +175,20 @@
 
     &__icon {
       position: absolute;
-      z-index: 15;
-      top: 50%;
+      z-index: 5;
+      top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
+
+      @include respond($tab-port) {
+        width: 50%;
+      }
+
+      &--first {
+        @include respond($tab-port) {
+          width: 40%;
+        }
+      }
     }
     &__bullets {
       position: absolute;
@@ -198,17 +237,6 @@
   padding: 0 4rem;
   justify-content: space-between;
 
-  &__wrap {
-    position: relative;
-    left: 0;
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-  }
-
   &__title {
     text-transform: uppercase;
     font-family: $text-heading;
@@ -217,9 +245,7 @@
     margin-top: 8rem;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.2);
     color: var(--color-primary);
-
     text-align: center;
     width: 90%;
   }
@@ -232,9 +258,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
-  height: 100vh;
-  width: 100vw;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
@@ -279,12 +305,21 @@
     display: flex;
     transform: scale(0.4);
     opacity: 0.2;
+
+    @include respond($tab-port) {
+      flex-direction: column;
+    }
   }
   &__photos {
     position: relative;
     background-color: var(--color-dark);
     flex: 0 0 60%;
     overflow: hidden;
+
+    @include respond($tab-port) {
+      width: 100%;
+      height: 50%;
+    }
 
     img {
       display: block;
@@ -308,9 +343,14 @@
     left: 0;
     height: 40%;
     width: 100%;
-    color: var(--color-secondary);
-    background-color: rgb(39, 43, 49);
+    color: var(--color-primary);
+    background-color: white;
     padding: 2rem;
+
+    @include respond($tab-port) {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__tipo {
@@ -323,7 +363,7 @@
     font-family: $text-heading;
     font-weight: 600;
     line-height: 1;
-    border: solid 2px var(--color-secondary);
+    border: solid 2px var(--color-primary);
   }
 
   %description {
@@ -339,7 +379,11 @@
     font-size: 2.5rem;
     font-weight: 600;
     margin-left: auto;
-    color: var(--color-secondary);
+    color: var(--color-primary);
+
+    @include respond($tab-port) {
+      height: auto;
+    }
   }
 
   &__comment {
@@ -348,6 +392,7 @@
     font-weight: 400;
     font-size: 1.2rem;
     font-style: italic;
+    color: var(--color-dark);
   }
 
   &__details {
@@ -362,6 +407,7 @@
   &__info {
     position: relative;
     flex: 1;
+
     iframe {
       display: block;
       width: 100%;
@@ -371,23 +417,31 @@
   }
 }
 .faq {
-  padding: 2rem 8rem 2rem 2rem;
+  padding: 2rem 8rem;
+
+  @include respond($phone) {
+    padding: 2rem;
+  }
   &__accordion {
     overflow-y: auto;
     & > h3:not(:last-child) {
       margin: 0 auto 2rem auto;
-      border-bottom: solid 1.2px var(--color-bg);
+      border-bottom: solid 1px var(--color-primary);
     }
     h3 {
       font-family: $text-heading;
       font-size: 2rem;
-      color: var(--color-secondary);
+      color: var(--color-primary);
       font-weight: 600;
       outline: none;
       cursor: pointer;
       text-align: center;
-      width: 30%;
+      width: 60%;
       padding: 1rem;
+
+      @include respond($small) {
+        width: 80%;
+      }
     }
   }
   &__collapse {
@@ -418,35 +472,37 @@
 .footer {
   display: flex;
   flex-direction: column;
-  height: 20vh;
-  background-color: rgb(231, 231, 231);
+  height: 15rem;
+  background-color: rgb(63, 63, 63);
   align-items: center;
   justify-content: center;
+
+  &__mobile {
+    position: absolute;
+    display: none;
+    right: -30%;
+    top: -35%;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    font-family: $text-heading;
+    padding: 1rem;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    font-weight: 400;
+  }
 
   &__nav {
     display: flex;
     position: relative;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #0b1b1f;
+    border-bottom: 1px solid var(--color-light);
     padding-bottom: 1rem;
     width: 19rem;
     justify-content: center;
   }
 
   &__links {
-    .contacto {
-      position: absolute;
-      right: -4rem;
-      top: -2rem;
-      display: none;
-      background-color: var(--color-dark);
-      color: var(--color-light);
-      font-family: $text-heading;
-      font-weight: 400;
-      font-size: 1.4rem;
-      padding: 1rem;
-      border-radius: 5px;
-    }
+    margin-right: 2px;
   }
 
   &__links:hover,
@@ -461,7 +517,7 @@
   }
 
   &__copy {
-    color: var(--color-dark);
+    color: var(--color-light);
     margin-bottom: 1rem;
 
     p {
@@ -472,7 +528,7 @@
   }
 
   &__policy {
-    color: var(--color-secondary);
+    color: var(--color-light-2);
     text-decoration: none;
     font-size: 1.2rem;
     font-family: $text-normal;

@@ -22,12 +22,12 @@
 
 .left {
   @include icon;
-  left: 18%;
+  left: 15%;
 }
 
 .right {
   @include icon;
-  right: 18%;
+  right: 15%;
 }
 .bulletpoint {
   width: 3.2rem;
@@ -36,8 +36,8 @@
 }
 
 .footer__svg {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .header__logo {
@@ -88,9 +88,15 @@
   background-position: -96px 0;
 }
 .icon-mobile {
-  width: 32px;
-  height: 32px;
   background-position: -144px 0;
+  fill: var(--color-light);
+}
+
+.icon-whatsapp {
+  background-position: -144px 0;
+  fill: #1ebea5;
+  transform: scale(1.25);
+  margin-right: 0.4rem;
 }
 .icon-bubble {
   width: 32px;
@@ -135,9 +141,9 @@
   background-position: -624px 0;
 }
 .icon-facebook {
-  width: 32px;
-  height: 32px;
   background-position: -672px 0;
+
+  fill: #4267b2;
 }
 .icon-twitter {
   width: 32px;
