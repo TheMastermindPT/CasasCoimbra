@@ -15,6 +15,7 @@ const updateInfo = (box, counterDiv, counterPhotos) => {
 };
 
 $('.imoveis__box').on('click', function () {
+  $('.popup__box').css('width', '85%');
   $('.popup').show();
   const box = $('.imoveis__box').index(this);
   $('.popup__info iframe').attr('src', casas[box].mapa);
@@ -67,4 +68,25 @@ $('.imoveis__box').on('click', function () {
     }
     updateInfo(box, counterDiv, counterPhotos);
   });
+});
+
+$('.servicos__box').on('click', function () {
+  const box = $('.servicos__box').index(this);
+
+  if (box === 0) {
+    $('.info__main:first-child').css('display', 'flex');
+    $('.info__list').css('width', '18.5rem');
+
+    $('.info__main:not(:first-child)').css('display', 'none');
+  } else if (box === 1) {
+    $('.info__main:nth-child(2)').css('display', 'flex');
+    $('.info__list').css('width', '70%');
+
+    $('.info__main:not(:nth-child(2))').css('display', 'none');
+  } else if (box === 2) {
+    $('.info__main:nth-child(3)').css('display', 'flex');
+    $('.info__list').css('width', '70%');
+
+    $('.info__main:not(:nth-child(3))').css('display', 'none');
+  }
 });

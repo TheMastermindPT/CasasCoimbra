@@ -124,6 +124,10 @@
       @include respond($tab-port) {
         flex-direction: column;
       }
+
+      a {
+        text-decoration: none;
+      }
     }
     &__title {
       text-transform: uppercase;
@@ -138,7 +142,7 @@
 
     &__box {
       position: relative;
-      width: 30rem;
+      width: 35rem;
       background-color: #fff;
       @include boxshadow;
       display: flex;
@@ -147,7 +151,7 @@
       box-sizing: content-box;
       border-radius: 1rem;
       overflow: hidden;
-      height: 44rem;
+      height: 50rem;
 
       @include respond($tab-port) {
         margin-bottom: 2rem;
@@ -159,7 +163,7 @@
       width: 100%;
       border-radius: 1rem;
       overflow: hidden;
-      height: 65%;
+      height: 60%;
       clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
       background-color: var(--color-bg);
     }
@@ -210,10 +214,11 @@
     &__header {
       font-family: $text-heading;
       color: var(--color-primary);
-      font-size: 1.4rem;
-      font-weight: 600;
+      font-size: 1.6rem;
+      font-weight: 900;
       margin-top: 1rem;
       text-align: center;
+      text-transform: uppercase;
     }
 
     &__points {
@@ -300,7 +305,8 @@
   }
   &__box {
     height: 85vh;
-    flex-basis: 85%;
+    width: 85%;
+
     border-radius: 5px;
     display: flex;
     transform: scale(0.4);
@@ -313,7 +319,7 @@
   &__photos {
     position: relative;
     background-color: var(--color-dark);
-    flex: 0 0 60%;
+    flex: 0 0 61.8%;
     overflow: hidden;
 
     @include respond($tab-port) {
@@ -414,6 +420,114 @@
       height: 70%;
       // max-width: 100%;
     }
+  }
+}
+
+.info {
+  display: flex;
+  &__desc {
+    flex: 0 0 40rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-dark);
+  }
+
+  &__title {
+    font-family: $text-heading;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px var(--color-light);
+  }
+
+  &__main {
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 8rem;
+    align-items: center;
+    flex: 1;
+
+    color: var(--color-light);
+
+    img {
+      margin-bottom: 2rem;
+      transform: scale(0.8);
+    }
+
+    &:first-child {
+      display: none;
+    }
+
+    &:nth-child(2) {
+      display: none;
+    }
+
+    &:nth-child(3) {
+      display: none;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    font-family: $text-heading;
+
+    font-weight: 400;
+    width: 18.5rem;
+    text-align: center;
+
+    &-item {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    &-item--2 {
+      position: relative;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    div {
+      &:first-child {
+        animation: fromSide 0.6s 0.4s forwards;
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      &:nth-child(2) {
+        animation: fromSide 0.6s 0.6s forwards;
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        animation: fromSide 0.6s 0.8s forwards;
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+
+    span {
+      @include spanAnimated {
+        background-color: var(--color-primary);
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  &__list-item:hover + span {
+    width: 100%;
+
+    @include respond($tab-land) {
+      width: 100%;
+    }
+  }
+
+  &__table {
+    flex: 1;
+    background-color: var(--color-light);
   }
 }
 .faq {

@@ -237,7 +237,7 @@ $(window).ready(() => {
     $('body').css('overflow', 'scroll');
   });
 
-  $('#sidenav__faq, #form').on('click', () => {
+  $('#sidenav__faq, #form, .servicos__box').on('click', () => {
     $('.popup').show();
     $('body').css('overflow', 'hidden');
   });
@@ -247,5 +247,29 @@ $(window).ready(() => {
       e.preventDefault();
       window.open('https://goo.gl/forms/9vlsm07atToEu7ql1', '_blank');
     }
+  });
+
+  $('.servicos__box').on('click', () => {
+    $('.popup__box').css('width', '40rem');
+    $('.info__table').css('flex', '0 0 0%');
+
+    $('.info__list-item').on('click', () => {
+      $('.info__table').animate(
+        {
+          flex: '1 0 auto',
+        },
+        800,
+      );
+      $('.popup__box').animate(
+        {
+          width: '85%',
+        },
+        800,
+      );
+
+      // $('.popup__box').css('width', '85%');
+
+      // $('.info__table').css('flex', '1 0 auto');
+    });
   });
 });
