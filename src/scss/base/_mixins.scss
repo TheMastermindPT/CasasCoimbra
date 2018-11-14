@@ -9,8 +9,9 @@
 @mixin spanAnimated {
   display: block;
   width: 0;
-  height: 2px;
-  transition: all 0.25s;
+  height: 1px;
+  transition: all 0.3s;
+  line-height: 2px;
   transition-timing-function: ease-in;
   @content;
 }

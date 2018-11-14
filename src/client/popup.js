@@ -1,5 +1,6 @@
 import { casas } from './casas';
 
+const width = $(window).width();
 const updateInfo = (box, counterDiv, counterPhotos) => {
   $('.popup__tipo').html(
     `${casas[box].divisoes[counterDiv].tipo} ${
@@ -14,8 +15,22 @@ const updateInfo = (box, counterDiv, counterPhotos) => {
   $('.popup__comment').html(`${casas[box].divisoes[counterDiv].descricao}`);
 };
 
+const clicked = 0;
 $('.imoveis__box').on('click', function () {
-  $('.popup__box').css('width', '85%');
+  // if (width <= 1250) {
+  //   if (!clicked) {
+  //     clicked = 1;
+  //   } else if (clicked) {
+  //     clicked = 0;
+  //   }
+  // } else {
+  // }
+
+  $('.popup__box').css({
+    width: '85%',
+    height: '70%',
+  });
+
   $('.popup').show();
   const box = $('.imoveis__box').index(this);
   $('.popup__info iframe').attr('src', casas[box].mapa);
@@ -28,7 +43,7 @@ $('.imoveis__box').on('click', function () {
   $('.popup__details').html(`${casas[box].info}`);
   updateInfo(box, counterDiv, counterPhotos);
 
-  $('#leftPhoto').on('click', (e) => {
+  $('#leftPhoto').on('click touchend', (e) => {
     if (counterDiv >= 0 && counterDiv <= casas[box].divisoes.length) {
       if (counterPhotos > 0 && counterPhotos <= casas[box].divisoes[counterDiv].fotos.length - 1) {
         counterPhotos--;
@@ -48,7 +63,7 @@ $('.imoveis__box').on('click', function () {
     updateInfo(box, counterDiv, counterPhotos);
   });
 
-  $('#rightPhoto').on('click', (e) => {
+  $('#rightPhoto').on('click touchend', (e) => {
     e.stopPropagation();
     if (counterDiv >= 0 && counterDiv < casas[box].divisoes.length) {
       if (counterPhotos >= 0 && counterPhotos < casas[box].divisoes[counterDiv].fotos.length - 1) {
@@ -68,25 +83,4 @@ $('.imoveis__box').on('click', function () {
     }
     updateInfo(box, counterDiv, counterPhotos);
   });
-});
-
-$('.servicos__box').on('click', function () {
-  const box = $('.servicos__box').index(this);
-
-  if (box === 0) {
-    $('.info__main:first-child').css('display', 'flex');
-    $('.info__list').css('width', '18.5rem');
-
-    $('.info__main:not(:first-child)').css('display', 'none');
-  } else if (box === 1) {
-    $('.info__main:nth-child(2)').css('display', 'flex');
-    $('.info__list').css('width', '70%');
-
-    $('.info__main:not(:nth-child(2))').css('display', 'none');
-  } else if (box === 2) {
-    $('.info__main:nth-child(3)').css('display', 'flex');
-    $('.info__list').css('width', '70%');
-
-    $('.info__main:not(:nth-child(3))').css('display', 'none');
-  }
 });

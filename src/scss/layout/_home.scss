@@ -45,6 +45,10 @@
       transform: scale(2);
       align-self: center;
 
+      @include respond($big-desktop) {
+        transform: scale(3);
+      }
+
       @include respond($phone) {
         transform: scale(1);
       }
@@ -62,6 +66,10 @@
 
     &__btn {
       margin-top: 4rem;
+
+      @include respond($big-desktop) {
+        margin-top: 8rem;
+      }
     }
   }
 
@@ -143,6 +151,7 @@
     &__box {
       position: relative;
       width: 35rem;
+      height: 50rem;
       background-color: #fff;
       @include boxshadow;
       display: flex;
@@ -151,10 +160,30 @@
       box-sizing: content-box;
       border-radius: 1rem;
       overflow: hidden;
-      height: 50rem;
 
+      transform: translateY(0);
+      transition: transform 0.2s;
       @include respond($tab-port) {
         margin-bottom: 2rem;
+      }
+
+      @include respond($big-desktop) {
+        width: 45rem;
+        height: 64.3rem;
+      }
+
+      @include respond($tab-port) {
+        width: 45rem;
+        height: 64.3rem;
+      }
+
+      @include respond($phone) {
+        width: 30rem;
+        height: 42.9rem;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
       }
     }
 
@@ -184,11 +213,21 @@
       left: 50%;
       transform: translate(-50%, -50%);
 
+      @include respond($big-desktop) {
+        transform: scale(1.3);
+        top: 20%;
+        left: 35%;
+      }
+
       @include respond($tab-port) {
         width: 50%;
       }
 
       &--first {
+        @include respond($big-desktop) {
+          left: 40%;
+        }
+
         @include respond($tab-port) {
           width: 40%;
         }
@@ -209,6 +248,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @include respond($big-desktop) {
+        margin-top: 4rem;
+      }
+
+      @include respond($tab-port) {
+        margin-top: 7rem;
+      }
+
+      @include respond($phone) {
+        margin-top: 1.5rem;
+      }
     }
 
     &__header {
@@ -241,6 +292,7 @@
   flex-direction: column;
   padding: 0 4rem;
   justify-content: space-between;
+  align-items: center;
 
   &__title {
     text-transform: uppercase;
@@ -269,6 +321,31 @@
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
+
+  &__compare {
+    border-radius: 0.5rem;
+    float: left;
+    height: 95vh;
+    position: relative;
+
+    @include respond($tab-land) {
+      height: 85vh;
+    }
+
+    @include respond($tab-port) {
+      height: 80vh;
+    }
+
+    @include respond($small) {
+      height: 50vh;
+    }
+
+    &-img {
+      display: block;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
 
   &__iframe-box {
     height: 90vh;
@@ -304,16 +381,16 @@
     opacity: 1;
   }
   &__box {
-    height: 85vh;
+    height: 70%;
     width: 85%;
-
-    border-radius: 5px;
     display: flex;
     transform: scale(0.4);
     opacity: 0.2;
+    overflow: visible;
 
     @include respond($tab-port) {
       flex-direction: column;
+      height: 80%;
     }
   }
   &__photos {
@@ -360,7 +437,7 @@
   }
 
   &__tipo {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     min-height: 2rem;
     padding: 1rem;
 
@@ -374,15 +451,18 @@
 
   %description {
     font-family: $text-heading;
-    line-height: 1 !important;
+    line-height: 1;
   }
 
   &__price {
     @extend %description;
-    display: block;
-    height: inherit;
-    margin-top: 1rem;
-    font-size: 2.5rem;
+    height: 4rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    margin-top: 0.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
     margin-left: auto;
     color: var(--color-primary);
@@ -390,14 +470,22 @@
     @include respond($tab-port) {
       height: auto;
     }
+
+    @include respond($tab-port) {
+      font-size: 1.5rem;
+    }
   }
 
   &__comment {
     @extend %description;
     width: 100%;
     font-weight: 400;
-    font-size: 1.2rem;
-    font-style: italic;
+    line-height: 1.8 !important;
+    font-size: 1.4rem;
+    height: 80%;
+    padding-top: 1rem;
+    align-self: flex-start;
+    text-align: justify;
     color: var(--color-dark);
   }
 
@@ -427,9 +515,30 @@
   display: flex;
   &__desc {
     flex: 0 0 40rem;
+
+    @include respond($tab-land) {
+      flex: 0 0 100%;
+    }
+
+    @include respond($tab-port) {
+      flex: 0 0 100%;
+    }
+
     display: flex;
     flex-direction: column;
-    background-color: var(--color-dark);
+  }
+
+  &__container {
+    @include respond($tab-port) {
+      height: 22rem;
+      width: 40rem;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__title {
@@ -437,27 +546,62 @@
     font-size: 1.8rem;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
     padding-bottom: 1rem;
     border-bottom: solid 1px var(--color-light);
+    color: var(--color-primary);
+
+    @include respond($tab-port) {
+      margin-top: 4rem;
+    }
+  }
+
+  &__bg {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 50%;
+    width: 100%;
+    overflow: hidden;
+
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    background-color: var(--color-bg);
+
+    @include respond($tab-port) {
+      display: none;
+    }
   }
 
   &__main {
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 8rem;
     align-items: center;
     flex: 1;
 
-    color: var(--color-light);
+    @include respond($tab-port) {
+      background-color: var(--color-bg);
+      justify-content: center;
+    }
 
     img {
       margin-bottom: 2rem;
-      transform: scale(0.8);
+
+      @include respond($tab-port) {
+        transform: scale(0.7);
+      }
     }
 
     &:first-child {
       display: none;
+    }
+
+    &:first-child .info__bg {
+      @include respond($tab-port) {
+        display: none;
+      }
     }
 
     &:nth-child(2) {
@@ -467,15 +611,17 @@
     &:nth-child(3) {
       display: none;
     }
+    &:nth-child(3) .info__list {
+      width: 70%;
+    }
   }
 
   &__list {
     list-style: none;
     font-family: $text-heading;
-
     font-weight: 400;
-    width: 18.5rem;
     text-align: center;
+    color: var(--color-dark);
 
     &-item {
       font-size: 1.8rem;
@@ -483,13 +629,9 @@
       cursor: pointer;
     }
 
-    &-item--2 {
-      position: relative;
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-    }
-
     div {
+      height: 4rem;
+      box-sizing: content-box;
       &:first-child {
         animation: fromSide 0.6s 0.4s forwards;
         transform: translateX(-100%);
@@ -527,7 +669,130 @@
 
   &__table {
     flex: 1;
-    background-color: var(--color-light);
+    flex-direction: column;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-list {
+      display: none;
+      width: 70%;
+      opacity: 0;
+      list-style: none;
+
+      @include respond($tab-land) {
+        width: 80%;
+      }
+    }
+    &-links--title {
+      font-family: $text-heading;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      text-align: center;
+
+      @include respond($phone) {
+        display: none;
+      }
+      span {
+        color: var(--color-primary);
+        font-style: italic;
+        font-weight: 300;
+      }
+    }
+
+    &-links {
+      font-family: $text-normal;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: var(--color-dark);
+      position: relative;
+
+      &::before {
+        content: "\203A";
+        display: inline-block;
+        font-size: 1.6rem;
+        position: absolute;
+        left: -2rem;
+      }
+    }
+
+    &-span {
+      border-top: solid 1px var(--color-primary);
+      border-bottom: solid 1px var(--color-primary);
+      text-align: center;
+      padding: 0.5rem;
+      font-family: $text-normal;
+      margin-bottom: 2rem;
+      font-style: italic;
+
+      .span__info {
+        font-style: italic;
+        font-size: 1.4rem;
+
+        font-weight: 400;
+
+        margin-left: 2rem;
+        display: block;
+
+        color: rgb(92, 92, 92);
+        line-height: 1.8;
+      }
+    }
+
+    p {
+      font-family: $text-normal;
+      text-align: center;
+      font-size: 1.4rem;
+      color: rgb(92, 92, 92);
+      margin-top: 2rem;
+    }
+    .span__nota {
+      font-weight: 400;
+      margin-right: 1rem;
+      color: var(--color-dark);
+    }
+  }
+
+  &__tabela {
+    display: none;
+    opacity: 0;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  &__tabela-tr {
+    th {
+      background-color: var(--color-primary);
+      padding: 1.2rem 4rem 1.2rem 4rem;
+      border-bottom: 1px solid var(--color-primary);
+
+      color: var(--color-light);
+      font-family: $text-heading;
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 400;
+
+      @include respond($phone) {
+        padding: 1rem;
+      }
+    }
+    td {
+      padding: 1.2rem 4rem 1.2rem 4rem;
+      font-family: $text-heading;
+      font-size: 1.2rem;
+      font-style: italic;
+      font-weight: 400;
+      border-bottom: 1px solid var(--color-primary);
+
+      @include respond($phone) {
+        padding: 1rem;
+      }
+    }
   }
 }
 .faq {
@@ -591,18 +856,32 @@
   align-items: center;
   justify-content: center;
 
+  &__svgbg {
+    position: relative;
+
+    width: 3.1rem;
+    height: 3.1rem;
+  }
+
   &__mobile {
     position: absolute;
-    display: none;
-    right: -30%;
-    top: -35%;
+    left: 2rem;
+    top: 0;
+    z-index: 1;
+    text-align: center;
+    width: 15rem;
     border-radius: 0.5rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-family: $text-heading;
-    padding: 1rem;
+    line-height: 30px;
     color: var(--color-light);
-    background-color: var(--color-dark);
+
     font-weight: 400;
+    height: 3.1rem;
+
+    &-span {
+      display: none;
+    }
   }
 
   &__nav {
@@ -616,7 +895,16 @@
   }
 
   &__links {
-    margin-right: 2px;
+    cursor: pointer;
+  }
+
+  &__links-wrap {
+    display: flex;
+    position: relative;
+
+    & > a:not(:first-child) {
+      margin-left: 2rem;
+    }
   }
 
   &__links:hover,
@@ -626,7 +914,7 @@
     }
   }
 
-  &__links:hover .contacto {
+  &__links:hover + .contacto {
     display: inline-block;
   }
 
@@ -663,4 +951,23 @@
   align-items: center;
   align-items: flex-end;
   margin-bottom: 4rem;
+
+  button {
+    outline: none;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: var(--color-light);
+    color: var(--color-primary);
+    font-family: $text-heading;
+    font-weight: 400;
+    font-size: 1.6rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    @include boxshadow;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1.5px);
+    }
+  }
 }

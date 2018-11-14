@@ -10,7 +10,8 @@ module.exports = {
   },
   mode: 'production',
   output: {
-    filename: 'scripts/[name]-bundle.js',
+    filename: 'scripts/[name].[hash].js',
+
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
@@ -83,9 +84,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new OptimizeCssAssetsPlugin(),
     new MiniCSSExtractPlugin({
-      filename: 'styles/[name].css',
+      filename: 'styles/[name].[hash].css',
     }),
     new HTMLWebpackPlugin({
+      title: 'Caching',
       template: './src/index.html',
       minify: {
         collapseWhitespace: true,

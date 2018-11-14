@@ -51,8 +51,8 @@
 .icon-cross {
   box-sizing: content-box;
   padding: 0.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   position: absolute;
   z-index: 1000;
   right: -1.3rem;
@@ -61,6 +61,11 @@
   background-color: var(--color-dark);
   border-radius: 50%;
   border: 1px solid white;
+}
+.phone {
+  position: absolute;
+  z-index: 5;
+  transform: scale(-0.8, 0.8);
 }
 
 .icon-circle-down {
@@ -96,7 +101,6 @@
   background-position: -144px 0;
   fill: #1ebea5;
   transform: scale(1.25);
-  margin-right: 0.4rem;
 }
 .icon-bubble {
   width: 32px;
@@ -120,15 +124,17 @@
   background-position: -384px 0;
 }
 .icon-circle-right {
-  width: 32px;
-  height: 32px;
+  width: 4.5rem;
+  height: 4.5rem;
   background-position: -432px 0;
+  @include textshadow;
 }
 
 .icon-circle-left {
-  width: 32px;
-  height: 32px;
+  width: 4.5rem;
+  height: 4.5rem;
   background-position: -528px 0;
+  @include textshadow;
 }
 .icon-mail4 {
   width: 32px;

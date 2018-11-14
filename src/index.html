@@ -24,7 +24,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Mastermind">
-    <meta name="description" content="Casas Coimbra. Procura Casa? É proprietário. Saiba como pudemos ajudá-lo.">
+    <meta name="description" content="Procura casa em Coimbra ou é proprietário? Conheça os nossos serviços, e saiba como podemos ajudá-lo a cuidar da sua moradia ou encontrar um local para morar em Coimbra.">
     <meta name="keywords" content="Casas, alugar, coimbra, proprietario, residencias, moradias, centro, zona">
     <meta name="google-site-verification" content="ujnLU20WJVDOoP1Qfh8N9fgqHcV0AIlZLxqao9DBTxM" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -36,7 +36,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d93240">
     <meta name="msapplication-TileColor" content="#b91d47">
     <meta name="theme-color" content="#ffffff">
-    <title>Casas Coimbra - Procura casa? É proprietário?</title>
+    <title>Casas Coimbra - Cuidamos da sua casa como se fosse nossa</title>
 </head>
 
 <body>
@@ -48,12 +48,10 @@
         <nav class="navigator--closed" id="navigator">
 
             <div class="sidenav" id="sidenav">
-
                 <input type="checkbox" class="sidenav__checkbox" id="navi-toggle">
                 <label for="navi-toggle" class="sidenav__button">
                     <span class="sidenav__icon">&nbsp;</span>
                 </label>
-
 
                 <ul class="sidenav__list">
                     <li class="sidenav__item">
@@ -123,7 +121,7 @@
                         Os nossos serviços
                     </h1>
                     <div class="servicos__wrap">
-                        <a href="#info">
+                        <a href="#info" class="servicos__link">
                             <div class="servicos__box">
                                 <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
                                 <img class="servicos__icon" src="svg/casacerto.svg" alt="cardicon">
@@ -156,7 +154,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#info">
+                        <a href="#info" class="servicos__link">
                             <div class="servicos__box">
                                 <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
                                 <img class="servicos__icon" src="svg/casacompessoas.svg" alt="cardicon">
@@ -182,7 +180,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="#info">
+                        <a href="#info" class="servicos__link">
                             <div class="servicos__box">
                                 <img class="servicos__logo" src="svg/logo-2-unletter.svg" alt="cardbglogo">
                                 <img class="servicos__icon servicos__icon--first" src="svg/lampada.svg" alt="cardicon">
@@ -213,15 +211,19 @@
                     </div>
                     </a>
                     <div class="arrow-wrapper">
-                        <svg class="white icon icon-circle-down" id="scrollToImoveis">
+                        <!-- <svg class="white icon icon-circle-down" id="scrollToImoveis">
                             <use xlink:href="#icon-circle-down"></use>
-                        </svg>
+                        </svg> -->
+                        <a href="#compare">
+                            <button id="btn__compare">Compare os serviços</button>
+                        </a>
+
                     </div>
 
                 </div>
                 <div class="imoveis view" id="imoveis">
                     <h1 class="imoveis__title">
-                        Procuras casa?
+                        Procura casa?
                     </h1>
                     <!-- 
                     <svg class="left red" id="changeLeft">
@@ -239,33 +241,33 @@
                                 <div class="imoveis__info">
                                     <ul class="imoveis__list">
                                         <li class="imoveis__item">
-                                            Tipologia: <span>Moradia T6 com jardim comum</span>
+                                            TIPOLOGIA: <span>Moradia T6 com jardim comum</span>
                                         </li>
                                         <li class="imoveis__item">
                                             WC: <span>2 Privados + 2 Comuns </span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Localização: <span>Alta de Coimbra / Polo 1 </span>
+                                            ZONA: <span>Alta de Coimbra / Polo 1 </span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Morada: <span>Tv. do Cabido 11, 3000-088</span>
+                                            MORADA: <span>Tv. do Cabido 11, 3000-088</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Mobilado & Equipado: <span>Sim</span>
+                                            MOBILADO & EQUIPADO: <span>Sim</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Próximo: <span>Zona Histórica / Polo 1 / Baixa de Coimbra / Faculdade
+                                            PRÓXIMO: <span>Zona Histórica / Polo 1 / Baixa de Coimbra / Faculdade
                                                 de
                                                 Direito / Faculdade de Letras</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Net/TV: <span>Sim</span>
+                                            NET/TV: <span>Sim</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Despesas Incluídas c/Limpeza
+                                            DESPESAS INCLUÍDAS C/LIMPEZA
                                         </li>
                                     </ul>
-                                    <button class="conheca">Moradia #1</button>
+                                    <button class="conheca">Conheça a casa</button>
                                 </div>
                                 <img src="imgs/casa1/casa1.jpg" alt="Casa2">
                             </a>
@@ -277,107 +279,78 @@
                                 <div class="imoveis__info">
                                     <ul class="imoveis__list">
                                         <li class="imoveis__item">
-                                            Tipologia: <span>Moradia de 3 andares com um total de 7 quartos</span>
+                                            TIPOLOGIA: <span>Moradia de 3 andares com um total de 7 quartos</span>
                                         </li>
                                         <li class="imoveis__item">
                                             WC: <span>1 Privado + 3 Comuns </span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Localização: <span>Celas/Sto. António dos Olivais</span>
+                                            ZONA: <span>Celas/Sto. António dos Olivais</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Morada: <span>Rua Rodrigues Gusmão nº20, 3000-345</span>
+                                            MORADA: <span>Rua Rodrigues Gusmão nº20, 3000-345</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Mobilado & Equipado: <span>Sim</span>
+                                            MOBILADO & EQUIPADO: <span>Sim</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Próximo: <span>2 min. a pé dos HUC / Escola de Enfermagem, a 10 min. da
+                                            PRÓXIMO: <span>2 min. a pé dos HUC / Escola de Enfermagem, a 10 min. da
                                                 FEUC /
                                                 Cruz de Celas /Bairro de Sto. António dos Olivais </span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Net/TV: <span>Sim</span>
+                                            NET/TV: <span>Sim</span>
                                         </li>
                                         <li class="imoveis__item">
-                                            Despesas Incluídas c/Limpeza
+                                            DESPESAS INCLUÍDAS C/LIMPEZA
                                         </li>
 
                                     </ul>
-                                    <button class="conheca">Moradia #2</button>
+                                    <button class="conheca">Conheça a casa</button>
                                 </div>
                                 <img src="imgs/casa2/quarto3-1.jpg" alt="Casa2">
                             </a>
                         </div>
 
-                        <div class="imoveis__box">
 
-                            <a href="#popup">
-                                <div class="imoveis__info">
-                                    <ul class="imoveis__list">
-                                        <li class="imoveis__item">
-                                            Tipologia: <span>Apartamento T4</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            WC: <span>2</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Localização: <span>Elísio de Moura /Solum</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Morada: <span>Av. Elísio de Moura 367, 3030-183</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Mobilado & Equipado: <span>Sim</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Próximo: <span> A 2 min. a pé de Café / Talho / Padaria, a 15 minutos a
-                                                pé
-                                                da
-                                                Solum / ESEC / Alma shopping, junto aos acessos da Cidade</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Net/TV: <span>Sim</span>
-                                        </li>
-                                        <li class="imoveis__item">
-                                            Despesas Incluídas c/Limpeza
-                                        </li>
-                                    </ul>
-                                    <button class="conheca">Moradia #3</button>
-                                </div>
-                                <img src="imgs/casa3/casa3.jpg" alt="quarto1">
-                            </a>
-                        </div>
 
 
                     </div>
 
-                    <a href="#forms" id="form" class="btn btn--procura">Não encontras o que procuras?</a>
+                    <a href="#forms" id="form" class="btn btn--procura">Não encontra o que procura?</a>
                 </div>
             </main>
             <footer>
                 <div class="footer">
                     <div class="footer__nav">
-                        <a href="https://www.facebook.com/CasasCoimbra.pt/" target="_blank" class="footer__links">
-                            <svg class="icon icon-facebook footer__svg">
-                                <use xlink:href="#icon-facebook"></use>
-                            </svg>
-                        </a>
-                        <a class="footer__links">
+                        <div class="footer__links-wrap">
+                            <a href="https://www.facebook.com/CasasCoimbra.pt/" target="_blank" class="footer__links">
+                                <svg class="icon icon-facebook footer__svg">
+                                    <use xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a>
 
-                            <a href="https://wa.me/351910211113" target="_blank">
+
+                            <a class="footer__links" href="https://wa.me/351910211113" target="_blank">
                                 <svg class="icon dark icon-whatsapp footer__svg">
                                     <use xlink:href="#whatsapp"></use>
                                 </svg>
                             </a>
 
-                        </a>
-                        <span class="footer__mobile">+351 910 211 113</span>
-                        <a class="footer__links">
-                            <svg class="icon icon-mobile footer__svg" id="numero">
-                                <use xlink:href="#icon-mobile"></use>
-                            </svg>
-                        </a>
+
+
+                            <a class="footer__links" id="numero">
+                                <div class="footer__svgbg">
+                                    <svg class="icon white phone footer__svg">
+                                        <use xlink:href="#phone"></use>
+                                    </svg>
+                                    <div class="footer__mobile">
+                                        <span class="footer__mobile-span contacto">+351 910 211 113</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
                     </div>
 
                     <div class="footer__copy">
@@ -391,8 +364,9 @@
         </div>
         <!--END of Content-->
         <div class="popup" id="popup">
+           
             <div class="popup__box">
-                <a href="javascript:history.back()" class="close">
+                <a href="javascript:history.back()" class="close"></a>
                     <svg class="icon icon-cross popup__close">
                         <use xlink:href="#icon-cross"></use>
                     </svg>
@@ -425,56 +399,252 @@
         </div>
 
         <div class="popup" id="info">
-            <div class="popup__box info">
+            <div class="popup__box info__container">
+                <a href="javascript:history.back()" class="close">
+                    <svg class="icon icon-cross popup__close">
+                        <use xlink:href="#icon-cross"></use>
+                    </svg>
+                </a>
                 <div class="info__desc">
-                    <div class="info__main">
-                        <img src="svg/casacerto.svg" alt="logo">
-                        <h1 class="info__title">Gestão Completa</h1>
-                        <ul class="info__list">
-                            <div>
-                                <li class="info__list-item">Apartamentos</li>
-                                <span></span>
-                            </div>
-                            <div>
-                                <li class="info__list-item">Quartos</li>
-                                <span></span>
-                            </div>
-                            <div>
-                                <li class="info__list-item">Alojamento Local</li>
-                                <span></span>
-                            </div>
+                    <div class="info__main info__main--1">
+                        <div class="info__bg">
+                            <img src="svg/casacerto.svg" alt="logo">
+                        </div>
 
-                        </ul>
+
+                        <h1 class="info__title">Gestão Completa</h1>
+                        <div class="info__wrap">
+                            <ul class="info__list">
+                                <div>
+                                    <li class="info__list-item" id="apartamentos">Apartamentos</li>
+                                    <span></span>
+                                </div>
+                                <div>
+                                    <li class="info__list-item" id="quartos">Quartos</li>
+                                    <span></span>
+                                </div>
+                                <div>
+                                    <li class="info__list-item" id="alojamento">Alojamento Local</li>
+                                    <span></span>
+                                </div>
+
+                            </ul>
+                        </div>
+
+
                     </div>
-                    <div class="info__main">
-                        <img src="svg/casacompessoas.svg" alt="logo">
+                    <div class="info__main info__main--2">
+                        <div class="info__bg">
+                            <img src="svg/casacompessoas.svg" alt="logo">
+                        </div>
+
+
                         <h1 class="info__title">Gestão de Visitas</h1>
-                        <ul class="info__list">
-                            <li class="info__list-item--2">Fotografias e publicidade</li>
-                            <li class="info__list-item--2">Gestão de contactos e visitas</li>
-                            <li class="info__list-item--2">Elaboração de contracto</li>
-                            <li class="info__list-item--2">Entrega das chaves </li>
-                            <li class="info__list-item--2">Serviço pago por 6 meses
-                            </li>
-                        </ul>
+                        <div class="info__wrap">
+                            <ul class="info__list">
+                                <div>
+                                    <li class="info__list-item">Gestão Continuada</li>
+                                    <span></span>
+                                </div>
+                                <div>
+                                    <li class="info__list-item">Gestão Pontual</li>
+                                    </li>
+                                    <span></span>
+                                </div>
+
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info__main">
-                        <img src="svg/lampada.svg" alt="logo">
+                    <div class="info__main info__main--3">
+                        <div class="info__bg">
+                            <img src="svg/lampada.svg" alt="logo">
+                        </div>
+
                         <h1 class="info__title">Serviços Pontuais</h1>
                         <ul class="info__list">
-                            <li class="info__list-item--2">Visita pontual fora de algum dos planos de serviços
-                                anteriores</li>
-                            <li class="info__list-item--2">Arranjos e manutenção</li>
-                            <li class="info__list-item--2">Compra, transporte e montagem de mobiliário e ou
-                                eletrodomésticos
-                            </li>
+                            <div>
+                                <li class="info__list-item">Arranjos e manutenção</li>
+                                <span></span>
+                            </div>
+                            <div>
+                                <li class="info__list-item">Mobiliário & Electrodomésticos</li>
+                                <span></span>
+                            </div>
                         </ul>
                     </div>
                 </div>
                 <div class="info__table">
+                    <ul class="info__table-list">
+                        <h1 class="info__table-links--title">Gestão Completa</h1>
+                        <li class="info__table-links">Fotografias e publicidade tanto física como online</li>
+                        <li class="info__table-links">Gestão de visitas e contactos</li>
+                        <li class="info__table-links">Registo de contractos e emissão de recibos</li>
+                        <li class="info__table-links">Apoio 24/7 aos residentes</li>
+                        <li class="info__table-links">Gestão de arranjos e manutenção do imóvel </li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                "Para arranjos superiores a 300€ será cobrada uma taxa de gestão de projeto de 20% do
+                                valor faturado."
+                            </span>
+                        </div>
 
+                        <li class="info__table-links">Relatório trimestral de contas </li>
+                    </ul>
+
+                    <ul class="info__table-list">
+                        <h1 class="info__table-links--title">Quartos</h1>
+                        <li class="info__table-links">Controlo dos serviços de limpeza (staff/consumíveis)</li>
+                        <li class="info__table-links">Pagamento e controlo de contas e despesas</li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                "No caso do imóvel ser arrendado com despesas incluídas."
+                            </span>
+                        </div>
+                    </ul>
+
+                    <ul class="info__table-list">
+                        <h1 class="info__table-links--title">Serviços Pontuais</h1>
+                        <li class="info__table-links">Acompanhar a entrada e saída dos hóspedes</li>
+                        <li class="info__table-links">Gestão dos serviços de lavandaria</li>
+                        <li class="info__table-links">Manutenção de consumíveis</li>
+                        <li class="info__table-links">Serviços de transfere </li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                "Serviço pontual com custo de 15€ por transporte válido apenas dentro da cidade de
+                                Coimbra e arredores próximos para distâncias superiores, valor sob consulta"
+                            </span>
+                        </div>
+                    </ul>
+
+                    <ul class="info__table-list">
+                        <li class="info__table-links--title">Gestão Continuada</span>
+                        </li>
+                        <li class="info__table-links">Fotografias e publicidade tanto física como on-line</li>
+                        <li class="info__table-links">Gestão de contactos e visitas</li>
+                        <li class="info__table-links">Reunir documentação e elaboração do contracto
+                        </li>
+                        <li class="info__table-links">Dar entrada do Inquilino</li>
+                        <li class="info__table-links">Serviços de transfere </li>
+                        <li class="info__table-links">Serviço pago por 6 meses</li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                "Caso o inquilino permaneça no imóvel por um período de tempo inferior a 6 meses o
+                                proprietário não será cobrado pelo serviço seguinte"
+                            </span>
+                        </div>
+                    </ul>
+
+                    <ul class="info__table-list">
+                        <li class="info__table-links--title">Gestão Pontual</li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                Os mesmos serviços da gestão de visitas continuada mas realizados apenas uma vez
+                            </span>
+                        </div>
+                    </ul>
+
+                    <ul class="info__table-list">
+
+                        <li class="info__table-links--title">Arranjos & Manutenção</li>
+                        <div class="info__table-span">
+
+                            <span class="span__info">
+                                "Avaliação do problema e recomendação de solução adequada.
+                                Contratação e supervisão de pessoal especializado no tipo de serviço em questão. válido
+                                para qualquer tipo de arranjos incluindo persianas, serviços de canalização,
+                                eletricidade
+                                ou serralharia, etc."
+                            </span>
+
+                        </div>
+                        <p><span class="span__nota">Nota:</span> Não dispensa uma avaliação caso-a-caso com
+                            eventual ajuste no valor
+                            tabelado
+                        </p>
+                    </ul>
+
+                    <table class="info__tabela">
+                        <tr class="info__tabela-tr">
+                            <th>Valor Orçamentado</th>
+                            <th>Comissão</th>
+                            <th>Valor Mínimo</th>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>0€-1000€</td>
+                            <td>20%</td>
+                            <td>50€</td>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>1000€-5000€</td>
+                            <td>15%</td>
+                            <td>200€</td>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>5000-25000€</td>
+                            <td>6%</td>
+                            <td>750€</td>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>>25000€</td>
+                            <td>4%</td>
+                            <td>1500€</td>
+                        </tr>
+                    </table>
+                    <ul class="info__table-list">
+
+                        <li class="info__table-links--title">Mobiliário & Electrodomésticos
+                        </li>
+                        <div class="info__table-span">
+                            <span class="span__info">
+                                "Avaliação das necessidades, orçamentação e proposta de solução adequada, compra
+                                transporte e montagem de todo o equipamento.)"
+                            </span>
+
+                        </div>
+                        <p><span class="span__nota">Nota:</span> Não dispensa uma avaliação caso-a-caso com
+                            eventual ajuste no valor
+                            tabelado
+                        </p>
+                    </ul>
+
+                    <table class="info__tabela">
+                        <tr class="info__tabela-tr">
+                            <th>Valor Orçamentado</th>
+                            <th>Comissão</th>
+                            <th>Valor Mínimo</th>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>0€-1000€</td>
+                            <td>35%</td>
+                            <td>100€</td>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>1000€-5000€</td>
+                            <td>25%</td>
+                            <td>350€</td>
+                        </tr>
+                        <tr class="info__tabela-tr">
+                            <td>5000-15000€</td>
+                            <td>20%</td>
+                            <td>1250€</td>
+                        </tr>
+
+                    </table>
                 </div>
             </div>
+        </div>
+        <div class="popup" id="compare">
+           <div class="popup__compare">
+                <a href="javascript:history.back()" class="close">
+                        <svg class="icon icon-cross popup__close">
+                            <use xlink:href="#icon-cross"></use>
+                        </svg>
+                    </a>
+                <img class="popup__compare-img" src="svg/tabela_CUSTOM2.svg" alt="tabela">
+              
+           </div>
+            
+
         </div>
         <div class="popup" id="faq">
             <div class="popup__box relative faq">
@@ -489,21 +659,15 @@
                     <div class="faq__collapse">
                         <ul class="faq__list">
                             <li class="faq__item">
-                                <p>Todos os residentes têm o direito à sua privacidade não tendo o senhorio ou seu
-                                    representante
-                                    o direito de entrar nas áreas privadas da habitação salvo com autorização do seu
-                                    ocupante
-                                    ou em caso de emergência ou força maior.</p>
+                                <p>A reserva de um quarto ou apartamento é possível sendo feita mediante o pagamento da caução do mesmo (valor equivalente a 1 mês de renda). Após a receção do valor em causa, serão retirados todos e quaisquer anúncios relativos ao mesmo sendo o imóvel/quarto considerado reservado até à data acordada de entrada.</p>
                             </li>
                             <li class="faq__item">
-                                <p>Os residentes têm o direito ter assegurada a manutenção das condições de
-                                    habitabilidade
-                                    que lhe foram apresentadas no início da sua estadia e de exigir a reparação e
-                                    manutenção
-                                    de todos os equipamentos e mobília desde que o desgaste dos mesmos seja derivado de
-                                    uma
-                                    utilização responsável.
+                                <p>Valor da caução para efeitos de reserva é não reembolsável, a exceção a esta condição será apenas no caso de ser encontrada uma pessoa que tome a posição do interessado e que dê entrada no imóvel em data anterior ou igual à data acordada com o mesmo.
+
                                 </p>
+                            </li>
+                            <li class="faq__item">
+                                <p>Por norma não são aceites reservas com antecedência superior a um mês, exceções a esta norma deverão serão analisadas caso a caso.</p>
                             </li>
                         </ul>
                     </div>
@@ -692,13 +856,7 @@
 
                                 </p>
                             </li>
-                            <li class="faq__item">
-                                <p>Todos os residentes têm o direito à sua privacidade não tendo o senhorio ou seu
-                                    representante
-                                    o direito de entrar nas áreas privadas da habitação salvo com autorização do seu
-                                    ocupante
-                                    ou em caso de emergência ou força maior.</p>
-                            </li>
+                           
                             <li class="faq__item">
                                 <p>No caso de existirem danos nos espaços comuns da habitação, será feita uma tentativa
                                     para
@@ -783,7 +941,10 @@
             <title>left</title>
             <path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
         </symbol>
-
+        <symbol id="phone" viewBox="0 0 512 512">
+            <title>phone</title>
+            <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path>
+        </symbol>
         <symbol id="whatsapp" viewBox="0 0 448 512">
             <title>whatsapp</title>
             <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path>

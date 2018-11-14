@@ -1,6 +1,10 @@
 html {
   font-size: 62.5%;
 
+  @include respond($big-desktop) {
+    font-size: 70%;
+  }
+
   @include respond($tab-port) {
     font-size: 55%;
   }
