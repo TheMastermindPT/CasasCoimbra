@@ -178,8 +178,8 @@
       }
 
       @include respond($phone) {
-        width: 30rem;
-        height: 42.9rem;
+        width: 35rem;
+        height: 45rem;
       }
 
       &:hover {
@@ -310,6 +310,7 @@
 
 .popup {
   visibility: hidden;
+
   display: flex;
   opacity: 0;
   position: fixed;
@@ -462,7 +463,6 @@
     justify-content: flex-end;
     text-align: right;
     flex: 1;
-    margin-top: 0.5rem;
     font-size: 1.8rem;
     font-weight: 600;
     margin-left: auto;
@@ -679,8 +679,11 @@
     &-list {
       display: none;
       width: 70%;
+      max-height: 80%;
+      overflow: scroll;
       opacity: 0;
       list-style: none;
+      flex-direction: column;
 
       @include respond($tab-land) {
         width: 80%;
@@ -714,10 +717,8 @@
 
       &::before {
         content: "\203A";
-        display: inline-block;
-        font-size: 1.6rem;
-        position: absolute;
-        left: -2rem;
+        margin-right: 1rem;
+        color: var(--color-primary);
       }
     }
 
@@ -865,17 +866,15 @@
   }
 
   &__mobile {
-    position: absolute;
-    left: 2rem;
-    top: 0;
-    z-index: 1;
-    text-align: center;
     width: 15rem;
     border-radius: 0.5rem;
     font-size: 1.6rem;
     font-family: $text-heading;
-    line-height: 30px;
+    line-height: 1.6rem;
+    display: flex;
+    align-items: center;
     color: var(--color-light);
+    margin-left: 3.5rem;
 
     font-weight: 400;
     height: 3.1rem;

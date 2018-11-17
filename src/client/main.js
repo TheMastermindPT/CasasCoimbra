@@ -166,7 +166,7 @@ $(window).ready(() => {
       window.history.back();
       $('#leftPhoto').off();
       $('#rightPhoto').off();
-      $('body').css('overflow', 'scroll');
+      $('body').css('overflow-y', 'scroll');
     }
 
     if (!contacto.is(e.target) && contacto.has(e.target).length === 0) {
@@ -186,7 +186,7 @@ $(window).ready(() => {
     }
   });
 
-  $('.close').on('click', () => {
+  $('.close').on('click touchend', () => {
     $('#leftPhoto').off();
     $('#rightPhoto').off();
     $('.popup').hide();
@@ -284,7 +284,7 @@ $(window).ready(() => {
           () => {
             $('.info__table-list')
               .eq($this)
-              .css('display', 'block');
+              .css('display', 'flex');
             $(`.info__table-list:not(:eq(${$this}))`).css('display', 'none');
             $(`.info__table-list:not(:eq(${$this}))`).css('opacity', 0);
             $('.info__table-list')

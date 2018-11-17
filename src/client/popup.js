@@ -43,7 +43,7 @@ $('.imoveis__box').on('click', function () {
   $('.popup__details').html(`${casas[box].info}`);
   updateInfo(box, counterDiv, counterPhotos);
 
-  $('#leftPhoto').on('click touchend', (e) => {
+  $('#leftPhoto').on('click', (e) => {
     if (counterDiv >= 0 && counterDiv <= casas[box].divisoes.length) {
       if (counterPhotos > 0 && counterPhotos <= casas[box].divisoes[counterDiv].fotos.length - 1) {
         counterPhotos--;
@@ -63,7 +63,7 @@ $('.imoveis__box').on('click', function () {
     updateInfo(box, counterDiv, counterPhotos);
   });
 
-  $('#rightPhoto').on('click touchend', (e) => {
+  $('#rightPhoto').on('click', (e) => {
     e.stopPropagation();
     if (counterDiv >= 0 && counterDiv < casas[box].divisoes.length) {
       if (counterPhotos >= 0 && counterPhotos < casas[box].divisoes[counterDiv].fotos.length - 1) {
