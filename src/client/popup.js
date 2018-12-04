@@ -33,6 +33,7 @@ $('.imoveis__box').on('click', function () {
 
   $('.popup').show();
   const box = $('.imoveis__box').index(this);
+
   $('.popup__info iframe').attr('src', casas[box].mapa);
   $('body').css('overflow', 'hidden');
 

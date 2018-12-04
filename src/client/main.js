@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import './popup';
+import './jquery.waypoints.min';
+import './jquery.counterup';
 
 require('babel-runtime/regenerator');
 require('webpack-hot-middleware/client?reload=true');
@@ -7,6 +9,43 @@ require('../scss/main.scss');
 require('../index.html');
 
 $(window).ready(() => {
+  $('.counter').counterUp({
+    delay: 10,
+    time: 1000,
+  });
+
+  const slider = $('.review').length;
+  const sliderCounter = 0;
+
+  // const sliderAnimation = () => {
+  //   if (sliderCounter < slider - 1) {
+  //     $('.review:nth-child(1)').animate(
+  //       {
+  //         marginLeft: '-=100%',
+  //       },
+  //       500,
+  //       () => {
+  //         sliderCounter++;
+  //         console.log(sliderCounter);
+  //       },
+  //     );
+  //   } else {
+  //     sliderCounter = 0;
+  //     $('.review:nth-child(1)').animate(
+  //       {
+  //         marginLeft: '0',
+  //       },
+  //       500,
+  //       () => {
+  //         sliderCounter++;
+  //         console.log(sliderCounter);
+  //       },
+  //     );
+  //   }
+  // };
+
+  // setInterval(sliderAnimation, 5000);
+
   $('img').on('dragstart', (event) => {
     event.preventDefault();
   });
@@ -190,7 +229,7 @@ $(window).ready(() => {
     $('#leftPhoto').off();
     $('#rightPhoto').off();
     $('.popup').hide();
-    $('body').css('overflow', 'scroll');
+    $('body').css('overflow-y', 'scroll');
   });
 
   $('#sidenav__faq, #form, .servicos__link, #btn__compare').on('click', () => {
@@ -265,6 +304,7 @@ $(window).ready(() => {
           $('.popup__box').animate(
             {
               height: '80%',
+              width: '90%'
             },
             {
               step() {

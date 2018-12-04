@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -46,6 +47,9 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
+            options: {
+              includePaths: [require('path').resolve(__dirname, 'node_modules')],
+            },
           },
         ],
       },
@@ -61,7 +65,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|png|gif|jpeg|svg|.ico)$/,
+        test: /\.(jpg|png|gif|jpeg|svg|.ico|eot|ttf|woff)$/,
         use: [
           {
             loader: 'file-loader',

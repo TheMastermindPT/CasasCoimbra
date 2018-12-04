@@ -20,14 +20,21 @@
   fill: var(--color-dark);
 }
 
+.arrow {
+  height: 3.2rem;
+  width: 3.2rem;
+  fill: var(--color-light);
+  top: 55%;
+}
+
 .left {
-  @include icon;
-  left: 15%;
+  position: absolute;
+  left: 25rem;
 }
 
 .right {
-  @include icon;
-  right: 15%;
+  position: absolute;
+  right: 25rem;
 }
 .bulletpoint {
   width: 3.2rem;

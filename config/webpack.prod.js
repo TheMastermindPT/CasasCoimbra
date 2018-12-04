@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -40,6 +41,9 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
+            options: {
+              includePaths: [require('path').resolve(__dirname, 'node_modules')],
+            },
           },
         ],
       },
@@ -55,7 +59,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|png|gif|jpeg|.ico)$/,
+        test: /\.(jpg|png|gif|jpeg|.ico|eot|ttf|woff)$/,
         use: [
           {
             loader: 'file-loader',

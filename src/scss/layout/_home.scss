@@ -49,11 +49,12 @@
         transform: scale(3);
       }
 
-      @include respond($phone) {
-        transform: scale(1);
-      }
       @include respond($tab-port) {
         transform: scale(1.4);
+      }
+
+      @include respond($phone) {
+        transform: scale(1);
       }
     }
 
@@ -285,6 +286,109 @@
     }
   }
 }
+
+.coolsection {
+  position: relative;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+
+  &__counters {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+    border-bottom: solid 1px var(--color-light-2);
+
+    @include respond($phone) {
+      flex-direction: column;
+    }
+  }
+
+  &__div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 32rem;
+    font-family: $text-heading;
+    text-transform: uppercase;
+    color: var(--color-primary);
+
+    &:not(:first-child) {
+      @include respond($phone) {
+        margin-top: 4rem;
+      }
+    }
+  }
+
+  &__title {
+    font-weight: 400;
+    font-size: 2rem;
+    color: var(--color-primary);
+    @include textshadow;
+  }
+
+  &__counter {
+    margin-top: 2rem;
+    font-weight: 600;
+    font-size: 6rem;
+    @include textshadow;
+  }
+}
+
+.reviews {
+  box-sizing: content-box;
+  margin-top: 4rem;
+  width: 95%;
+  height: 6vw;
+  overflow: hidden;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+
+  @include respond($tab-land) {
+    height: 10vw;
+  }
+
+  @include respond($tab-port) {
+    height: 12vw;
+  }
+
+  @include respond($phone) {
+    flex-direction: column;
+    width: 90%;
+    height: 20vw;
+  }
+
+  .review:nth-child(2n) {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  &__slider {
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    border-radius: 1rem;
+    width: 33.333333333%;
+    @include respond($tab-land) {
+      width: 50%;
+    }
+
+    @include respond($phone) {
+      width: 100%;
+    }
+  }
+}
+
 .imoveis {
   position: relative;
   background-color: var(--color-light);
@@ -387,7 +491,6 @@
     display: flex;
     transform: scale(0.4);
     opacity: 0.2;
-    overflow: visible;
 
     @include respond($tab-port) {
       flex-direction: column;
