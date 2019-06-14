@@ -14,38 +14,6 @@ $(window).ready(() => {
     time: 1000,
   });
 
-  const slider = $('.review').length;
-  const sliderCounter = 0;
-
-  // const sliderAnimation = () => {
-  //   if (sliderCounter < slider - 1) {
-  //     $('.review:nth-child(1)').animate(
-  //       {
-  //         marginLeft: '-=100%',
-  //       },
-  //       500,
-  //       () => {
-  //         sliderCounter++;
-  //         console.log(sliderCounter);
-  //       },
-  //     );
-  //   } else {
-  //     sliderCounter = 0;
-  //     $('.review:nth-child(1)').animate(
-  //       {
-  //         marginLeft: '0',
-  //       },
-  //       500,
-  //       () => {
-  //         sliderCounter++;
-  //         console.log(sliderCounter);
-  //       },
-  //     );
-  //   }
-  // };
-
-  // setInterval(sliderAnimation, 5000);
-
   $('img').on('dragstart', (event) => {
     event.preventDefault();
   });
@@ -126,6 +94,40 @@ $(window).ready(() => {
 
   const width = $(window).width();
   const state = $('#navi-toggle').is(':checked');
+
+  if (width <= 480) {
+    const slider = $('.review').length;
+    let sliderCounter = 0;
+
+    const sliderAnimation = () => {
+      if (sliderCounter < slider - 1) {
+        $('.review:nth-child(1)').animate(
+          {
+            marginLeft: '-=100%',
+          },
+          500,
+          () => {
+            sliderCounter++;
+            console.log(sliderCounter);
+          },
+        );
+      } else {
+        sliderCounter = 0;
+        $('.review:nth-child(1)').animate(
+          {
+            marginLeft: '0',
+          },
+          500,
+          () => {
+            sliderCounter++;
+            console.log(sliderCounter);
+          },
+        );
+      }
+    };
+
+    setInterval(sliderAnimation, 5000);
+  }
 
   $('#navi-toggle').on('change', () => {
     const state = $('#navi-toggle').is(':checked');
@@ -304,7 +306,7 @@ $(window).ready(() => {
           $('.popup__box').animate(
             {
               height: '80%',
-              width: '90%'
+              width: '90%',
             },
             {
               step() {

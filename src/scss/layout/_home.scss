@@ -365,11 +365,6 @@
     height: 20vw;
   }
 
-  .review:nth-child(2n) {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
   &__slider {
     display: inline-flex;
     height: 100%;
@@ -787,9 +782,24 @@
       opacity: 0;
       list-style: none;
       flex-direction: column;
+      padding-left: 2rem;
+      padding-right: 2rem;
+
+      &::-webkit-scrollbar {
+        width: 1px; /* remove scrollbar space */
+        background: transparent; /* optional: just make scrollbar invisible */
+      }
+      /* optional: show position indicator in red */
+      &::-webkit-scrollbar-thumb {
+        background: gray;
+      }
 
       @include respond($tab-land) {
         width: 80%;
+      }
+
+      @include respond($phone) {
+        width: 90%;
       }
     }
     &-links--title {
