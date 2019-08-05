@@ -7,12 +7,14 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: ['./src/client/main.js'],
+    home: './src/client/home.js',
+    login: './src/client/login.js',
+    admin: './src/client/admin.js'
   },
   mode: 'production',
   output: {
-    filename: 'scripts/[name].[hash].js',
-
+    // filename: 'scripts/[name].[hash].js',
+    filename: 'scripts/[name].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
@@ -47,16 +49,27 @@ module.exports = {
           },
         ],
       },
+      // {
+      //   test: /\.(html)$/,
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //       options: {
+      //         attrs: ['img:src'],
+      //       },
+      //     },
+      //   ],
+      // },
       {
-        test: /\.html$/,
+        test: /\.hbs$/,
         use: [
           {
-            loader: 'html-loader',
+            loader: "handlebars-loader",
             options: {
-              attrs: ['img:src'],
-            },
-          },
-        ],
+              partialDirs: path.join(__dirname, '/../src/views/partials')
+            }
+          }
+        ]
       },
       {
         test: /\.(jpg|png|gif|jpeg|.ico|eot|ttf|woff)$/,
@@ -65,8 +78,32 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'imgs/',
+              outputPath: path.join(__dirname, '/../dist/assets/'),
             },
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
+            }
           },
         ],
       },
@@ -77,7 +114,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'svg/',
+              outputPath: path.join(__dirname, '/../dist/assets/svg'),
             },
           },
         ],
@@ -85,14 +122,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new OptimizeCssAssetsPlugin(),
     new MiniCSSExtractPlugin({
       filename: 'styles/[name].[hash].css',
     }),
     new HTMLWebpackPlugin({
-      title: 'Caching',
-      template: './src/index.html',
+      filename: path.join(__dirname, '/../dist/index.html'),
+      template: './src/views/home.hbs',
+      chunks: ['home'],
       minify: {
         collapseWhitespace: true,
         removeComments: true,

@@ -1,0 +1,377 @@
+
+//PLACEHOLDERS
+%button {
+    color: var(--color-light);
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    height: 3rem;
+    width: 6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border:none;
+    outline: none;
+}
+%svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+    display: block;
+}
+
+
+//ADMIN
+.admin {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+       
+    }
+
+    &__navigation {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100vw;
+        background-color: var(--color-light);
+    }
+
+    &__dash-title {
+        display: flex;
+        font-family: 'Montserrat', sans-serif;
+        margin-right: auto;
+        margin-left: 2rem;
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: var(--color-darkred);
+        text-transform: uppercase;
+    
+    }
+
+    &__title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        color: var(--color-light);
+    }
+
+    &__pic {
+        clip-path: circle(50%);
+        margin-right: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 4rem;
+        height: 4rem;
+        
+        
+        img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &__end {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 4rem;
+        height: 4rem;
+        cursor: pointer;  
+        
+    }
+
+    &__content {
+        width: 100vw;
+        padding: 2rem 2rem 0rem 2rem;
+        flex-grow: 1;
+        background: #200122;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, var(--color-darkred), #200122);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, var(--color-darkred), #200122); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
+    }
+
+    &__editHome {
+        position: absolute;
+        background-color: var(--color-success);
+        font-family: $text-heading;
+        font-weight: 400;
+        font-size: 1.4rem;
+        align-self: center;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        bottom: 2rem;
+        color: var(--color-light);
+        opacity: 1;
+        cursor: pointer;
+        outline: none;
+        transition: transform 0.2s;
+        text-transform: uppercase;
+       
+        &:hover {
+            transform: translateY(-1.5px);
+        }
+        
+        @include respond($phone) {
+            display: none;
+        }
+
+        border: none;
+    }
+
+    
+}
+//HOME ROWS
+.home {
+    &__form {
+        &:last-child {
+          label {
+            border: 2px dashed var(--color-light);
+            border-radius: 4px;
+
+            &:hover {
+                border: 2px dashed darken(white, 20%);
+            }
+          }
+        }
+        
+
+        display: flex;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 1.4rem;
+        justify-content: space-between;
+        align-items: center; 
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        height: 10rem;
+
+        .error {
+            color: red; 
+        }
+
+       
+
+        input {
+            border: none;
+            outline: none;
+        }
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            border: none;
+            -webkit-text-fill-color: var(--color-light);
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+       
+        input[type=text] {
+            height: 3rem;
+            background-color: transparent;
+            color: var(--color-light);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+            font-size: 1.4rem;
+            font-style: italic;
+
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color:grey;
+                font-family: 'Montserrat', sans-serif;
+                font-style: italic;
+                font-weight: 600;
+                font-size: 1.4rem;
+                text-transform: capitalize;
+            }
+              
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+               
+            }
+              
+            &::-ms-input-placeholder { /* Microsoft Edge */
+            
+            }
+        }
+
+      
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        width: 10rem;
+        height: 100%;
+        align-items: center;
+        justify-content: space-around;
+
+
+        & > div > a {
+            a:focus,
+            a:visited,
+            a:link,
+            a:active {
+                text-decoration: none;
+                outline: 0;
+            }
+        }
+    }
+    &__editarQuartos {
+        order: 1;
+        button {
+         @extend %button;
+         background-color: #006492;
+        }
+
+        svg {
+            @extend %svg;
+        }
+    }
+
+    &__delete {
+        order: 2;
+        button {
+            @extend %button;
+            background-color: var(--color-dark);
+        }
+        svg {
+          @extend %svg;
+        }
+    }
+
+    &__submit {
+        
+        order: 1;
+        button {
+            @extend %button;
+            background-color: var(--color-success);
+        }
+        svg {
+            @extend %svg;
+        }
+    }
+
+    &__fields {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        flex-grow: 1;
+        height: 100%;
+        
+        &> * {
+            text-align: left;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            flex-grow: 1;
+            flex-shrink: 1;
+            padding: 0rem 1rem 0rem 0rem;
+            
+        }
+
+        & > * > label {
+            color:white;
+            padding-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+    }
+
+  
+    &__nome {
+        input[type=text] {
+            width: 6rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+    }
+
+    &__foto {
+        height: 100%;
+        width: 8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+     .foto__label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10rem;
+        max-width: 100%;
+        cursor: pointer;
+
+
+        svg {
+            height: 3rem;
+            fill: white;
+        }
+
+        svg:hover {
+            fill:darken(white, 25%);
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;       
+        }
+     } 
+     .foto__input{
+         display: none;
+     }
+    }
+    &__checkboxes {
+        display: none;
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &__numero {
+        display: none;
+    }
+}
+
+
+//POPUP
+.popup {
+    &__admin {
+        width: 100%;
+        padding: 4rem;
+        display: flex;
+    }
+    &__edit {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--color-darkred);
+        &--casa {
+        }
+        &--quartos {
+        }
+    }
+}

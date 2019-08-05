@@ -1,20 +1,23 @@
 const path = require('path');
 const webpack = require('webpack');
-
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HandlebarsPlugin = require("handlebars-webpack-plugin");
 
 module.exports = {
   entry: {
-    main: ['./src/client/main.js'],
+    home: ['webpack-hot-middleware/client?reload=true', './src/client/home.js'],
+    login: ['webpack-hot-middleware/client?reload=true', './src/client/login.js'],
+    admin: ['webpack-hot-middleware/client?reload=true', './src/client/admin.js']
   },
   mode: 'development',
   output: {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: 'http://localhost:8080/',
+    publicPath: 'http://localhost:3000/',
   },
   devServer: {
-    contentBase: 'dist',
+    contentBase: 'src',
+    publicPath: '/',
     overlay: true,
     stats: {
       colors: true,
@@ -36,15 +39,12 @@ module.exports = {
       {
         test: /\.s?[ac]ss$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
+          'style-loader',
           {
             loader: 'css-loader',
+            options: { importLoaders: 1 }
           },
-          {
-            loader: 'postcss-loader',
-          },
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -54,7 +54,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.html$/,
+        test: /\.(html)$/,
         use: [
           {
             loader: 'html-loader',
@@ -65,12 +65,23 @@ module.exports = {
         ],
       },
       {
+        test: /\.hbs$/,
+        use: [
+          {
+            loader: "handlebars-loader",
+            options: {
+              partialDirs: path.join(__dirname, '/../src/views/partials')
+            }
+          }
+        ]
+      },
+      {
         test: /\.(jpg|png|gif|jpeg|svg|.ico|eot|ttf|woff)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: 'imgs/[name].[ext]',
+              name: 'imgs/[path][name].[ext]',
             },
           },
         ],
@@ -79,13 +90,11 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HTMLWebpackPlugin({
-      template: './src/index.html',
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        handlebarsLoader: {}
+      }
+    })
   ],
   externals: {
     jquery: 'jQuery',

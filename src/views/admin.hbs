@@ -1,0 +1,97 @@
+<div class="admin__container">
+    <div class="admin__navigation">
+        <h1 class="admin__dash-title">Dashboard</h1>
+        <div class="admin__pic">
+            <img src="/assets/users/admin/admin.jpg" alt="admin">
+        </div>
+        <div class="admin__end">
+            <svg class="icon-off">
+                <use xlink:href="#off"></use>
+            </svg>
+        </div>
+    </div>
+    <div class="admin__content" id="admin__content">
+        <h1 class="admin__title">Editar Casas</h1>
+        <div class="home__wrap">
+            <form class="home__form" enctype="multipart/form-data" name="home-form" id="add_home" autocomplete="off"
+                autocorrect="off">
+                <div class="home__foto">
+                    <label for="casaupload" class="foto__label">
+                        <svg>
+                            <use xlink:href="#icon-upload"></use>
+                        </svg>
+                    </label>
+                    <input type="file" class="foto__input" name="casa" id="casaupload" required>
+                </div>
+
+                <div class="home__fields">
+                    <div class="home__numero">
+                        <input type="hidden" name="numero" value="" id="numero" required>
+                    </div>
+                    <div class="home__nome">
+                        <input type="text" name="nome" placeholder="Nome..." required autocomplete="off">
+                    </div>
+                    <div class="home__tipologia">
+
+                        <input type="text" name="tipologia" placeholder="Tipologia..." required autocomplete="off">
+                    </div>
+                    <div class="home__wc">
+                        <input type="text" name="wc" placeholder="WC..." required autocomplete="off">
+                    </div>
+
+                    <div class="home__zona">
+
+                        <input type="text" name="zona" placeholder="Zona..." required autocomplete="off">
+                    </div>
+
+                    <div class="home__morada">
+                        <input type="text" name="morada" placeholder="Morada..." required autocomplete="off">
+                    </div>
+                    <div class="home__proximo">
+                        <input type="text" name="proximo" placeholder="Próximo..." required autocomplete="off">
+                    </div>
+                    <div class="home__mapa">
+                        <input type="text" name="mapa" placeholder="Mapa..." required autocomplete="off">
+                    </div>
+                    <div class="home__checkboxes">
+                        <div class="home__mobilado">
+                            <label for="mobilado">Mobilado & Equipado:</label>
+                            <input type="checkbox" name="mobilado">
+                        </div>
+                        <div class="home__netTv">
+                            <label for="netTv">Net & TV:</label>
+                            <input type="checkbox" name="netTv">
+                        </div>
+                    </div>
+                </div>
+                <div class="home__buttons">
+                    <div class="home__submit">
+                        <button type="submit">
+                            <svg>
+                                <use xlink:href="#save"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup">
+
+        <div class="popup__box">
+            <a href="javascript:void(0)" class="close">
+                <svg class="icon icon-cross popup__close">
+                    <use xlink:href="#icon-cross"></use>
+                </svg>
+            </a>
+            <div class="popup__admin">
+                <div class="popup__edit">
+                    <h1 class="popup__title popup__title--quartos">Quartos</h1>
+                    <form method="post">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> externals}}
