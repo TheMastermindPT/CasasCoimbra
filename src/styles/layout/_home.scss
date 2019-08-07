@@ -396,10 +396,8 @@
     flex-wrap: wrap;
     overflow: hidden;
     width: 100%;
-    position: relative; 
+    position: relative;
     justify-content: center;
-    
-    
 
     // &:last-child {
     //   @include respond($tab-land) {
@@ -407,17 +405,14 @@
     //   }
     // }
 
-
     &:first-of-type {
       margin-top: 4rem;
     }
 
     &:last-of-type {
-   
     }
 
     @include respond($tab-land) {
-      
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -657,7 +652,7 @@
       position: relative;
 
       &::before {
-        content: "\203A";
+        content: '\203A';
         margin-right: 1rem;
         color: var(--color-primary);
       }
@@ -784,7 +779,7 @@
       color: var(--color-dark);
       font-style: italic;
       &::before {
-        content: "\2192";
+        content: '\2192';
         margin-right: 1rem;
         color: var(--color-primary);
       }

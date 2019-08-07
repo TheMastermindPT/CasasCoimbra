@@ -2,11 +2,8 @@ require('./main');
 const popup = require('./popup.js');
 const template = require('./template');
 const exitPopup = popup.exitPopup;
-const closeModal = popup.closeModal;
-const openModal = popup.openModal;
 
 $(window).ready(() => {
-
     // VARIABLES ON LOAD /////////
     const imoveisWrapper = $('.imoveis__wrapper');
     const width = $(window).width();
@@ -16,23 +13,7 @@ $(window).ready(() => {
     const sidenav = $('.sidenav');
     const svg = $('#imoveis').find('svg');
     const contacto = $('#numero');
-    let loaded = true;
     /////////////////////////////
-
-    const closePopup = (loaded) => {
-        if (history.state.popup) {
-            if (!loaded) {
-                history.back();
-            } else {
-                history.pushState({ popup: false }, null, window.location.origin);
-                loaded = false;
-            }
-        }
-        $('.popup__box').toggleClass('popup--open').promise().done(() => { closeModal(); });
-        $('#leftPhoto').off();
-        $('#rightPhoto').off();
-        $('body').css('overflow-y', 'scroll');
-    }
 
     $.ajax({
         url: `${window.location.origin}/api/casas`,
@@ -256,22 +237,12 @@ $(window).ready(() => {
     });
 
 
-    //Listens for mouse clicks
-    $(document).mouseup((e) => {
-
-
-        //Listens for mouse clicks outside the popup box in order to close it
-        if (exitPopup.is(e.target) && exitPopup.has(e.target).length === 0) {
-            closePopup(loaded);
-        }
-
-
+    $(document).mouseup(e => {
         //Listens for mouse clicks outside the phone icon in footer in order to close it
         if (!contacto.is(e.target) && contacto.has(e.target).length === 0) {
             $('.contacto').css('display', 'none');
             contactClick = 0;
         }
-
         //Listens for mouse clicks outside the sidenav in order to close it
         // and toogles its animation
         if (
@@ -284,19 +255,6 @@ $(window).ready(() => {
             $('.sidenav__list').css('display', 'none');
             $('.sidenav__checkbox').prop('checked', false);
         }
-    });
-
-    //Closes Popup
-    $('.close').on('click touchend', () => {
-        closePopup(loaded);
-    });
-
-    //Opens popup when certain elements are clicked
-    $('body').on('click', '#sidenav__faq, #form, .servicos__link, #btn__compare', function (e) {
-        e.preventDefault();
-        const modal = `${$(this).data('modal')}`;
-        history.pushState({ popup: true }, null, `${window.location.origin}/${modal}`);
-        openModal(modal);
     });
 
     $('body').on('click', '#sidenav__faq, #form, #btn__compare, .imovel', () => {

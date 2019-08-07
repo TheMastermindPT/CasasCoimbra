@@ -6,11 +6,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #00c6ff;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #00c6ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to left,
+      #0072ff,
+      #00c6ff
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #0072ff, #00c6ff);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
-
   &__container {
     background-color: white;
     padding: 2rem 0rem;
@@ -19,11 +23,12 @@
   &__form {
     display: flex;
     flex-direction: column;
-    input{
+    input {
       background-color: var(--color-dark);
-      color:white;
+      color: white;
     }
-    input, button {
+    input,
+    button {
       margin: 1rem 2rem;
       border: none;
       border-radius: 1rem;
@@ -39,7 +44,6 @@
       color: var(--color-light);
     }
   }
-
   &__status {
     font-family: 'Montserrat';
     font-weight: 400;

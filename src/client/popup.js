@@ -18,6 +18,9 @@ const modalsList = [
   },
   {
     name: '#compare'
+  },
+  {
+    name: '#quartos'
   }
 ]
 const updateInfo = (casa, counterDiv) => {
@@ -82,6 +85,7 @@ const openModal = (modal) => {
   const modalExists = modalsList.find((value, key) => {
     return modalsList[key].name === modal;
   });
+
   if (modalExists) {
     $(modal).addClass('popup--visible');
     $('.popup__box').addClass('popup--open');
@@ -90,14 +94,15 @@ const openModal = (modal) => {
 }
 
 const closeModal = () => {
-  $('.popup').removeClass('popup--visible');
-  $('.popup__box').removeClass('popup--open');
-  $('body').css('overflow-y', 'scroll');
+  $('.popup__box').removeClass('popup--open').promise().done(() => {
+    $('.popup').removeClass('popup--visible');
+    $('.popup__box').removeClass('popup--open');
+    $('body').css('overflow-y', 'scroll');
+  });
 }
 
 const getHomeWithView = (query, modal, counterDiv, counterPhotos, loaded) => {
-
-  if (!loaded) {
+  if (loaded) {
     //Check if Url contains query
     if (query.has('id') && query.has('div') && query.has('foto')) {
       const urlGet = `${window.location.origin}/api/casas?id=${query.get('id')}`;
@@ -114,7 +119,7 @@ const getHomeWithView = (query, modal, counterDiv, counterPhotos, loaded) => {
       openModal(modal);
       history.replaceState({ popup: true }, null, null);
     }
-    loaded = true;
+    loaded = false;
   }
 }
 
@@ -151,7 +156,6 @@ const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
 }
 
 $(document).ready(() => {
-
   //VARIABLES/////////////
   let query1 = window.location.search.slice(1);
   const hash = window.location.hash;
@@ -159,12 +163,15 @@ $(document).ready(() => {
   let numeroCasa;
   let counterDiv = 0;
   let counterPhotos = 0;
-  let loaded = false;
   let modal;
   modal = query1 && (hash.length === 0) ? '#imovel' : hash;
-  //////////////////////
+  let loaded = true;
+  const dashboard = location.pathname;
 
+  //If url has a  query, fetch home from DB
   getHomeWithView(query1, modal, counterDiv, counterPhotos, loaded);
+
+  //Fetch home from DB when clicking imovel
   $('#imoveis').on('click', '.imovel', function (e) {
     // Variables
     const imovelDiv = $(this);
@@ -190,29 +197,81 @@ $(document).ready(() => {
     });
   });
 
-  $(window).on('popstate', e => {
+  //Opens popup when certain elements are clicked
+  $('body').on('click', '#sidenav__faq, #form, .servicos__link, #btn__compare, .home__editar', function (e) {
+    e.preventDefault();
+    modal = `${$(this).data('modal')}`;
+    //Checks if already opened a link before
+    if (!loaded && location.hash) {
+      history.replaceState({ popup: true }, null, modal);
+    } else {
+      history.pushState({ popup: true }, null, modal);
+      loaded = false;
+    }
+    openModal(modal);
 
+    if (modal === "#quartos") {
+      console.log('rooms');
+    }
+  });
+
+  //Listens for mouse clicks
+  $(document).mouseup((e) => {
+    //Listens for mouse clicks outside the popup box in order to close it
+    if (exitPopup.is(e.target) && exitPopup.has(e.target).length === 0) {
+      if (history.state.popup) {
+        if (!loaded || dashboard) {
+          history.back();
+        } else {
+          history.pushState({ popup: false }, null, window.location.origin);
+          loaded = false;
+        }
+        closeModal();
+      }
+    }
+  });
+
+  //Closes Popup
+  $('.close').on('click touchend', () => {
+    if (history.state.popup) {
+      if (!loaded) {
+        history.back();
+      } else {
+        history.pushState({ popup: false }, null, window.location.origin);
+        loaded = false;
+      }
+      closeModal();
+    }
+  });
+
+
+
+  //Display page properly when navigating browser history
+  $(window).on('popstate', e => {
     if (history.state != null) {
       if (!history.state.popup) {
         closeModal();
         return;
       }
-    }
-    if (location.hash) {
-      openModal(location.hash);
-      return;
-    }
-    if (location.search) {
-      let query2 = window.location.search.slice(1);
-      query2 = new URLSearchParams(query2);
-      getHomeWithQuery(query2, '#imovel', query2.get('id'), query2.get('foto'));
-      return;
+
+      if (location.hash && history.state.popup) {
+        openModal(location.hash);
+        return;
+      }
+      if (location.search && history.state.popup) {
+        let query2 = window.location.search.slice(1);
+        query2 = new URLSearchParams(query2);
+        getHomeWithQuery(query2, '#imovel', query2.get('id'), query2.get('foto'));
+        return;
+      }
     }
     closeModal();
     return;
   });
 });
 
-module.exports = { exitPopup, openModal, closeModal };
+module.exports = { exitPopup };
+
+
 
 

@@ -26,7 +26,7 @@ module.exports = {
                                 NET/TV: <span>${casa.netTv ? 'Sim' : 'Não'}</span>
                             </li>
                             <li class="imovel__item">
-                                ${casa.mobilado ? 'DESPESAS INCLUÍDAS C/LIMPEZA' : ''}
+                                ${casa.despesas ? 'DESPESAS INCLUÍDAS C/LIMPEZA' : ''}
                             </li>
                         </ul>
                         
@@ -80,23 +80,21 @@ module.exports = {
         <div class="home__checkboxes">
             <div class="home__mobilado">
                 <label for="mobilado">Mobilado & Equipado:</label>
-                <input type="checkbox" name="mobilado">
+                <input type="checkbox" name="mobilado" ${casa.mobilado ? 'checked' : 'unchecked'}>
             </div>
             <div class="home__netTv">
                 <label for="netTv">Net & TV:</label>
-                <input type="checkbox" name="netTv">
+                <input type="checkbox" name="netTv" ${casa.netTv ? 'checked' : 'unchecked'}>
             </div>
         </div>
         </div>
         <div class="home__buttons">
-        <div class="home__editarQuartos">
-        <a href="#popup">
-            <button type="button">
+        <div class="home__editar" data-id="${casa.idCasa}" data-modal="#quartos">
+            <button type="button" >
             <svg>
             <use xlink:href="#edit"></use>
             </svg>
             </button>
-        </a>
         </div>
         <div class="home__submit">
             <button type="submit">
@@ -115,5 +113,8 @@ module.exports = {
         </div>
     </form>
         `);
+    },
+    templateQuartos: function () {
+
     }
 };

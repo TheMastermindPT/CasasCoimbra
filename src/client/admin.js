@@ -7,13 +7,6 @@ const template = require('./template');
 //GLOBALS
 let isAppended = false;
 
-
-const closePopup = () => {
-    $('.popup__box').toggleClass('popup--open', 200);
-    $('body').css('overflow-y', 'scroll');
-    window.history.back();
-};
-
 //Loads Homes in the Dashboard
 $.ajax({
     url: `${window.location.origin}/api/casas`,
@@ -110,16 +103,6 @@ $(document).ready(() => {
             window.location.replace('/admin/login');
         }
     }
-
-
-
-    //Opens Up Popup
-    $('body').on('click', '.home__editarQuartos', () => {
-        $('.popup').show()
-        $('.popup__box').toggleClass('popup--open', 200);
-        $('body').css('overflow-y', 'hidden');
-    });
-
 });
 
 
