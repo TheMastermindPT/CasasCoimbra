@@ -46,6 +46,7 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^2.1.6",
     "postcss-preset-env": "^6.6.0",
+    "rimraf": "^2.6.3",
     "sass-loader": "^7.1.0",
     "sequelize": "^5.12.2",
     "slick-carousel": "^1.8.1",

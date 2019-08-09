@@ -158,6 +158,28 @@ $(document).ready(() => {
     });
   });
 
+  $('#fotos__divisao').on('change', function() {
+    const idDivisao = $('#divisao option:selected').val();
+    const numeroDivisao = $('#div__numero').val();
+    const idCasa = $('.popup__form').data('id');
+    const tipo = $('#tipo').val();
+    const data = new FormData($(this).parent('form')[0]);
+
+    data.append('tipo', tipo);
+    data.append('idDivisao', idDivisao);
+    data.append('idCasa', idCasa);
+    data.append('numeroDivisao', numeroDivisao);
+
+    $.ajax({
+      method: 'POST',
+      url: `${window.location.origin}/api/casas/previewMulti`,
+      data,
+      cache: false,
+      contentType: false,
+      processData: false
+    }).then(res => console.log(res));
+  });
+
   // Check if admin is logged in
   const auth = cookies.get('auth');
   if (window.location.href === 'http://localhost:3000/admin/dashboard') {

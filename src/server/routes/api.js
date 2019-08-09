@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const app = require('express');
+const rimraf = require('rimraf');
 const { casas } = require('../../client/casas');
 const db = require('../../../config/database');
 
@@ -53,6 +54,13 @@ const upload = multer({
   }
 }).single('casa');
 
+const uploadMulti = multer({
+  storage,
+  fileFilter(req, file, callback) {
+    checkFileType(file, callback);
+  }
+}).array('fotos', 10);
+
 router.post('/preview', (req, res) => {
   // Check if the folder exists and moves file from Temp folder to new folder
   ensureExistsFolder(path.join(`src/assets/temp/`), err => {
@@ -84,6 +92,58 @@ router.post('/preview', (req, res) => {
           );
           res.end();
         }
+      });
+    }
+  });
+});
+
+router.post('/previewMulti', (req, res) => {
+  // Check if the folder exists and moves file from Temp folder to new folder
+  ensureExistsFolder(path.join(`src/assets/temp/`), err => {
+    if (err) {
+      throw err;
+    } else {
+      rimraf(path.join(`src/assets/temp/*`), err => {
+        uploadMulti(req, res, function(err) {
+          if (err) {
+            res.sendStatus(400);
+            res.end();
+          } else {
+            let { tipo, idCasa, idDivisao, numeroDivisao } = req.body;
+            tipo = tipo.toLowerCase();
+
+            fs.mkdir(
+              path.join(`src/assets/temp/${tipo}${numeroDivisao}`),
+              err => {
+                req.files.forEach((file, index) => {
+                  let fileType = req.files[index].originalname.split('.').pop();
+                  fileType = `.${fileType}`;
+
+                  fs.readFile(
+                    path.join(
+                      `./src/assets/temp/${req.files[index].originalname}`
+                    ),
+                    function(err, data) {
+                      if (err) throw err;
+                      fs.writeFile(
+                        path.join(
+                          `./src/assets/temp/${tipo}${numeroDivisao}/${tipo}${numeroDivisao}-${index +
+                            1}${fileType}`
+                        ),
+                        data,
+                        function(err) {
+                          if (err) throw err;
+                        }
+                      );
+                    }
+                  );
+                });
+
+                res.end();
+              }
+            );
+          }
+        });
       });
     }
   });
