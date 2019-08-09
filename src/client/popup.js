@@ -1,7 +1,3 @@
-
-//GLOBALS
-const width = $(window).width();
-const clicked = 0;
 const exitPopup = $('.popup');
 const modalsList = [
   {
@@ -20,18 +16,20 @@ const modalsList = [
     name: '#compare'
   },
   {
-    name: '#quartos'
+    name: '#divisoes'
   }
-]
+];
 const updateInfo = (casa, counterDiv) => {
   $('.popup__tipo').html(
     `${casa.divisao[counterDiv].tipo} ${
-    casa.divisao[counterDiv].numero ? casa.divisao[counterDiv].numero : ''
-    }`,
+      casa.divisao[counterDiv].numero ? casa.divisao[counterDiv].numero : ''
+    }`
   );
 
   $('.popup__price').html(
-    `${casa.divisao[counterDiv].preco ? `${casa.divisao[counterDiv].preco}€` : ''}`,
+    `${
+      casa.divisao[counterDiv].preco ? `${casa.divisao[counterDiv].preco}€` : ''
+    }`
   );
 
   $('.popup__comment').html(`${casa.divisao[counterDiv].descricao}`);
@@ -40,48 +38,90 @@ const updateInfo = (casa, counterDiv) => {
 const updatePhoto = (casa, counterDiv, counterPhotos) => {
   $('#leftPhoto').on('click', () => {
     if (counterDiv >= 0 && counterDiv <= casa.divisao.length) {
-      if (counterPhotos > 0 && counterPhotos <= casa.divisao[counterDiv].fotos[0].path.split(',').length - 1) {
+      if (
+        counterPhotos > 0 &&
+        counterPhotos <=
+          casa.divisao[counterDiv].fotos[0].path.split(',').length - 1
+      ) {
         counterPhotos--;
-        $('.popup__photos img').attr('src', '/' + casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]);
+        $('.popup__photos img').attr(
+          'src',
+          `/${casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]}`
+        );
       } else {
         counterDiv--;
         if (counterDiv >= 0) {
-          counterPhotos = casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
-          $('.popup__photos img').attr('src', '/' + casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]);
+          counterPhotos =
+            casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
+          $('.popup__photos img').attr(
+            'src',
+            `/${
+              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
+            }`
+          );
         } else {
           counterDiv = casa.divisao.length - 1;
-          counterPhotos = casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
-          $('.popup__photos img').attr('src', '/' + casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]);
+          counterPhotos =
+            casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
+          $('.popup__photos img').attr(
+            'src',
+            `/${
+              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
+            }`
+          );
         }
       }
     }
     updateInfo(casa, counterDiv, counterPhotos);
-    window.history.replaceState({ popup: true }, null, `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`);
+    window.window.history.replaceState(
+      { popup: true },
+      null,
+      `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
+    );
   });
 
   $('#rightPhoto').on('click', () => {
     if (counterDiv >= 0 && counterDiv < casa.divisao.length) {
-      if (counterPhotos >= 0 && counterPhotos < casa.divisao[counterDiv].fotos[0].path.split(',').length - 1) {
+      if (
+        counterPhotos >= 0 &&
+        counterPhotos <
+          casa.divisao[counterDiv].fotos[0].path.split(',').length - 1
+      ) {
         counterPhotos++;
-        $('.popup__photos img').attr('src', '/' + casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]);
+        $('.popup__photos img').attr(
+          'src',
+          `/${casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]}`
+        );
       } else {
         counterDiv++;
         if (counterDiv !== casa.divisao.length) {
           counterPhotos = 0;
-          $('.popup__photos img').attr('src', '/' + casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]);
+          $('.popup__photos img').attr(
+            'src',
+            `/${
+              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
+            }`
+          );
         } else {
           counterDiv = 0;
           counterPhotos = 0;
-          $('.popup__photos img').attr('src', '/' + casa.divisao[0].fotos[0].path.split(',')[counterPhotos]);
+          $('.popup__photos img').attr(
+            'src',
+            `/${casa.divisao[0].fotos[0].path.split(',')[counterPhotos]}`
+          );
         }
       }
     }
     updateInfo(casa, counterDiv, counterPhotos);
-    window.history.replaceState({ popup: true }, null, `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`);
+    window.history.replaceState(
+      { popup: true },
+      null,
+      `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
+    );
   });
 };
 
-const openModal = (modal) => {
+const openModal = (modal, element) => {
   const modalExists = modalsList.find((value, key) => {
     return modalsList[key].name === modal;
   });
@@ -90,62 +130,116 @@ const openModal = (modal) => {
     $(modal).addClass('popup--visible');
     $('.popup__box').addClass('popup--open');
     $('body').css('overflow-y', 'hidden');
+
+    if (modal === '#divisoes' && element) {
+      const idCasa = $(element)
+        .data('id')
+        .toString();
+
+      $.ajax({
+        method: 'GET',
+        url: `${window.location.origin}/api/casas?id=${idCasa}`,
+        dataType: 'json'
+      }).then(casa => {
+        $('.popup__title').text(`${casa.nome}`);
+        $('.popup__form').data('id', casa.idCasa);
+        // Empties select values
+        $('#divisao').html('');
+
+        // Populates select values
+        casa.divisao.forEach(divisao => {
+          $('#divisao').append(`
+          <option value='${divisao.idDivisao}'>
+          ${divisao.tipo} ${divisao.numero ? divisao.numero : ''}
+          </option>
+        `);
+        });
+
+        // Appends the option to create a new div
+        $('#divisao').append(`
+        <option value='create'>
+          &nbsp&nbsp->Add Division
+        </option>
+      `);
+
+        // Populate inputs with the values of the first division of the house
+        $('#tipo').val(casa.divisao[0].tipo);
+        $('#div__numero').val(casa.divisao[0].numero);
+        $('#descricao').val(casa.divisao[0].descricao);
+        $('#preco').val(casa.divisao[0].preco);
+        casa.divisao[0].disponivel
+          ? $('#disponivel').prop('checked', true)
+          : $('#disponivel').prop('checked', false);
+        $('#quando').val(casa.divisao[0].quando);
+      });
+    }
   }
-}
+};
 
 const closeModal = () => {
-  $('.popup__box').removeClass('popup--open').promise().done(() => {
-    $('.popup').removeClass('popup--visible');
-    $('.popup__box').removeClass('popup--open');
-    $('body').css('overflow-y', 'scroll');
-  });
-}
+  $('.popup__box')
+    .removeClass('popup--open')
+    .promise()
+    .done(() => {
+      $('.popup').removeClass('popup--visible');
+      $('.popup__box').removeClass('popup--open');
+      $('body').css('overflow-y', 'scroll');
+    });
+};
 
 const getHomeWithView = (query, modal, counterDiv, counterPhotos, loaded) => {
   if (loaded) {
-    //Check if Url contains query
+    // Check if Url contains query
     if (query.has('id') && query.has('div') && query.has('foto')) {
-      const urlGet = `${window.location.origin}/api/casas?id=${query.get('id')}`;
+      const urlGet = `${window.location.origin}/api/casas?id=${query.get(
+        'id'
+      )}`;
       $.ajax({
         url: urlGet,
-        method: 'GET',
+        method: 'GET'
       }).then(casa => {
         openModal(modal);
-        history.replaceState({ popup: true }, null, null);
+        window.history.replaceState({ popup: true }, null, null);
         updatePhoto(casa, counterDiv, counterPhotos);
       });
     }
-    if (location.hash) {
+    if (window.location.hash) {
       openModal(modal);
-      history.replaceState({ popup: true }, null, null);
+      window.history.replaceState({ popup: true }, null, null);
     }
     loaded = false;
   }
-}
+};
 
 const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
-  //Check if Url contains query
+  // Check if Url contains query
   if (query.has('id') && query.has('div') && query.has('foto')) {
-    const urlGet = `${window.location.origin}/api/casas?id=${query.get('id')}&div=${query.get('div')}&json=true`;
+    const urlGet = `${window.location.origin}/api/casas?id=${query.get(
+      'id'
+    )}&div=${query.get('div')}&json`;
     $.ajax({
       url: urlGet,
-      method: 'GET',
+      method: 'GET'
     }).then(casa => {
-      if (history.state != null) {
-        if (history.state.popup) {
-          //Finds the division in DB corresponding with the query div key
+      if (window.history.state != null) {
+        if (window.history.state.popup) {
+          // Finds the division in DB corresponding with the query div key
           const divisao = casa.divisao.find((value, key) => {
-            return casa.divisao[key].idDivisao == parseInt(query.get('div'));
+            return (
+              casa.divisao[key].idDivisao === parseInt(query.get('div'), 10)
+            );
           });
           const fotoPath = divisao.fotos[0].path.split(',')[query.get('foto')];
           // //Loads Details
-          $('.popup__mapa').children('iframe').remove();
+          $('.popup__mapa')
+            .children('iframe')
+            .remove();
           $('.popup__mapa').append(`
               <iframe frameborder="0" style="border:0" src="${casa.mapa}" allowfullscreen></iframe>
               `);
           $('.popup__photos img').attr('src', `/${fotoPath}`);
           openModal(modal);
-          history.replaceState({ popup: true }, null, null);
+          window.history.replaceState({ popup: true }, null, null);
           updatePhoto(casa, counterDiv, counterPhotos);
         } else {
           closeModal();
@@ -153,26 +247,26 @@ const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
       }
     });
   }
-}
+};
 
 $(document).ready(() => {
-  //VARIABLES/////////////
+  // VARIABLES/////////////
   let query1 = window.location.search.slice(1);
-  const hash = window.location.hash;
+  const { hash } = window.location;
   query1 = new URLSearchParams(query1);
   let numeroCasa;
-  let counterDiv = 0;
-  let counterPhotos = 0;
+  const counterDiv = 0;
+  const counterPhotos = 0;
   let modal;
-  modal = query1 && (hash.length === 0) ? '#imovel' : hash;
+  modal = query1 && hash.length === 0 ? '#imovel' : hash;
   let loaded = true;
-  const dashboard = location.pathname;
+  const dashboard = window.location.pathname;
 
-  //If url has a  query, fetch home from DB
+  // If url has a  query, fetch home from DB
   getHomeWithView(query1, modal, counterDiv, counterPhotos, loaded);
 
-  //Fetch home from DB when clicking imovel
-  $('#imoveis').on('click', '.imovel', function (e) {
+  // Fetch home from DB when clicking imovel
+  $('#imoveis').on('click', '.imovel', function() {
     // Variables
     const imovelDiv = $(this);
     numeroCasa = $('.imovel').index(imovelDiv) + 1;
@@ -180,50 +274,60 @@ $(document).ready(() => {
 
     $.ajax({
       url: window.location.origin + url,
-      method: 'GET',
+      method: 'GET'
     }).then(casa => {
       const fotoPath = casa.divisao[0].fotos[0].path.split(',')[0];
 
       // //Loads Details
-      $('.popup__mapa').children('iframe').remove();
+      $('.popup__mapa')
+        .children('iframe')
+        .remove();
       $('.popup__mapa').append(`
       <iframe frameborder="0" style="border:0" src="${casa.mapa}" allowfullscreen></iframe>
       `);
       $('.popup__photos img').attr('src', `/${fotoPath}`);
       updateInfo(casa, counterDiv);
       updatePhoto(casa, counterDiv, counterPhotos);
-      window.history.pushState({ popup: true }, null, `${url}&div=${casa.divisao[0].idDivisao}&foto=${counterPhotos}`);
+      window.window.history.pushState(
+        { popup: true },
+        null,
+        `${url}&div=${casa.divisao[0].idDivisao}&foto=${counterPhotos}`
+      );
       openModal('#imovel');
     });
   });
 
-  //Opens popup when certain elements are clicked
-  $('body').on('click', '#sidenav__faq, #form, .servicos__link, #btn__compare, .home__editar', function (e) {
-    e.preventDefault();
-    modal = `${$(this).data('modal')}`;
-    //Checks if already opened a link before
-    if (!loaded && location.hash) {
-      history.replaceState({ popup: true }, null, modal);
-    } else {
-      history.pushState({ popup: true }, null, modal);
-      loaded = false;
+  // Opens popup when certain elements are clicked
+  $('body').on(
+    'click',
+    '#sidenav__faq, #form, .servicos__link, #btn__compare, .home__edit',
+    function(e) {
+      e.preventDefault();
+      modal = `${$(this).data('modal')}`;
+      // Checks if already opened a link before
+      openModal(modal, this);
+      if (!loaded && window.location.hash) {
+        window.history.replaceState({ popup: true }, null, modal);
+      } else {
+        window.history.pushState({ popup: true }, null, modal);
+        loaded = false;
+      }
     }
-    openModal(modal);
+  );
 
-    if (modal === "#quartos") {
-      console.log('rooms');
-    }
-  });
-
-  //Listens for mouse clicks
-  $(document).mouseup((e) => {
-    //Listens for mouse clicks outside the popup box in order to close it
+  // Listens for mouse clicks
+  $(document).mousedown(e => {
+    // Listens for mouse clicks outside the popup box in order to close it
     if (exitPopup.is(e.target) && exitPopup.has(e.target).length === 0) {
-      if (history.state.popup) {
+      if (window.history.state.popup) {
         if (!loaded || dashboard) {
-          history.back();
+          window.history.back();
         } else {
-          history.pushState({ popup: false }, null, window.location.origin);
+          window.history.pushState(
+            { popup: false },
+            null,
+            window.location.origin
+          );
           loaded = false;
         }
         closeModal();
@@ -231,47 +335,50 @@ $(document).ready(() => {
     }
   });
 
-  //Closes Popup
+  // Closes Popup
   $('.close').on('click touchend', () => {
-    if (history.state.popup) {
+    if (window.history.state.popup) {
       if (!loaded) {
-        history.back();
+        window.history.back();
       } else {
-        history.pushState({ popup: false }, null, window.location.origin);
+        window.history.pushState(
+          { popup: false },
+          null,
+          window.location.origin
+        );
         loaded = false;
       }
       closeModal();
     }
   });
 
-
-
-  //Display page properly when navigating browser history
-  $(window).on('popstate', e => {
-    if (history.state != null) {
-      if (!history.state.popup) {
+  // Display page properly when navigating browser window.history
+  $(window).on('popstate', () => {
+    if (window.history.state != null) {
+      if (!window.history.state.popup) {
         closeModal();
         return;
       }
 
-      if (location.hash && history.state.popup) {
-        openModal(location.hash);
+      if (window.location.hash && window.history.state.popup) {
+        openModal(window.location.hash);
         return;
       }
-      if (location.search && history.state.popup) {
+      if (window.location.search && window.history.state.popup) {
         let query2 = window.location.search.slice(1);
         query2 = new URLSearchParams(query2);
-        getHomeWithQuery(query2, '#imovel', query2.get('id'), query2.get('foto'));
+        getHomeWithQuery(
+          query2,
+          '#imovel',
+          query2.get('id'),
+          query2.get('foto')
+        );
         return;
       }
+      console.log(window.history.state);
     }
     closeModal();
-    return;
   });
 });
 
 module.exports = { exitPopup };
-
-
-
-

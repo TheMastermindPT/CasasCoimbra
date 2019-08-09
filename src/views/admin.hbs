@@ -63,6 +63,13 @@
                     </div>
                 </div>
                 <div class="home__buttons">
+                    <div class="home__edit" data-id="" data-modal="#divisoes">
+                        <button type="button">
+                            <svg>
+                                <use xlink:href="#edit"></use>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="home__submit">
                         <button type="submit">
                             <svg>
@@ -74,7 +81,7 @@
             </form>
         </div>
     </div>
-    <div class="popup" id="quartos">
+    <div class="popup" id="divisoes">
         <div class="popup__box">
             <a href="javascript:void(0)" class="close">
                 <svg class="icon icon-cross popup__close">
@@ -83,12 +90,63 @@
             </a>
             <div class="popup__admin">
                 <div class="popup__edit">
-                    <h1 class="popup__title popup__title--quartos">Quartos</h1>
-                    <form method="post">
+                    <h1 class="popup__title popup__title--divisões">Divisões</h1>
+                    <form method="post" class="popup__form" data-id="">
+                        <div class="popup__form-divisao">
+                            <label for="divisao">Divisão:</label>
+                            <select name="divisao" id="divisao"></select>
+                        </div>
+                        <div class="popup__form-tipo">
+                            <label for="tipo">Tipo:</label>
+                            <input type="text" name="tipo" id="tipo">
+                        </div>
+                        <div class="popup__form-numero">
+                            <label for="div__numero">Numero:</label>
+                            <input type="text" name="numero" id="div__numero">
+                        </div>
+                        <div class="popup__form-descricao">
+                            <label for="descricao">Descrição:</label>
+                            <textarea name="descricao" id="descricao" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="popup__form-preco">
+                            <label for="preco">Preço:</label>
+                            <input type="number" name="preco" id="preco">
+                        </div>
+                        <div class="popup__form-disponivel">
+                            <label for="disponivel">Disponível:</label>
+                            <input type="checkbox" name="disponivel" id="disponivel">
+                        </div>
+                        <div class="popup__form-quando">
+                            <label for="quando">Quando:</label>
+                            <input type="date" name="quando" id="quando">
+                        </div>
+
+                        <button type="submit" class="submit">
+                            <svg>
+                                <use xlink:href="#save"></use>
+                            </svg>
+                        </button>
                     </form>
+                </div>
+
+                <div class="popup__editPhotos">
+                    <div class="fotos__thumbnail">
+                        <form action="" enctype="multipart/form-data">
+                            <label for="fotos__divisao" class="foto__label">
+                                <svg>
+                                    <use xlink:href="#icon-upload"></use>
+                                </svg>
+                                {{!-- <img src="/assets/casas/casa1/casa1.jpg" alt=""> --}}
+                            </label>
+                            <input type="file" name="" id="fotos__divisao" multiple>
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 {{> externals}}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

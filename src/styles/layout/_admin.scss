@@ -1,3 +1,5 @@
+$color-dark: #0b1b1f;
+
 //PLACEHOLDERS
 %button {
   color: var(--color-light);
@@ -223,7 +225,7 @@
       }
     }
   }
-  &__editar {
+  &__edit {
     order: 1;
     button {
       @extend %button;
@@ -301,28 +303,6 @@
     justify-content: center;
     align-items: center;
 
-    .foto__label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 10rem;
-      max-width: 100%;
-      cursor: pointer;
-
-      svg {
-        height: 3rem;
-        fill: white;
-      }
-
-      svg:hover {
-        fill: darken(white, 25%);
-      }
-
-      img {
-        max-height: 100%;
-        max-width: 100%;
-      }
-    }
     .foto__input {
       display: none;
     }
@@ -361,19 +341,188 @@
     display: flex;
   }
   &__edit {
-    width: 100%;
+    width: 30rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+
+    & > form {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-around;
+    }
+
+    & form > div:not(:nth-child(6)) {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Montserrat', sans-serif;
+
+      label {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-style: italic;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus,
+      button:focus {
+        outline: none;
+      }
+      input {
+        display: block;
+        border: none;
+        margin-bottom: 1rem;
+        border: 1px solid var(--color-dark);
+        border-radius: 5px;
+        padding: 0.5rem;
+
+        color: var(--color-dark);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+
+        &::placeholder {
+          color: var(--color-dark);
+        }
+        &::-webkit-input-placeholder {
+          color: var(--color-dark);
+        }
+        &:-moz-placeholder {
+          color: var(--color-dark);
+        }
+        &:-ms-input-placeholder {
+          color: var(--color-dark);
+        }
+      }
+
+      input[type='date'] {
+        -webkit-appearance: none;
+
+        &::-webkit-inner-spin-button {
+          display: none;
+          -webkit-appearance: none;
+        }
+      }
+
+      select {
+        border: 1px solid var(--color-dark);
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        color: var(--color-dark);
+        outline: none;
+        font-weight: 600;
+
+        option {
+          outline: none;
+
+          &[value='create'] {
+            font-weight: 600;
+          }
+        }
+      }
+
+      textarea {
+        border: 1px solid var(--color-dark);
+        border-radius: 5px;
+        color: var(--color-dark);
+        padding: 1rem;
+        resize: none;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 1rem;
+        font-weight: 600;
+
+        &::placeholder {
+          color: var(--color-dark);
+        }
+        &::-webkit-input-placeholder {
+          color: var(--color-dark);
+        }
+        &:-moz-placeholder {
+          color: var(--color-dark);
+        }
+        &:-ms-input-placeholder {
+          color: var(--color-dark);
+        }
+      }
+    }
+
+    & form > div:nth-child(6) {
+      display: flex !important;
+      font-size: 1.4rem;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      font-style: italic;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+
+      input[type='checkbox'] {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  &__editPhotos {
+    display: flex;
+    flex-grow: 1;
+    padding-left: 2rem;
+    flex-wrap: wrap;
+    overflow: hidden;
+    max-height: 100%;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+
+    .fotos__thumbnail {
+      width: calc(100% / 8);
+      margin-bottom: 1rem;
+
+      label {
+        position: relative;
+        border: 5px dashed var(--color-dark);
+        border-radius: 4px;
+        width: 100%;
+        height: 0;
+        padding: 61.8% 0;
+
+        svg {
+          height: 3rem;
+          fill: $color-dark;
+        }
+
+        svg:hover {
+          fill: lighten($color-dark, 25%);
+        }
+        img {
+          max-width: 100%;
+        }
+
+        &:hover {
+          border: 5px dashed lighten($color-dark, 25%);
+        }
+      }
+
+      input {
+        display: none;
+      }
+
+      &:hover {
+        filter: brightness(50%) sepia(100%);
+        cursor: pointer;
+      }
+    }
   }
   &__title {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     font-weight: 600;
-    color: var(--color-darkred);
-    &--casa {
-    }
-    &--quartos {
+    margin-bottom: 2rem;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    padding: 1rem;
+    border-radius: 5px;
+    &--divisoes {
     }
   }
 }

@@ -1,62 +1,61 @@
 //IMOVEL
 .imovel {
-    backface-visibility: hidden;
-    position: relative;
+  backface-visibility: hidden;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 30%;
+  height: 35vw;
+  margin-bottom: 4rem;
+
+  @include respond($tab-land) {
+    width: 45rem;
+    height: 45vw;
+  }
+
+  @include respond($tab-port) {
+    width: 45rem;
+    height: 53rem;
+    margin-bottom: 2rem;
+    margin-left: 0;
+  }
+
+  @include respond($phone) {
+    width: 35rem;
+    height: 45rem;
+    margin-left: 0;
+  }
+
+  &:nth-child(2n + 2) {
+    margin-left: 4rem;
+    margin-right: 4rem;
+  }
+
+  img {
     overflow: hidden;
+    position: relative;
+    z-index: 1;
+    width: 100%;
     border-radius: 1rem;
+    height: 100%;
+  }
+  &:hover svg {
+    transition: all 0.4s;
+    opacity: 1;
+  }
+
+  &--placeholder {
     width: 30%;
-    height: 35vw;
-    margin-bottom: 4rem;
+    visibility: hidden;
+    &:nth-child(2n + 2) {
+      margin-left: 4rem;
+      margin-right: 4rem;
+    }
 
     @include respond($tab-land) {
-        width: 45rem;
-        height: 45vw;
+      display: none;
     }
-  
-    @include respond($tab-port) {
-        width: 45rem;
-        height: 53rem;
-        margin-bottom: 2rem;
-        margin-left: 0;
-    }
-  
-    @include respond($phone) {
-        width: 35rem;
-        height: 45rem;
-        margin-left: 0;
-    }
-    
-    &:nth-child(2n + 2) {
-        margin-left: 4rem;
-        margin-right: 4rem;
-    }
-    
-    img {
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      border-radius: 1rem;
-      height: 100%;
-    }
-    &:hover svg {
-      transition: all 0.4s;
-      opacity: 1;
-    }
-
-    &--placeholder {
-      width: 30%;
-      visibility: hidden;
-      &:nth-child(2n + 2) {
-        margin-left: 4rem;
-        margin-right: 4rem;
-      }
-
-      @include respond($tab-land) {
-           display: none;
-       }
-    }
-  
+  }
 
   &:hover &__info {
     background-color: rgba(41, 41, 41, 0.95);
@@ -250,7 +249,7 @@
     }
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       transition: all 0.2s;
@@ -288,7 +287,7 @@
     }
   }
 }
-//CONTACT 
+//CONTACT
 .contactme {
   position: fixed;
   right: 8rem;
@@ -387,8 +386,6 @@
   justify-content: center;
   align-items: center;
 
-
-
   &__compare {
     border-radius: 0.5rem;
     float: left;
@@ -437,8 +434,6 @@
     z-index: 20;
   }
 
-  
-
   //Animates box transition when changing classes with Jquery
   &__box {
     display: flex;
@@ -448,20 +443,19 @@
     width: 85%;
     background-color: white;
     position: relative;
-    
+
     @include respond($tab-port) {
       flex-direction: column;
       height: 80%;
     }
   }
 
-  &--open{
-      transition-duration: 0.5s;
-      transition-property: transform, opacity;
-      transform: scale(1);
-      opacity: 1;
+  &--open {
+    transition-duration: 0.5s;
+    transition-property: transform, opacity;
+    transform: scale(1);
+    opacity: 1;
   }
-
 
   &__photos {
     position: relative;
@@ -559,7 +553,6 @@
     color: var(--color-dark);
   }
 
-
   &__details {
     color: var(--color-dark);
     font-family: $text-normal;
@@ -587,8 +580,53 @@
 }
 
 .popup--visible {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
+.submit {
+  background-color: var(--color-success);
+  color: var(--color-light);
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  width: 6rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 1;
+  svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+    display: block;
+  }
+}
 
+.foto__label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  max-width: 100%;
+  cursor: pointer;
+
+  svg {
+    height: 3rem;
+    fill: white;
+  }
+
+  svg:hover {
+    fill: darken(white, 25%);
+  }
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
