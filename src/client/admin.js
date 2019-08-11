@@ -172,7 +172,7 @@ $(document).ready(() => {
 
     $.ajax({
       method: 'POST',
-      url: `${window.location.origin}/api/casas/previewMulti`,
+      url: `${window.location.origin}/api/casas/uploadMulti`,
       data,
       cache: false,
       contentType: false,

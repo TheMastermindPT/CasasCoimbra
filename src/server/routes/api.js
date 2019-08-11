@@ -1,12 +1,24 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const multer = require('multer');
+const bodyParser = require('body-parser');
 const app = require('express');
-const rimraf = require('rimraf');
+const Promise = require('bluebird');
 const { casas } = require('../../client/casas');
 const db = require('../../../config/database');
 
 const router = app.Router();
+router.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+router.use(bodyParser.json());
+
+Promise.config({
+  longStackTraces: true,
+  warnings: true // note, run node with --trace-warnings to see full stack traces for warnings
+});
 
 // SET STORAGE ENGINE
 const storage = multer.diskStorage({
@@ -61,6 +73,59 @@ const uploadMulti = multer({
   }
 }).array('fotos', 10);
 
+// Copies files
+async function copyFiles(src, dest) {
+  try {
+    await fs.copy(src, dest);
+    console.log('Photo was copied!');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Removes content from folder, uploads new photos and updates the DB
+async function uploadFiles(files, divisao, tipo, nome, numero) {
+  try {
+    // Using Promise.map:
+    Promise.map(files, function(fileName) {
+      // Promise.map awaits for returned promises as well.
+      const src = path.join(`./src/assets/temp/${fileName.originalname}`);
+      const dest = path.join(
+        `./src/assets/casas/${nome}/${tipo}${numero}/${fileName.originalname}`
+      );
+      return copyFiles(src, dest);
+    }).then(function() {
+      fs.readdir(
+        path.join(`./src/assets/casas/${nome}/${tipo}${numero}`),
+        (error, ficheiros) => {
+          if (error) throw error;
+          const filePath = [];
+          ficheiros.forEach((ficheiro, index) => {
+            const newPath = `assets/casas/${nome}/${tipo}${numero}/${ficheiro}`;
+            filePath.push(newPath);
+          });
+
+          let stringPath = JSON.stringify(filePath);
+          stringPath = stringPath.slice(1);
+          stringPath = stringPath.slice(0, -1);
+          stringPath = stringPath.replace(/"/g, '');
+
+          db.Foto.update(
+            {
+              path: stringPath
+            },
+            { where: { DivisaoIdDivisao: divisao } }
+          ).then(() => {
+            console.log('update successful');
+          });
+        }
+      );
+    });
+  } catch (failed) {
+    console.log(failed);
+  }
+}
+
 router.post('/preview', (req, res) => {
   // Check if the folder exists and moves file from Temp folder to new folder
   ensureExistsFolder(path.join(`src/assets/temp/`), err => {
@@ -72,24 +137,7 @@ router.post('/preview', (req, res) => {
           res.sendStatus(400);
           res.end();
         } else {
-          let fileType = req.file.originalname.split('.').pop();
-          fileType = `.${fileType}`;
-
-          fs.readFile(
-            path.join(`./src/assets/temp/${req.file.originalname}`),
-            function(err, data) {
-              if (err) throw err;
-              fs.writeFile(
-                path.join(
-                  `./src/assets/temp/casa${req.body.numero}${fileType}`
-                ),
-                data,
-                function(err) {
-                  if (err) throw err;
-                }
-              );
-            }
-          );
+          res.sendStatus(200);
           res.end();
         }
       });
@@ -97,53 +145,22 @@ router.post('/preview', (req, res) => {
   });
 });
 
-router.post('/previewMulti', (req, res) => {
+router.post('/uploadMulti', (req, res) => {
   // Check if the folder exists and moves file from Temp folder to new folder
   ensureExistsFolder(path.join(`src/assets/temp/`), err => {
     if (err) {
       throw err;
     } else {
-      rimraf(path.join(`src/assets/temp/*`), err => {
-        uploadMulti(req, res, function(err) {
-          if (err) {
-            res.sendStatus(400);
-            res.end();
-          } else {
-            let { tipo, idCasa, idDivisao, numeroDivisao } = req.body;
-            tipo = tipo.toLowerCase();
-
-            fs.mkdir(
-              path.join(`src/assets/temp/${tipo}${numeroDivisao}`),
-              err => {
-                req.files.forEach((file, index) => {
-                  let fileType = req.files[index].originalname.split('.').pop();
-                  fileType = `.${fileType}`;
-
-                  fs.readFile(
-                    path.join(
-                      `./src/assets/temp/${req.files[index].originalname}`
-                    ),
-                    function(err, data) {
-                      if (err) throw err;
-                      fs.writeFile(
-                        path.join(
-                          `./src/assets/temp/${tipo}${numeroDivisao}/${tipo}${numeroDivisao}-${index +
-                            1}${fileType}`
-                        ),
-                        data,
-                        function(err) {
-                          if (err) throw err;
-                        }
-                      );
-                    }
-                  );
-                });
-
-                res.end();
-              }
-            );
-          }
-        });
+      uploadMulti(req, res, function(err) {
+        if (err) {
+          res.sendStatus(400);
+          res.end();
+        } else {
+          const { divisao, tipo, nome, numero } = req.body;
+          const { files } = req;
+          uploadFiles(files, divisao, tipo.toLowerCase(), nome, numero);
+          res.send(req.files);
+        }
       });
     }
   });
@@ -196,36 +213,22 @@ router.post('/upload', (req, res) => {
           mapa: req.body.mapa
         }
       }).then(([casa, created]) => {
+        const { nome } = req.body;
+
         // Check if file exists
         if (req.file != null) {
-          fotoPath = `assets/casas/casa${casa.numero}/casa${casa.numero}${fileType}`;
+          fotoPath = `assets/casas/${nome}/${nome}${fileType}`;
           // Check if the folder exists and moves file from Temp folder to new folder
-          ensureExistsFolder(
-            path.join(`src/assets/casas/casa${casa.numero}`),
-            err => {
-              if (err) {
-                throw err;
-              } else {
-                fs.readFile(
-                  path.join(
-                    `./src/assets/temp/casa${req.body.numero}${fileType}`
-                  ),
-                  function(err, data) {
-                    if (err) throw err;
-                    fs.writeFile(
-                      path.join(
-                        `./src/assets/casas/casa${casa.numero}/casa${casa.numero}${fileType}`
-                      ),
-                      data,
-                      function(err) {
-                        if (err) throw err;
-                      }
-                    );
-                  }
-                );
-              }
+          ensureExistsFolder(path.join(`src/assets/casas/${nome}`), err => {
+            if (err) {
+              throw err;
+            } else {
+              copyFiles(
+                path.join(`./src/assets/temp/${req.file.originalname}`),
+                path.join(`./src/${fotoPath}`)
+              );
             }
-          );
+          });
           // If file exists and home exists update the foto and the fields
           db.Casa.update(
             {
@@ -269,6 +272,7 @@ router.post('/upload', (req, res) => {
   });
 });
 
+// Delete Home
 router.post('/delete', (req, res) => {
   db.Casa.findOne({
     where: { nome: req.body.nome },
@@ -281,28 +285,78 @@ router.post('/delete', (req, res) => {
       }
     ]
   }).then(casa => {
-    db.Foto.destroy({
+    // MAYBE CHANGE
+
+    const foto = db.Foto.destroy({
       where: {
         CasaIdCasa: casa.idCasa
       }
-    }).then();
-
-    db.Divisao.destroy({
-      where: {
-        CasaIdCasa: casa.idCasa
-      }
-    }).then();
-
-    db.Casa.destroy({
-      where: {
-        idCasa: casa.idCasa
-      }
-    }).then();
-    res.end();
+    }).then(() => {
+      const divisao = db.Divisao.destroy({
+        where: {
+          CasaIdCasa: casa.idCasa
+        }
+      }).then(() => {
+        const home = db.Casa.destroy({
+          where: {
+            idCasa: casa.idCasa
+          }
+        }).then(() => {
+          res.sendStatus(200);
+          res.end();
+        });
+      });
+    });
   });
 });
 
-// Checks for queries and retreives specified data
+router.delete('/removePhoto', (req, res) => {
+  db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } }).then(
+    fotos => {
+      const fotosPath = fotos[0];
+      const pathArray = fotosPath.path.split(',');
+      const { fotoIndex } = req.body;
+      const foto = pathArray[fotoIndex];
+      const { idDivisao } = req.body;
+
+      const nomeCasa = foto.split('/')[2];
+      const divisao = foto.split('/')[3];
+      const filename = foto.split('/')[4];
+
+      // fs.remove(path.join(`./src/${foto}`))
+      //   .then(() => {
+      //     fs.readdir(
+      //       path.join(`./src/assets/casas/${nomeCasa}/${divisao}`),
+      //       (error, ficheiros) => {
+      //         if (error) throw error;
+      //         const filePath = [];
+      //         ficheiros.forEach((ficheiro, index) => {
+      //           const newPath = `assets/casas/${nomeCasa}/${divisao}/${ficheiro}`;
+      //           filePath.push(newPath);
+      //         });
+
+      //         let stringPath = JSON.stringify(filePath);
+      //         stringPath = stringPath.slice(1);
+      //         stringPath = stringPath.slice(0, -1);
+      //         stringPath = stringPath.replace(/"/g, '');
+
+      //         db.Foto.update(
+      //           {
+      //             path: stringPath
+      //           },
+      //           { where: { DivisaoIdDivisao: idDivisao } }
+      //         ).then(() => {
+      //           console.log('update successful');
+      //         });
+      //       }
+      //     );
+      //   })
+      //   .catch(err => console.error(err));
+    }
+  );
+});
+
+// GET Checks for queries and retreives specified data
 router.get('/', (req, res) => {
   // If there are no queries in URL, retrieve all the homes in DB
   if (Object.keys(req.query).length === 0) {
@@ -360,8 +414,7 @@ router.get('/', (req, res) => {
   // Get all the info about the division and pull the photos that are associated with it
   if (
     Object.keys(req.query)[0] === 'id' &&
-    Object.keys(req.query)[1] === 'div' &&
-    Object.keys(req.query)[2] === 'edit'
+    Object.keys(req.query)[1] === 'div'
   ) {
     db.Casa.findOne({
       include: [
