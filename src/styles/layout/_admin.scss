@@ -486,20 +486,56 @@ $color-dark: #0b1b1f;
         overflow: hidden;
         width: calc(100% / 6);
 
-        .foto__form-label {
-          display: flex;
-          width: 100%;
-          height: 0;
-          padding: 37.5% 0;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
+        input {
+          display: none;
+        }
 
-          img {
-            max-width: 100%;
+        &--show {
+          label {
+            position: relative;
+
+            img {
+              transform: scale(1.2);
+              transition: all 0.2s ease-in-out;
+              max-width: 100%;
+            }
+
+            button {
+              position: absolute;
+              z-index: 2;
+              cursor: pointer;
+              bottom: 1rem;
+              right: 2rem;
+              width: 3.5rem;
+              height: 3rem;
+              border: none;
+              outline: none;
+              border-radius: 5px;
+              background-color: $color-dark;
+              transition: all 0.2s ease-in-out;
+
+              svg {
+                fill: white;
+                width: 50%;
+                height: 50%;
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                background-color: darken(red, 15%);
+              }
+            }
+
+            &:hover img {
+              transform: scale(1.4);
+              filter: brightness(150%);
+              cursor: pointer;
+            }
           }
+        }
 
-          &--add {
+        &--add {
+          label {
             border: 5px dashed var(--color-dark);
             border-radius: 4px;
 
@@ -521,12 +557,14 @@ $color-dark: #0b1b1f;
             }
           }
         }
-        input {
-          display: none;
-        }
 
-        &:hover {
-          filter: brightness(50%) sepia(100%);
+        .foto__form-label {
+          display: flex;
+          width: 100%;
+          height: 0;
+          padding: 37.5% 0;
+          justify-content: center;
+          align-items: center;
           cursor: pointer;
         }
       }

@@ -121,6 +121,39 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
   });
 };
 
+const appendPhotos = (files = null, a, b, c) => {
+  // VARIABLES
+  const photosForm = $('.popup__fotos-form');
+  const arrayPath = files.divisao[0].fotos[0].path.split(',');
+  // files ? null : photosForm.empty();
+  photosForm.empty();
+  arrayPath.forEach((value, index) => {
+    photosForm.append(`
+    <div class="fotos__foto fotos__foto--show">
+      <label for="fotos__divisao" class="foto__form-label">
+        <img src="/${value}" alt="">
+        <button type="button" class="foto__delete">
+          <svg>
+            <use xlink:href="#delete"></use>
+          </svg>
+        </button>
+      </label>
+    </div>
+  `);
+  });
+
+  photosForm.append(`
+   <div class="fotos__foto fotos__foto--add">
+     <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
+       <svg>
+         <use xlink:href="#icon-upload"></use>
+       </svg>
+     </label>
+     <input type="file" name="fotos" id="fotos__divisao" multiple required>
+   </div>
+  `);
+};
+
 const openModal = (modal, element) => {
   const modalExists = modalsList.find((value, key) => {
     return modalsList[key].name === modal;
@@ -171,6 +204,8 @@ const openModal = (modal, element) => {
           ? $('#disponivel').prop('checked', true)
           : $('#disponivel').prop('checked', false);
         $('#quando').val(casa.divisao[0].quando);
+
+        appendPhotos(casa);
       });
     }
   }
@@ -186,8 +221,6 @@ const closeModal = () => {
       $('body').css('overflow-y', 'scroll');
     });
 };
-
-const appendPhotos = (files, a, b, c) => {};
 
 const getHomeWithView = (query, modal, counterDiv, counterPhotos, loaded) => {
   if (loaded) {
