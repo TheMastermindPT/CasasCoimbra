@@ -322,9 +322,7 @@ router.delete('/removePhoto', (req, res) => {
       const divisao = foto.split('/')[3];
       const filename = foto.split('/')[4];
 
-      res.send(foto);
-
-      /*  fs.remove(path.join(`./src/${foto}`))
+      fs.remove(path.join(`./src/${foto}`))
         .then(() => {
           fs.readdir(
             path.join(`./src/assets/casas/${nomeCasa}/${divisao}`),
@@ -357,7 +355,7 @@ router.delete('/removePhoto', (req, res) => {
         .catch(err => {
           console.error(err);
           res.end();
-        }); */
+        });
     }
   );
 });
