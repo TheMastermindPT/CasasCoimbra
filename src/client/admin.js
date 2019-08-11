@@ -214,6 +214,9 @@ $(document).ready(() => {
       .toLowerCase();
     const numero = $('#div__numero').val();
     const divisao = `${tipo}${numero}`;
+    const filepath = $(this)
+      .prev('img')
+      .attr('src');
 
     $.ajax({
       method: 'DELETE',
@@ -222,12 +225,13 @@ $(document).ready(() => {
         idFoto,
         idDivisao,
         nome,
-        divisao
+        divisao,
+        filepath
       },
       dataType: 'json'
     }).then(res => {
-      console.log(idFoto);
-      appendPhotos(null, null, this);
+      console.log(idFoto, res);
+      // appendPhotos(null, null, this);
     });
   });
 

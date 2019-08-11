@@ -86,30 +86,40 @@ async function copyFiles(src, dest) {
 // Removes content from folder, uploads new photos and updates the DB
 async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
   try {
-    // Using Promise.map:
-    Promise.map(files, function(fileName) {
-      // Promise.map awaits for returned promises as well.
-      const src = path.join(`./src/assets/temp/${fileName.originalname}`);
-      const dest = path.join(
-        `./src/assets/casas/${nome}/${tipo}${numero}/${fileName.originalname}`
-      );
-      return copyFiles(src, dest);
-    }).then(function() {
-      files.forEach(file => {
-        const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
-        db.Foto.create({
-          path: newPath,
-          DivisaoIdDivisao: divisao,
-          CasaIdCasa: idCasa
-        })
-          .then(() => {
-            console.log('Foto path created');
-          })
-          .catch(failCreate => console.error(failCreate));
+    files.forEach(file => {
+      const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
+
+      // Verify if same filename exists in the directory
+      fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
+        console.log(exists);
+        if (!exists) {
+          // Using Promise.map:
+          Promise.map(files, function(fileName) {
+            // Promise.map awaits for returned promises as well.
+            const src = path.join(`./src/assets/temp/${fileName.originalname}`);
+            const dest = path.join(
+              `./src/assets/casas/${nome}/${tipo}${numero}/${fileName.originalname}`
+            );
+            return copyFiles(src, dest);
+          }).then(function() {
+            console.log('files copied');
+
+            // If there are no duplicate files, add entry to DB
+            db.Foto.create({
+              path: newPath,
+              DivisaoIdDivisao: divisao,
+              CasaIdCasa: idCasa
+            })
+              .then(() => {
+                console.log('Foto path created');
+              })
+              .catch(failCreate => console.error(failCreate));
+          });
+        }
       });
     });
-  } catch (failed) {
-    console.log(failed);
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -299,32 +309,25 @@ router.post('/delete', (req, res) => {
 });
 
 router.delete('/removePhoto', (req, res) => {
-  const { idFoto, idDivisao, nome, divisao } = req.body;
-  fs.readdir(path.join(`src/assets/casas/${nome}/${divisao}`)).then(files => {
-    console.log(files);
-  });
+  let { filepath, idFoto } = req.body;
+  filepath = filepath.slice(1);
 
-  // db.Foto.findAll({ where: { idFoto: req.body.idFoto } })
-  //   .then(fotos => {
-  //     const foto = fotos[0].path;
-  //     db.Foto.destroy({ where: { idFoto: fotos[0].idFoto } }).then(() => {
-  //       console.log('foto removed');
-  //       if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
-  //         fs.remove(path.join(`src/${foto}`))
-  //           .then(() => {
-  //             console.log('Foto file removed!');
-  //             res.send({ delete: true });
-  //             res.end();
-  //           })
-  //           .catch(err => {
-  //             console.error(err);
-  //             res.send({ delete: false });
-  //             res.end();
-  //           });
-  //       }
-  //     });
-  //   })
-  //   .catch(err => console.error(err));
+  db.Foto.destroy({ where: { idFoto } }).then(() => {
+    console.log('foto removed');
+    // if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
+    //   fs.remove(path.join(`src/${foto}`))
+    //     .then(() => {
+    //       console.log('Foto file removed!');
+    //       res.send({ delete: true });
+    //       res.end();
+    //     })
+    //     .catch(err => {
+    //       console.error(err);
+    //       res.send({ delete: false });
+    //       res.end();
+    //     });
+    // }
+  });
 });
 
 // GET Checks for queries and retreives specified data
