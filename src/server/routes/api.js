@@ -308,35 +308,14 @@ router.delete('/removePhoto', (req, res) => {
       const { idFoto, idDivisao, nome, divisao } = req.body;
       const foto = fotos[0].path;
 
+      db.Foto.destroy({ where: { idFoto: fotos[0].idFoto } }).then(() => {
+        console.log('foto removed');
+        res.sendStatus(200);
+        res.end();
+      });
       // if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
       //   fs.remove(path.join(`src/${foto}`))
-      //     .then(() => {
-      //       fs.readdir(
-      //         path.join(`src/assets/casas/${nome}/${divisao}`),
-      //         (error, ficheiros) => {
-      //           if (error) throw error;
-      //           const filePath = [];
-      //           ficheiros.forEach((ficheiro, index) => {
-      //             const newPath = `assets/casas/${nome}/${divisao}/${ficheiro}`;
-      //             filePath.push(newPath);
-      //           });
-      //           let stringPath = JSON.stringify(filePath);
-      //           stringPath = stringPath.slice(1);
-      //           stringPath = stringPath.slice(0, -1);
-      //           stringPath = stringPath.replace(/"/g, '');
-      //           db.Foto.update(
-      //             {
-      //               path: stringPath
-      //             },
-      //             { where: { DivisaoIdDivisao: idDivisao } }
-      //           ).then(() => {
-      //             res.sendStatus(200);
-      //             res.end();
-      //             console.log('update successful');
-      //           });
-      //         }
-      //       );
-      //     })
+      //     .then(() => {})
       //     .catch(err => {
       //       console.error(err);
       //       res.end();
