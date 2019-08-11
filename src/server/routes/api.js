@@ -99,28 +99,16 @@ async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
         path.join(`./src/assets/casas/${nome}/${tipo}${numero}`),
         (error, ficheiros) => {
           if (error) throw error;
-
           ficheiros.forEach((ficheiro, index) => {
             const newPath = `assets/casas/${nome}/${tipo}${numero}/${ficheiro}`;
-
-            db.Foto.findOrCreate({
-              where: { numero: index + 1 },
-              defaults: {
-                path: newPath,
-                DivisaoIdDivisao: divisao,
-                CasaIdCasa: idCasa
-              }
-            }).then(([foto, created]) => {
-              if (!created) {
-                console.log(foto);
-              }
+            db.Foto.create({
+              path: newPath,
+              DivisaoIdDivisao: divisao,
+              CasaIdCasa: idCasa
+            }).then(() => {
+              console.log('Foto path created');
             });
           });
-
-          // let stringPath = JSON.stringify(filePath);
-          // stringPath = stringPath.slice(1);
-          // stringPath = stringPath.slice(0, -1);
-          // stringPath = stringPath.replace(/"/g, '');
         }
       );
     });
@@ -526,12 +514,11 @@ router.post('/create', (req, res) => {
             quando: divisao.quando
           })
             .then(divisaoObj => {
-              divisao.fotos.forEach((foto, index) => {
+              divisao.fotos.forEach(foto => {
                 db.Foto.create({
                   CasaIdCasa: casaObj.idCasa,
                   DivisaoIdDivisao: divisaoObj.idDivisao,
-                  path: foto.toString(),
-                  numero: index + 1
+                  path: foto.toString()
                 })
                   .then(() => {
                     console.log('success');
