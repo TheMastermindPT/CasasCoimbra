@@ -121,7 +121,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
   });
 };
 
-const appendPhotos = (casa = null, uploadFiles = null, element) => {
+const appendPhotos = (casa = null, uploadFiles = null) => {
   //
 
   const photosForm = $('.popup__fotos-form');
@@ -168,12 +168,6 @@ const appendPhotos = (casa = null, uploadFiles = null, element) => {
       </div>
     `);
     });
-  }
-
-  if (!casa && !uploadFiles && element) {
-    $(element)
-      .closest('.fotos__foto')
-      .remove();
   }
 
   $('.fotos__foto--add').remove();

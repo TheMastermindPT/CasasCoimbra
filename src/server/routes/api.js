@@ -314,7 +314,7 @@ router.delete('/removePhoto', (req, res) => {
 
   db.Foto.destroy({ where: { idFoto } }).then(() => {
     console.log(`foto removed ${filepath}`);
-    fs.remove(path.join(`./src/${foto}`))
+    fs.remove(path.join(`./src/${filepath}`))
       .then(() => {
         console.log('Foto file removed!');
         res.send({ delete: true });

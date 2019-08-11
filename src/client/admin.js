@@ -230,8 +230,9 @@ $(document).ready(() => {
       },
       dataType: 'json'
     }).then(res => {
-      console.log(idFoto, res);
-      // appendPhotos(null, null, this);
+      $(this)
+        .closest('.fotos__foto')
+        .remove();
     });
   });
 
