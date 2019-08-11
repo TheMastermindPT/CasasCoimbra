@@ -313,20 +313,18 @@ router.delete('/removePhoto', (req, res) => {
   filepath = filepath.slice(1);
 
   db.Foto.destroy({ where: { idFoto } }).then(() => {
-    console.log('foto removed');
-    // if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
-    //   fs.remove(path.join(`src/${foto}`))
-    //     .then(() => {
-    //       console.log('Foto file removed!');
-    //       res.send({ delete: true });
-    //       res.end();
-    //     })
-    //     .catch(err => {
-    //       console.error(err);
-    //       res.send({ delete: false });
-    //       res.end();
-    //     });
-    // }
+    console.log(`foto removed ${filepath}`);
+    fs.remove(path.join(`./src/${foto}`))
+      .then(() => {
+        console.log('Foto file removed!');
+        res.send({ delete: true });
+        res.end();
+      })
+      .catch(err => {
+        console.error(err);
+        res.send({ delete: false });
+        res.end();
+      });
   });
 });
 
