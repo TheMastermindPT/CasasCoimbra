@@ -121,11 +121,17 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
   });
 };
 
-const appendPhotos = (files = null, a, b, c) => {
+const appendPhotos = (files = null) => {
   // VARIABLES
   const photosForm = $('.popup__fotos-form');
   const arrayPath = files.divisao[0].fotos[0].path.split(',');
-  // files ? null : photosForm.empty();
+
+  if (arrayPath.length >= 6) {
+    photosForm.css('justify-content', 'flex-start');
+  } else {
+    photosForm.css('justify-content', 'center');
+  }
+
   photosForm.empty();
   arrayPath.forEach((value, index) => {
     photosForm.append(`

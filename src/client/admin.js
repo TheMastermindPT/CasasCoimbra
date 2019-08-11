@@ -53,7 +53,6 @@ $(document).ready(() => {
         url: `${window.location.origin}/api/casas?id=${idCasa}&div=${idDivisao}&edit`,
         dataType: 'json'
       }).then(casa => {
-        console.log(casa);
         // Populate inputs with the values of the first division of the house
         $('#tipo').val(casa.divisao[0].tipo);
 
@@ -68,18 +67,22 @@ $(document).ready(() => {
           : $('#disponivel').prop('checked', false);
 
         $('#quando').val(casa.divisao[0].quando);
+        appendPhotos(casa);
       });
-    } else if (idDivisao === 'create') {
-      $(this)
-        .parents('.popup__form')
-        .find('input, textarea')
-        .val('');
-
-      $(this)
-        .parents('.popup__form')
-        .find('input[type=checkbox]')
-        .prop('checked', false);
+      return true;
     }
+
+    $(this)
+      .parents('.popup__form')
+      .find('input, textarea')
+      .val('');
+
+    $(this)
+      .parents('.popup__form')
+      .find('input[type=checkbox]')
+      .prop('checked', false);
+
+    return false;
   });
 
   // Deletes Home from Database
