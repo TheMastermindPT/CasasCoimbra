@@ -185,6 +185,11 @@ $(document).ready(() => {
     }).then(res => console.log(res));
   });
 
+  $('.popup__fotos-form').on('click', '.foto__delete', function() {
+    const fotoNumber = $(this).data('id');
+    console.log(fotoNumber);
+  });
+
   // Check if admin is logged in
   const auth = cookies.get('auth');
   if (window.location.href === 'http://localhost:3000/admin/dashboard') {

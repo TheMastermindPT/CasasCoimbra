@@ -123,6 +123,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 
 const appendPhotos = (files = null) => {
   // VARIABLES
+  console.log(files);
   const photosForm = $('.popup__fotos-form');
   const arrayPath = files.divisao[0].fotos[0].path.split(',');
 
@@ -138,7 +139,7 @@ const appendPhotos = (files = null) => {
     <div class="fotos__foto fotos__foto--show">
       <label for="fotos__divisao" class="foto__form-label">
         <img src="/${value}" alt="">
-        <button type="button" class="foto__delete">
+        <button type="button" class="foto__delete" data-id="${index}">
           <svg>
             <use xlink:href="#delete"></use>
           </svg>
