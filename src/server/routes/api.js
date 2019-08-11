@@ -299,29 +299,32 @@ router.post('/delete', (req, res) => {
 });
 
 router.delete('/removePhoto', (req, res) => {
-  db.Foto.findAll({ where: { idFoto: req.body.idFoto } })
-    .then(fotos => {
-      const { idFoto, idDivisao, nome, divisao } = req.body;
-      const foto = fotos[0].path;
+  const { idFoto, idDivisao, nome, divisao } = req.body;
+  fs.readdir(path.join(`src/assets/casas/${nome}/${divisao}`)).then(files => {
+    console.log(files);
+  });
 
-      db.Foto.destroy({ where: { idFoto: fotos[0].idFoto } }).then(() => {
-        console.log('foto removed');
-        if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
-          fs.remove(path.join(`src/${foto}`))
-            .then(() => {
-              console.log('Foto file removed!');
-              res.send({ delete: true });
-              res.end();
-            })
-            .catch(err => {
-              console.error(err);
-              res.send({ delete: false });
-              res.end();
-            });
-        }
-      });
-    })
-    .catch(err => console.error(err));
+  // db.Foto.findAll({ where: { idFoto: req.body.idFoto } })
+  //   .then(fotos => {
+  //     const foto = fotos[0].path;
+  //     db.Foto.destroy({ where: { idFoto: fotos[0].idFoto } }).then(() => {
+  //       console.log('foto removed');
+  //       if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
+  //         fs.remove(path.join(`src/${foto}`))
+  //           .then(() => {
+  //             console.log('Foto file removed!');
+  //             res.send({ delete: true });
+  //             res.end();
+  //           })
+  //           .catch(err => {
+  //             console.error(err);
+  //             res.send({ delete: false });
+  //             res.end();
+  //           });
+  //       }
+  //     });
+  //   })
+  //   .catch(err => console.error(err));
 });
 
 // GET Checks for queries and retreives specified data

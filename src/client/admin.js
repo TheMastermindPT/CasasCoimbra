@@ -215,7 +215,6 @@ $(document).ready(() => {
     const numero = $('#div__numero').val();
     const divisao = `${tipo}${numero}`;
 
-    console.log(idFoto);
     $.ajax({
       method: 'DELETE',
       url: `${window.location.origin}/api/casas/removePhoto`,
@@ -227,11 +226,8 @@ $(document).ready(() => {
       },
       dataType: 'json'
     }).then(res => {
-      const ok = $(this)
-        .closest('.fotos__foto')
-        .remove();
-
-      console.log(ok);
+      console.log(idFoto);
+      appendPhotos(null, null, this);
     });
   });
 

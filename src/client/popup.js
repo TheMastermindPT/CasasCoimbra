@@ -121,8 +121,8 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
   });
 };
 
-const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
-  // VARIABLES
+const appendPhotos = (casa = null, uploadFiles = null, element) => {
+  //
 
   const photosForm = $('.popup__fotos-form');
   const arrayPath = casa ? casa.divisao[0].fotos : [];
@@ -168,6 +168,12 @@ const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
       </div>
     `);
     });
+  }
+
+  if (!casa && !uploadFiles && element) {
+    $(element)
+      .closest('.fotos__foto')
+      .remove();
   }
 
   $('.fotos__foto--add').remove();
