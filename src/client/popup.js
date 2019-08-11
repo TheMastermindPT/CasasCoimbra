@@ -123,7 +123,6 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 
 const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
   // VARIABLES
-  console.log(casa);
 
   const photosForm = $('.popup__fotos-form');
   const arrayPath = casa ? casa.divisao[0].fotos : [];
@@ -134,41 +133,42 @@ const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
     photosForm.css('justify-content', 'center');
   }
 
-  casa ? photosForm.empty() : null;
+  // casa ? photosForm.empty() : null;
 
   if (arrayPath) {
     arrayPath.forEach((foto, index) => {
       photosForm.append(`
-      <div class="fotos__foto fotos__foto--show">
-        <label for="fotos__divisao" class="foto__form-label">
-          <img src="/${foto.path}" alt="foto-divisao">
-          <button type="button" class="foto__delete" data-id="${foto.idFoto}">
-            <svg>
-              <use xlink:href="#delete"></use>
-            </svg>
-          </button>
-        </label>
-      </div>
-    `);
+        <div class="fotos__foto fotos__foto--show">
+          <label for="foto-${foto.idFoto}" class="foto__form-label">
+            <img src="/${foto.path}" alt="foto-divisao">
+            <button type="button" class="foto__delete" data-id="${foto.idFoto}">
+              <svg>
+                <use xlink:href="#delete"></use>
+              </svg>
+            </button>
+            <input type="file" name="foto" id="foto-${foto.idFoto}">
+          </label>
+        </div>
+      `);
     });
   }
 
-  if (uploadFiles) {
-    uploadFiles.forEach((value, index) => {
-      photosForm.append(`
-      <div class="fotos__foto fotos__foto--show">
-        <label for="fotos__divisao" class="foto__form-label">
-          <img src="/assets/temp/${value.originalname}">
-          <button type="button" class="foto__delete" data-id="">
-            <svg>
-              <use xlink:href="#delete"></use>
-            </svg>
-          </button>
-        </label>
-      </div>
-    `);
-    });
-  }
+  // if (uploadFiles) {
+  //   uploadFiles.forEach((value, index) => {
+  //     photosForm.append(`
+  //     <div class="fotos__foto fotos__foto--show">
+  //       <label for="fotos__divisao" class="foto__form-label">
+  //         <img src="/assets/temp/${value.originalname}">
+  //         <button type="button" class="foto__delete" data-id="">
+  //           <svg>
+  //             <use xlink:href="#delete"></use>
+  //           </svg>
+  //         </button>
+  //       </label>
+  //     </div>
+  //   `);
+  //   });
+  // }
 
   $('.fotos__foto--add').remove();
   photosForm.append(`

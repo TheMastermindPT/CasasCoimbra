@@ -99,25 +99,26 @@ async function uploadFiles(files, divisao, tipo, nome, numero) {
         path.join(`./src/assets/casas/${nome}/${tipo}${numero}`),
         (error, ficheiros) => {
           if (error) throw error;
-          const filePath = [];
+
           ficheiros.forEach((ficheiro, index) => {
             const newPath = `assets/casas/${nome}/${tipo}${numero}/${ficheiro}`;
-            filePath.push(newPath);
+
+            db.Foto.create(
+              {
+                path: newPath
+              },
+              { where: { DivisaoIdDivisao: divisao } }
+            ).then(() => {
+              console.log('update successful');
+            });
           });
 
-          let stringPath = JSON.stringify(filePath);
-          stringPath = stringPath.slice(1);
-          stringPath = stringPath.slice(0, -1);
-          stringPath = stringPath.replace(/"/g, '');
+          // let stringPath = JSON.stringify(filePath);
+          // stringPath = stringPath.slice(1);
+          // stringPath = stringPath.slice(0, -1);
+          // stringPath = stringPath.replace(/"/g, '');
 
-          db.Foto.update(
-            {
-              path: stringPath
-            },
-            { where: { DivisaoIdDivisao: divisao } }
-          ).then(() => {
-            console.log('update successful');
-          });
+          res.end();
         }
       );
     });
