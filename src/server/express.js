@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 import express from 'express';
 import path from 'path';
 
@@ -5,6 +6,7 @@ import path from 'path';
 const app = express();
 const webpack = require('webpack');
 const bodyParser = require('body-parser');
+const config = require('../../config/webpack.dev');
 
 const compiler = webpack(config);
 const webpackDevMiddleware = require('webpack-dev-middleware')(
@@ -16,7 +18,6 @@ const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const auth = require('./routes/auth');
 const api = require('./routes/api');
-const config = require('../../config/webpack.dev');
 
 // MIDDLEWARES
 app.use(
