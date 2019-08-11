@@ -47,7 +47,11 @@ $(document).ready(() => {
       .find(':selected')
       .val();
 
-    if (idDivisao !== 'create') {
+    const mode = $(this)
+      .find(':selected')
+      .data('mode');
+
+    if (mode !== 'create') {
       $.ajax({
         method: 'GET',
         url: `${window.location.origin}/api/casas?id=${idCasa}&div=${idDivisao}&edit`,

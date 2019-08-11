@@ -221,7 +221,7 @@ const openModal = (modal, element) => {
 
         // Appends the option to create a new div
         $('#divisao').append(`
-        <option value='create'>
+        <option value='' data-mode="create">
           &nbsp&nbsp->Add Division
         </option>
       `);
