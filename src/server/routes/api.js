@@ -313,49 +313,44 @@ router.post('/delete', (req, res) => {
 router.delete('/removePhoto', (req, res) => {
   db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } }).then(
     fotos => {
-      const { fotoIndex, idDivisao } = req.body;
-
+      const { fotoIndex, idDivisao, nome, divisao } = req.body;
       const pathArray = fotos[0].path.split(',');
       const foto = pathArray[fotoIndex];
 
-      const nomeCasa = foto.split('/')[2];
-      const divisao = foto.split('/')[3];
-      const filename = foto.split('/')[4];
-
-      fs.remove(path.join(`./src/${foto}`))
-        .then(() => {
-          fs.readdir(
-            path.join(`./src/assets/casas/${nomeCasa}/${divisao}`),
-            (error, ficheiros) => {
-              if (error) throw error;
-              const filePath = [];
-              ficheiros.forEach((ficheiro, index) => {
-                const newPath = `assets/casas/${nomeCasa}/${divisao}/${ficheiro}`;
-                filePath.push(newPath);
-              });
-
-              let stringPath = JSON.stringify(filePath);
-              stringPath = stringPath.slice(1);
-              stringPath = stringPath.slice(0, -1);
-              stringPath = stringPath.replace(/"/g, '');
-
-              db.Foto.update(
-                {
-                  path: stringPath
-                },
-                { where: { DivisaoIdDivisao: idDivisao } }
-              ).then(() => {
-                res.sendStatus(200);
-                res.end();
-                console.log('update successful');
-              });
-            }
-          );
-        })
-        .catch(err => {
-          console.error(err);
-          res.end();
-        });
+      if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
+        fs.remove(path.join(`src/${foto}`))
+          .then(() => {
+            fs.readdir(
+              path.join(`src/assets/casas/${nome}/${divisao}`),
+              (error, ficheiros) => {
+                if (error) throw error;
+                const filePath = [];
+                ficheiros.forEach((ficheiro, index) => {
+                  const newPath = `assets/casas/${nome}/${divisao}/${ficheiro}`;
+                  filePath.push(newPath);
+                });
+                let stringPath = JSON.stringify(filePath);
+                stringPath = stringPath.slice(1);
+                stringPath = stringPath.slice(0, -1);
+                stringPath = stringPath.replace(/"/g, '');
+                db.Foto.update(
+                  {
+                    path: stringPath
+                  },
+                  { where: { DivisaoIdDivisao: idDivisao } }
+                ).then(() => {
+                  res.sendStatus(200);
+                  res.end();
+                  console.log('update successful');
+                });
+              }
+            );
+          })
+          .catch(err => {
+            console.error(err);
+            res.end();
+          });
+      }
     }
   );
 });

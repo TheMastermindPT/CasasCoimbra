@@ -195,17 +195,27 @@ $(document).ready(() => {
   });
 
   $('.popup__fotos-form').on('click', '.foto__delete', function() {
+    const nome = $('.popup__title--divisoes').text();
     const fotoIndex = $(this).data('id');
     const idDivisao = $('#divisao')
       .find(':selected')
       .val();
+
+    const tipo = $('#tipo')
+      .val()
+      .toString()
+      .toLowerCase();
+    const numero = $('#div__numero').val();
+    const divisao = `${tipo}${numero}`;
 
     $.ajax({
       method: 'DELETE',
       url: `${window.location.origin}/api/casas/removePhoto`,
       data: {
         fotoIndex,
-        idDivisao
+        idDivisao,
+        nome,
+        divisao
       },
       dataType: 'json'
     }).then(res => {
