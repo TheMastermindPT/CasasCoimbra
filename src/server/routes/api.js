@@ -95,22 +95,18 @@ async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
       );
       return copyFiles(src, dest);
     }).then(function() {
-      fs.readdir(
-        path.join(`./src/assets/casas/${nome}/${tipo}${numero}`),
-        (error, ficheiros) => {
-          if (error) throw error;
-          ficheiros.forEach((ficheiro, index) => {
-            const newPath = `assets/casas/${nome}/${tipo}${numero}/${ficheiro}`;
-            db.Foto.create({
-              path: newPath,
-              DivisaoIdDivisao: divisao,
-              CasaIdCasa: idCasa
-            }).then(() => {
-              console.log('Foto path created');
-            });
-          });
-        }
-      );
+      files.forEach(file => {
+        const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
+        db.Foto.create({
+          path: newPath,
+          DivisaoIdDivisao: divisao,
+          CasaIdCasa: idCasa
+        })
+          .then(() => {
+            console.log('Foto path created');
+          })
+          .catch(failCreate => console.error(failCreate));
+      });
     });
   } catch (failed) {
     console.log(failed);
@@ -310,17 +306,20 @@ router.delete('/removePhoto', (req, res) => {
 
       db.Foto.destroy({ where: { idFoto: fotos[0].idFoto } }).then(() => {
         console.log('foto removed');
-        res.sendStatus(200);
-        res.end();
+        if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
+          fs.remove(path.join(`src/${foto}`))
+            .then(() => {
+              console.log('Foto file removed!');
+              res.send({ delete: true });
+              res.end();
+            })
+            .catch(err => {
+              console.error(err);
+              res.send({ delete: false });
+              res.end();
+            });
+        }
       });
-      // if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
-      //   fs.remove(path.join(`src/${foto}`))
-      //     .then(() => {})
-      //     .catch(err => {
-      //       console.error(err);
-      //       res.end();
-      //     });
-      // }
     })
     .catch(err => console.error(err));
 });
