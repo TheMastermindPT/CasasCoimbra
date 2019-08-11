@@ -201,6 +201,7 @@ $(document).ready(() => {
   $('.popup__fotos-form').on('click', '.foto__delete', function() {
     const nome = $('.popup__title--divisoes').text();
     const fotoIndex = $(this).data('id');
+    console.log(fotoIndex);
     const idDivisao = $('#divisao')
       .find(':selected')
       .val();

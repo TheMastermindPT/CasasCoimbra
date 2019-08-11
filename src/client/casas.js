@@ -373,7 +373,7 @@ let casas = [
       {
         numero: null,
         descricao: '',
-        tipo: 'Traseiras / Garagem',
+        tipo: 'Traseiras',
         fotos: ['assets/casas/casa4/traseiras.jpg']
       }
     ]
@@ -398,7 +398,7 @@ let casas = [
         numero: 1,
         descricao:
           'Estudio com zona de cozinha e casa de banho privativa, excelente vista sobre a cidade',
-        tipo: 'Estúdio',
+        tipo: 'Estudio',
         preco: null,
         disponivel: 0,
         quando: null,
@@ -509,7 +509,7 @@ let casas = [
         numero: null,
         descricao:
           'Sala partilhada entre todos os ocupantes da casa, tem lcd, zona de refeições e de estar, com vista sobre o jardim.',
-        tipo: 'Sala de Estar/Jantar',
+        tipo: 'Sala',
         preco: null,
         fotos: [
           'assets/casas/casa6/sala1-1.jpg',

@@ -126,7 +126,7 @@ const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
   console.log(casa);
 
   const photosForm = $('.popup__fotos-form');
-  const arrayPath = casa ? casa.divisao[0].fotos[0].path.split(',') : [];
+  const arrayPath = casa ? casa.divisao[0].fotos : [];
 
   if (arrayPath.length >= 6) {
     photosForm.css('justify-content', 'flex-start');
@@ -137,12 +137,12 @@ const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
   casa ? photosForm.empty() : null;
 
   if (arrayPath) {
-    arrayPath.forEach((value, index) => {
+    arrayPath.forEach((foto, index) => {
       photosForm.append(`
       <div class="fotos__foto fotos__foto--show">
         <label for="fotos__divisao" class="foto__form-label">
-          <img src="/${value}" alt="foto-divisao">
-          <button type="button" class="foto__delete" data-id="${index}">
+          <img src="/${foto.path}" alt="foto-divisao">
+          <button type="button" class="foto__delete" data-id="${foto.idFoto}">
             <svg>
               <use xlink:href="#delete"></use>
             </svg>
@@ -159,7 +159,7 @@ const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
       <div class="fotos__foto fotos__foto--show">
         <label for="fotos__divisao" class="foto__form-label">
           <img src="/assets/temp/${value.originalname}">
-          <button type="button" class="foto__delete" data-id="${index}">
+          <button type="button" class="foto__delete" data-id="">
             <svg>
               <use xlink:href="#delete"></use>
             </svg>
@@ -199,6 +199,10 @@ const openModal = (modal, element) => {
       const idCasa = $(element)
         .data('id')
         .toString();
+
+      // const idDivisao = $('#divisao')
+      //   .find(':selected')
+      //   .val();
 
       $.ajax({
         method: 'GET',

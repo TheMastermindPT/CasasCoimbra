@@ -213,7 +213,8 @@ router.post('/upload', (req, res) => {
           mapa: req.body.mapa
         }
       }).then(([casa, created]) => {
-        const { nome } = req.body;
+        let { nome } = req.body;
+        nome = nome.toLowerCase().trim();
 
         // Check if file exists
         if (req.file != null) {
@@ -311,8 +312,8 @@ router.post('/delete', (req, res) => {
 });
 
 router.delete('/removePhoto', (req, res) => {
-  db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } }).then(
-    fotos => {
+  db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } })
+    .then(fotos => {
       const { fotoIndex, idDivisao, nome, divisao } = req.body;
       const pathArray = fotos[0].path.split(',');
       const foto = pathArray[fotoIndex];
@@ -351,8 +352,8 @@ router.delete('/removePhoto', (req, res) => {
             res.end();
           });
       }
-    }
-  );
+    })
+    .catch(err => console.error(err));
 });
 
 // GET Checks for queries and retreives specified data
@@ -374,7 +375,9 @@ router.get('/', (req, res) => {
       include: [
         {
           model: db.Divisao,
-          include: { model: db.Foto }
+          include: {
+            model: db.Foto
+          }
         }
       ],
       where: {
@@ -492,7 +495,7 @@ router.get('/:id/divisao=:idDivisao', (req, res) => {
 });
 
 // POPULATE DATABASE
-router.post('/create', () => {
+router.post('/create', (req, res) => {
   casas.forEach(casa => {
     db.Casa.create({
       nome: casa.casa,
@@ -520,15 +523,19 @@ router.post('/create', () => {
             quando: divisao.quando
           })
             .then(divisaoObj => {
-              db.Foto.create({
-                CasaIdCasa: casaObj.idCasa,
-                DivisaoIdDivisao: divisaoObj.idDivisao,
-                path: divisao.fotos.toString()
-              })
-                .then(() => {
-                  console.log('success');
+              divisao.fotos.forEach((foto, index) => {
+                db.Foto.create({
+                  CasaIdCasa: casaObj.idCasa,
+                  DivisaoIdDivisao: divisaoObj.idDivisao,
+                  path: foto.toString()
                 })
-                .catch(err => console.log(err));
+                  .then(() => {
+                    console.log('success');
+                  })
+                  .catch(err => console.log(err));
+              });
+              res.send(divisaoObj);
+              res.end();
             })
             .catch(err => {
               console.log(err);
