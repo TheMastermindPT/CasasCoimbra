@@ -84,7 +84,7 @@ async function copyFiles(src, dest) {
 }
 
 // Removes content from folder, uploads new photos and updates the DB
-async function uploadFiles(files, divisao, tipo, nome, numero) {
+async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
   try {
     // Using Promise.map:
     Promise.map(files, function(fileName) {
@@ -103,13 +103,17 @@ async function uploadFiles(files, divisao, tipo, nome, numero) {
           ficheiros.forEach((ficheiro, index) => {
             const newPath = `assets/casas/${nome}/${tipo}${numero}/${ficheiro}`;
 
-            db.Foto.create(
-              {
-                path: newPath
-              },
-              { where: { DivisaoIdDivisao: divisao } }
-            ).then(() => {
-              console.log('update successful');
+            db.Foto.findOrCreate({
+              where: { numero: index + 1 },
+              defaults: {
+                path: newPath,
+                DivisaoIdDivisao: divisao,
+                CasaIdCasa: idCasa
+              }
+            }).then(([foto, created]) => {
+              if (!created) {
+                console.log(foto);
+              }
             });
           });
 
@@ -117,8 +121,6 @@ async function uploadFiles(files, divisao, tipo, nome, numero) {
           // stringPath = stringPath.slice(1);
           // stringPath = stringPath.slice(0, -1);
           // stringPath = stringPath.replace(/"/g, '');
-
-          res.end();
         }
       );
     });
@@ -157,9 +159,9 @@ router.post('/uploadMulti', (req, res) => {
           res.sendStatus(400);
           res.end();
         } else {
-          const { divisao, tipo, nome, numero } = req.body;
+          const { divisao, tipo, nome, numero, idCasa } = req.body;
           const { files } = req;
-          uploadFiles(files, divisao, tipo.toLowerCase(), nome, numero);
+          uploadFiles(files, divisao, tipo.toLowerCase(), nome, numero, idCasa);
           res.send(req.files);
         }
       });
@@ -528,7 +530,8 @@ router.post('/create', (req, res) => {
                 db.Foto.create({
                   CasaIdCasa: casaObj.idCasa,
                   DivisaoIdDivisao: divisaoObj.idDivisao,
-                  path: foto.toString()
+                  path: foto.toString(),
+                  numero: index + 1
                 })
                   .then(() => {
                     console.log('success');

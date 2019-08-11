@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         field: 'path'
       },
+      numero: {
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+        field: 'numero'
+      },
       createdAt: {
         type: DataTypes.DATEONLY,
         allowNull: false,

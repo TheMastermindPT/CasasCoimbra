@@ -168,6 +168,7 @@ $(document).ready(() => {
 
   $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
     const nome = $('.popup__title--divisoes').text();
+    const idCasa = $('.popup__form').data('id');
     const data = new FormData($('.popup__fotos-form')[0]);
     const data2 = new FormData($('.popup__form')[0]);
     const tipo = $('#tipo')
@@ -183,6 +184,8 @@ $(document).ready(() => {
       data.append(pairs[0], pairs[1]);
     }
     data.append('nome', nome);
+    data.append('idCasa', idCasa);
+
     $.ajax({
       method: 'POST',
       url: `${window.location.origin}/api/casas/uploadMulti`,
