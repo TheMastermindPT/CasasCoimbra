@@ -303,46 +303,45 @@ router.post('/delete', (req, res) => {
 });
 
 router.delete('/removePhoto', (req, res) => {
-  db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } })
+  db.Foto.findAll({ where: { idFoto: req.body.idFoto } })
     .then(fotos => {
-      const { fotoIndex, idDivisao, nome, divisao } = req.body;
-      const pathArray = fotos[0].path.split(',');
-      const foto = pathArray[fotoIndex];
+      const { idFoto, idDivisao, nome, divisao } = req.body;
+      const foto = fotos[0].path;
 
-      if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
-        fs.remove(path.join(`src/${foto}`))
-          .then(() => {
-            fs.readdir(
-              path.join(`src/assets/casas/${nome}/${divisao}`),
-              (error, ficheiros) => {
-                if (error) throw error;
-                const filePath = [];
-                ficheiros.forEach((ficheiro, index) => {
-                  const newPath = `assets/casas/${nome}/${divisao}/${ficheiro}`;
-                  filePath.push(newPath);
-                });
-                let stringPath = JSON.stringify(filePath);
-                stringPath = stringPath.slice(1);
-                stringPath = stringPath.slice(0, -1);
-                stringPath = stringPath.replace(/"/g, '');
-                db.Foto.update(
-                  {
-                    path: stringPath
-                  },
-                  { where: { DivisaoIdDivisao: idDivisao } }
-                ).then(() => {
-                  res.sendStatus(200);
-                  res.end();
-                  console.log('update successful');
-                });
-              }
-            );
-          })
-          .catch(err => {
-            console.error(err);
-            res.end();
-          });
-      }
+      // if (foto.startsWith(`assets/casas/${nome}/${divisao}`)) {
+      //   fs.remove(path.join(`src/${foto}`))
+      //     .then(() => {
+      //       fs.readdir(
+      //         path.join(`src/assets/casas/${nome}/${divisao}`),
+      //         (error, ficheiros) => {
+      //           if (error) throw error;
+      //           const filePath = [];
+      //           ficheiros.forEach((ficheiro, index) => {
+      //             const newPath = `assets/casas/${nome}/${divisao}/${ficheiro}`;
+      //             filePath.push(newPath);
+      //           });
+      //           let stringPath = JSON.stringify(filePath);
+      //           stringPath = stringPath.slice(1);
+      //           stringPath = stringPath.slice(0, -1);
+      //           stringPath = stringPath.replace(/"/g, '');
+      //           db.Foto.update(
+      //             {
+      //               path: stringPath
+      //             },
+      //             { where: { DivisaoIdDivisao: idDivisao } }
+      //           ).then(() => {
+      //             res.sendStatus(200);
+      //             res.end();
+      //             console.log('update successful');
+      //           });
+      //         }
+      //       );
+      //     })
+      //     .catch(err => {
+      //       console.error(err);
+      //       res.end();
+      //     });
+      // }
     })
     .catch(err => console.error(err));
 });

@@ -203,8 +203,7 @@ $(document).ready(() => {
 
   $('.popup__fotos-form').on('click', '.foto__delete', function() {
     const nome = $('.popup__title--divisoes').text();
-    const fotoIndex = $(this).data('id');
-    console.log(fotoIndex);
+    const idFoto = $(this).data('id');
     const idDivisao = $('#divisao')
       .find(':selected')
       .val();
@@ -220,7 +219,7 @@ $(document).ready(() => {
       method: 'DELETE',
       url: `${window.location.origin}/api/casas/removePhoto`,
       data: {
-        fotoIndex,
+        idFoto,
         idDivisao,
         nome,
         divisao
