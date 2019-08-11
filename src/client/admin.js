@@ -194,20 +194,24 @@ $(document).ready(() => {
     });
   });
 
-  // $('.popup__fotos-form').on('click', '.foto__delete', function() {
-  //   const fotoIndex = $(this).data('id');
-  //   const idDivisao = $('#divisao')
-  //     .find(':selected')
-  //     .val();
-  //   console.log(idDivisao);
+  $('.popup__fotos-form').on('click', '.foto__delete', function() {
+    const fotoIndex = $(this).data('id');
+    const idDivisao = $('#divisao')
+      .find(':selected')
+      .val();
 
-  //   // $.ajax({
-  //   //   method: 'DELETE',
-  //   //   url: `${window.location.origin}/api/casas/removePhoto`,
-  //   //   data: {},
-  //   //   dataType: 'json'
-  //   // }).then(res => console.log(res));
-  // });
+    $.ajax({
+      method: 'DELETE',
+      url: `${window.location.origin}/api/casas/removePhoto`,
+      data: {
+        fotoIndex,
+        idDivisao
+      },
+      dataType: 'json'
+    }).then(res => {
+      console.log(res);
+    });
+  });
 
   // Check if admin is logged in
   const auth = cookies.get('auth');
