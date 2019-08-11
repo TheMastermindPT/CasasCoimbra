@@ -313,11 +313,11 @@ router.post('/delete', (req, res) => {
 router.delete('/removePhoto', (req, res) => {
   db.Foto.findAll({ where: { DivisaoIdDivisao: req.body.idDivisao } }).then(
     fotos => {
+      const { fotoIndex, idDivisao } = req.body;
+
       const fotosPath = fotos[0];
       const pathArray = fotosPath.path.split(',');
-      const { fotoIndex } = req.body;
       const foto = pathArray[fotoIndex];
-      const { idDivisao } = req.body;
 
       const nomeCasa = foto.split('/')[2];
       const divisao = foto.split('/')[3];

@@ -162,19 +162,16 @@ $(document).ready(() => {
     });
   });
 
-  $('#fotos__divisao').on('change', function() {
+  $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
     const idCasa = $('.popup__form').data('id');
     const nome = $('.popup__title--divisoes').text();
     const data = new FormData($('.popup__fotos-form')[0]);
     const data2 = new FormData($('.popup__form')[0]);
-
     // eslint-disable-next-line no-restricted-syntax
     for (const pairs of data2.entries()) {
       data.append(pairs[0], pairs[1]);
     }
-
     data.append('nome', nome);
-
     $.ajax({
       method: 'POST',
       url: `${window.location.origin}/api/casas/uploadMulti`,
@@ -185,10 +182,20 @@ $(document).ready(() => {
     }).then(res => console.log(res));
   });
 
-  $('.popup__fotos-form').on('click', '.foto__delete', function() {
-    const fotoNumber = $(this).data('id');
-    console.log(fotoNumber);
-  });
+  // $('.popup__fotos-form').on('click', '.foto__delete', function() {
+  //   const fotoIndex = $(this).data('id');
+  //   const idDivisao = $('#divisao')
+  //     .find(':selected')
+  //     .val();
+  //   console.log(idDivisao);
+
+  //   // $.ajax({
+  //   //   method: 'DELETE',
+  //   //   url: `${window.location.origin}/api/casas/removePhoto`,
+  //   //   data: {},
+  //   //   dataType: 'json'
+  //   // }).then(res => console.log(res));
+  // });
 
   // Check if admin is logged in
   const auth = cookies.get('auth');
