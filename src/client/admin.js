@@ -3,6 +3,7 @@ require('./popup.js');
 require('../views/admin.hbs');
 const cookies = require('js-cookie');
 const template = require('./template');
+const { appendPhotos } = require('./popup');
 
 // GLOBALS
 let isAppended = false;
@@ -159,16 +160,17 @@ $(document).ready(() => {
   });
 
   $('#fotos__divisao').on('change', function() {
-    const idDivisao = $('#divisao option:selected').val();
-    const numeroDivisao = $('#div__numero').val();
     const idCasa = $('.popup__form').data('id');
-    const tipo = $('#tipo').val();
-    const data = new FormData($(this).parent('form')[0]);
+    const nome = $('.popup__title--divisoes').text();
+    const data = new FormData($('.popup__fotos-form')[0]);
+    const data2 = new FormData($('.popup__form')[0]);
 
-    data.append('tipo', tipo);
-    data.append('idDivisao', idDivisao);
-    data.append('idCasa', idCasa);
-    data.append('numeroDivisao', numeroDivisao);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const pairs of data2.entries()) {
+      data.append(pairs[0], pairs[1]);
+    }
+
+    data.append('nome', nome);
 
     $.ajax({
       method: 'POST',

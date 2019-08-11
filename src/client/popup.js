@@ -187,6 +187,8 @@ const closeModal = () => {
     });
 };
 
+const appendPhotos = (files, a, b, c) => {};
+
 const getHomeWithView = (query, modal, counterDiv, counterPhotos, loaded) => {
   if (loaded) {
     // Check if Url contains query
@@ -381,4 +383,4 @@ $(document).ready(() => {
   });
 });
 
-module.exports = { exitPopup };
+module.exports = { exitPopup, appendPhotos };
