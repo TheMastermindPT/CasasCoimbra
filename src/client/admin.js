@@ -163,10 +163,17 @@ $(document).ready(() => {
   });
 
   $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
-    const idCasa = $('.popup__form').data('id');
     const nome = $('.popup__title--divisoes').text();
     const data = new FormData($('.popup__fotos-form')[0]);
     const data2 = new FormData($('.popup__form')[0]);
+    const tipo = $('#tipo')
+      .val()
+      .toString()
+      .toLowerCase();
+    const numero = $('#div__numero').val();
+    const divisao = `${tipo}${numero}`;
+    const nrFiles = $(this).get(0).files.length;
+
     // eslint-disable-next-line no-restricted-syntax
     for (const pairs of data2.entries()) {
       data.append(pairs[0], pairs[1]);
@@ -179,7 +186,12 @@ $(document).ready(() => {
       cache: false,
       contentType: false,
       processData: false
-    }).then(res => console.log(res));
+    }).then(res => {
+      // WAIT TO APEND
+      if (res.length === nrFiles) {
+        appendPhotos(null, res, nome, divisao);
+      }
+    });
   });
 
   // $('.popup__fotos-form').on('click', '.foto__delete', function() {

@@ -121,11 +121,12 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
   });
 };
 
-const appendPhotos = (files = null) => {
+const appendPhotos = (casa = null, uploadFiles = null, nome, divisao) => {
   // VARIABLES
-  console.log(files);
+  console.log(casa);
+
   const photosForm = $('.popup__fotos-form');
-  const arrayPath = files.divisao[0].fotos[0].path.split(',');
+  const arrayPath = casa ? casa.divisao[0].fotos[0].path.split(',') : [];
 
   if (arrayPath.length >= 6) {
     photosForm.css('justify-content', 'flex-start');
@@ -133,22 +134,43 @@ const appendPhotos = (files = null) => {
     photosForm.css('justify-content', 'center');
   }
 
-  photosForm.empty();
-  arrayPath.forEach((value, index) => {
-    photosForm.append(`
-    <div class="fotos__foto fotos__foto--show">
-      <label for="fotos__divisao" class="foto__form-label">
-        <img src="/${value}" alt="">
-        <button type="button" class="foto__delete" data-id="${index}">
-          <svg>
-            <use xlink:href="#delete"></use>
-          </svg>
-        </button>
-      </label>
-    </div>
-  `);
-  });
+  casa ? photosForm.empty() : null;
 
+  if (arrayPath) {
+    arrayPath.forEach((value, index) => {
+      photosForm.append(`
+      <div class="fotos__foto fotos__foto--show">
+        <label for="fotos__divisao" class="foto__form-label">
+          <img src="/${value}" alt="foto-divisao">
+          <button type="button" class="foto__delete" data-id="${index}">
+            <svg>
+              <use xlink:href="#delete"></use>
+            </svg>
+          </button>
+        </label>
+      </div>
+    `);
+    });
+  }
+
+  if (uploadFiles) {
+    uploadFiles.forEach((value, index) => {
+      photosForm.append(`
+      <div class="fotos__foto fotos__foto--show">
+        <label for="fotos__divisao" class="foto__form-label">
+          <img src="/assets/temp/${value.originalname}">
+          <button type="button" class="foto__delete" data-id="${index}">
+            <svg>
+              <use xlink:href="#delete"></use>
+            </svg>
+          </button>
+        </label>
+      </div>
+    `);
+    });
+  }
+
+  $('.fotos__foto--add').remove();
   photosForm.append(`
    <div class="fotos__foto fotos__foto--add">
      <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
@@ -159,6 +181,8 @@ const appendPhotos = (files = null) => {
      <input type="file" name="fotos" id="fotos__divisao" multiple required>
    </div>
   `);
+
+  return true;
 };
 
 const openModal = (modal, element) => {
