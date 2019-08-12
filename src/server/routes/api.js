@@ -84,14 +84,13 @@ async function copyFiles(src, dest) {
 }
 
 // Removes content from folder, uploads new photos and updates the DB
-async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
+async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
     files.forEach(file => {
       const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
-
       // Verify if same filename exists in the directory
       fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
-        console.log(exists);
+        // console.log(exists);
         if (!exists) {
           // Using Promise.map:
           Promise.map(files, function(fileName) {
@@ -103,7 +102,6 @@ async function uploadFiles(files, divisao, tipo, nome, numero, idCasa) {
             return copyFiles(src, dest);
           }).then(function() {
             console.log('files copied');
-
             // If there are no duplicate files, add entry to DB
             db.Foto.create({
               path: newPath,
@@ -155,8 +153,9 @@ router.post('/uploadMulti', (req, res) => {
         } else {
           const { divisao, tipo, nome, numero, idCasa } = req.body;
           const { files } = req;
-          uploadFiles(files, divisao, tipo.toLowerCase(), nome, numero, idCasa);
-          res.send(req.files);
+
+          // (REMINDER) NEED TO FIND TO RET
+          uploadFiles(res, files, divisao, tipo.toLowerCase(), nome, numero, idCasa);
         }
       });
     }
