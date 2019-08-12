@@ -86,36 +86,43 @@ async function copyFiles(src, dest) {
 // Removes content from folder, uploads new photos and updates the DB
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
-    files.forEach(file => {
+    await Promise.map(files, file => {
       const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
       // Verify if same filename exists in the directory
-      fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
+      return fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
         // console.log(exists);
         if (!exists) {
           // Using Promise.map:
-          Promise.map(files, function(fileName) {
+          return Promise.map(files, function(fileName) {
             // Promise.map awaits for returned promises as well.
             const src = path.join(`./src/assets/temp/${fileName.originalname}`);
             const dest = path.join(
               `./src/assets/casas/${nome}/${tipo}${numero}/${fileName.originalname}`
             );
             return copyFiles(src, dest);
-          }).then(function() {
-            console.log('files copied');
-            // If there are no duplicate files, add entry to DB
-            db.Foto.create({
-              path: newPath,
-              DivisaoIdDivisao: divisao,
-              CasaIdCasa: idCasa
-            })
-              .then(() => {
-                console.log('Foto path created');
+          })
+            .then(() => {
+              // If there are no duplicate files, add entry to DB
+              return db.Foto.create({
+                path: newPath,
+                DivisaoIdDivisao: divisao,
+                CasaIdCasa: idCasa
               })
-              .catch(failCreate => console.error(failCreate));
-          });
+                .then(created => {
+                  console.log('Foto path created');
+                  return exists;
+                })
+                .catch(failCreate => {
+                  console.error(failCreate);
+                });
+            })
+            .catch(allFailed => console.log(allFailed));
         }
+        return exists;
       });
     });
+    console.log('All tasks were succesful!');
+    res.send(files);
   } catch (err) {
     console.error(err);
   }
@@ -155,7 +162,15 @@ router.post('/uploadMulti', (req, res) => {
           const { files } = req;
 
           // (REMINDER) NEED TO FIND TO RET
-          uploadFiles(res, files, divisao, tipo.toLowerCase(), nome, numero, idCasa);
+          uploadFiles(
+            res,
+            files,
+            divisao,
+            tipo.toLowerCase(),
+            nome,
+            numero,
+            idCasa
+          );
         }
       });
     }
