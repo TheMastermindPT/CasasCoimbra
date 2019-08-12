@@ -119,10 +119,10 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
             .catch(allFailed => console.log(allFailed));
         }
         // Return JSON object with the path
-        let json = [{ path: newPath }];
-        json = JSON.stringify(json);
-        [json] = JSON.parse(json);
-        return json;
+        // let json = [{ path: newPath }];
+        // json = JSON.stringify(json);
+        // [json] = JSON.parse(json);
+        return [];
       });
     });
     console.log('All tasks were succesful!');

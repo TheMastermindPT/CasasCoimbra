@@ -124,7 +124,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 const appendPhotos = (casa = null, uploadFiles = null) => {
   if (casa || uploadFiles) {
     const photosForm = $('.popup__fotos-form');
-    const fotos = casa ? casa.divisao[0].fotos : uploadFiles;
+    const fotos = casa && !uploadFiles ? casa.divisao[0].fotos : uploadFiles;
 
     // Changes the layout of the thumbnails according to the number of fotos
     if (fotos.length >= 6) {
@@ -138,18 +138,20 @@ const appendPhotos = (casa = null, uploadFiles = null) => {
     // Appends the foto thumbnail to the division editor (NOTE) DONT APPEN IF SAME FOTO THERE
     if (fotos) {
       fotos.forEach((foto, index) => {
-        photosForm.append(`
-          <div class="fotos__foto fotos__foto--show">
-            <label class="foto__form-label">
-              <img src="/${foto.path}" alt="foto-divisao">
-              <button type="button" class="foto__delete" data-id="${foto.idFoto}">
-                <svg>
-                  <use xlink:href="#delete"></use>
-                </svg>
-              </button>
-            </label>
-          </div>
-        `);
+        if (!Array.isArray(foto)) {
+          photosForm.append(`
+            <div class="fotos__foto fotos__foto--show">
+              <label class="foto__form-label">
+                <img src="/${foto.path}" alt="foto-divisao">
+                <button type="button" class="foto__delete" data-id="${foto.idFoto}">
+                  <svg>
+                    <use xlink:href="#delete"></use>
+                  </svg>
+                </button>
+              </label>
+            </div>
+          `);
+        }
       });
     }
 
