@@ -122,69 +122,52 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 };
 
 const appendPhotos = (casa = null, uploadFiles = null) => {
-  //
+  if (casa || uploadFiles) {
+    const photosForm = $('.popup__fotos-form');
+    const fotos = casa ? casa.divisao[0].fotos : uploadFiles;
 
-  const photosForm = $('.popup__fotos-form');
-  const arrayPath = casa ? casa.divisao[0].fotos : [];
+    // Changes the layout of the thumbnails according to the number of fotos
+    if (fotos.length >= 6) {
+      photosForm.css('justify-content', 'flex-start');
+    } else {
+      photosForm.css('justify-content', 'center');
+    }
 
-  if (arrayPath.length >= 6) {
-    photosForm.css('justify-content', 'flex-start');
-  } else {
-    photosForm.css('justify-content', 'center');
-  }
+    casa ? photosForm.empty() : null;
 
-  casa ? photosForm.empty() : null;
-
-  // DB NEEDS THE FILEPATH, NOT THE TEMP (REMINDER)
-  if (arrayPath) {
-    arrayPath.forEach((foto, index) => {
-      photosForm.append(`
-        <div class="fotos__foto fotos__foto--show">
-          <label for="foto-${foto.idFoto}" class="foto__form-label">
-            <img src="/${foto.path}" alt="foto-divisao">
-            <button type="button" class="foto__delete" data-id="${foto.idFoto}">
-              <svg>
-                <use xlink:href="#delete"></use>
-              </svg>
-            </button>
-            <input type="file" name="foto" id="foto-${foto.idFoto}">
-          </label>
-        </div>
-      `);
-    });
-  }
-
-  if (uploadFiles) {
-    uploadFiles.forEach((foto, index) => {
-      photosForm.append(`
+    // Appends the foto thumbnail to the division editor (NOTE) DONT APPEN IF SAME FOTO THERE
+    if (fotos) {
+      fotos.forEach((foto, index) => {
+        photosForm.append(`
           <div class="fotos__foto fotos__foto--show">
-            <label for="foto-${foto.idFoto}" class="foto__form-label">
+            <label class="foto__form-label">
               <img src="/${foto.path}" alt="foto-divisao">
               <button type="button" class="foto__delete" data-id="${foto.idFoto}">
                 <svg>
                   <use xlink:href="#delete"></use>
                 </svg>
               </button>
-              <input type="file" name="foto" id="foto-${foto.idFoto}">
             </label>
           </div>
-      `);
-    });
+        `);
+      });
+    }
+
+    // Removes and appends the option to add thumbnails again
+    $('.fotos__foto--add').remove();
+    photosForm.append(`
+     <div class="fotos__foto fotos__foto--add">
+       <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
+         <svg>
+           <use xlink:href="#icon-upload"></use>
+         </svg>
+       </label>
+       <input type="file" name="fotos" id="fotos__divisao" multiple required>
+     </div>
+    `);
+
+    return true;
   }
-
-  $('.fotos__foto--add').remove();
-  photosForm.append(`
-   <div class="fotos__foto fotos__foto--add">
-     <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
-       <svg>
-         <use xlink:href="#icon-upload"></use>
-       </svg>
-     </label>
-     <input type="file" name="fotos" id="fotos__divisao" multiple required>
-   </div>
-  `);
-
-  return true;
 };
 
 const openModal = (modal, element) => {
