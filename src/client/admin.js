@@ -194,6 +194,7 @@ $(document).ready(() => {
       contentType: false,
       processData: false
     }).then(res => {
+      console.log(res);
       appendPhotos(null, res, nome, divisao);
     });
   });
@@ -227,10 +228,9 @@ $(document).ready(() => {
       },
       dataType: 'json'
     }).then(res => {
-      console.log(res);
-      // $(this)
-      //   .closest('.fotos__foto')
-      //   .remove();
+      $(this)
+        .closest('.fotos__foto')
+        .remove();
     });
   });
 

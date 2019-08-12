@@ -86,7 +86,7 @@ async function copyFiles(src, dest) {
 // Removes content from folder, uploads new photos and updates the DB
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
-    await Promise.map(files, file => {
+    const response = await Promise.map(files, file => {
       const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
       // Verify if same filename exists in the directory
       return fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
@@ -108,9 +108,9 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
                 DivisaoIdDivisao: divisao,
                 CasaIdCasa: idCasa
               })
-                .then(created => {
+                .then(createdFoto => {
                   console.log('Foto path created');
-                  return exists;
+                  return createdFoto;
                 })
                 .catch(failCreate => {
                   console.error(failCreate);
@@ -122,7 +122,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
       });
     });
     console.log('All tasks were succesful!');
-    res.send(files);
+    res.send(response);
   } catch (err) {
     console.error(err);
   }
@@ -329,16 +329,14 @@ router.delete('/removePhoto', (req, res) => {
   db.Foto.findOne({ where: { idFoto } }).then(foto => {
     fs.remove(`./src/${filepath}`)
       .then(() => {
-        db.Foto.destroy({ where: { idFoto } }).then(() => {
+        foto.destroy({ where: { idFoto } }).then(() => {
           console.log('Foto file removed!');
-          res.send({ delete: true });
-          res.end();
+          res.send({});
         });
       })
       .catch(err => {
         console.error(err);
-        res.send({ delete: false });
-        res.end();
+        res.send();
       });
   });
 });

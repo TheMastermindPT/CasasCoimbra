@@ -155,19 +155,20 @@ const appendPhotos = (casa = null, uploadFiles = null) => {
   }
 
   if (uploadFiles) {
-    uploadFiles.forEach((value, index) => {
+    uploadFiles.forEach((foto, index) => {
       photosForm.append(`
-      <div class="fotos__foto fotos__foto--show">
-        <label for="fotos__divisao" class="foto__form-label">
-          <img src="/assets/temp/${value.originalname}">
-          <button type="button" class="foto__delete" data-id="">
-            <svg>
-              <use xlink:href="#delete"></use>
-            </svg>
-          </button>
-        </label>
-      </div>
-    `);
+          <div class="fotos__foto fotos__foto--show">
+            <label for="foto-${foto.idFoto}" class="foto__form-label">
+              <img src="/${foto.path}" alt="foto-divisao">
+              <button type="button" class="foto__delete" data-id="${foto.idFoto}">
+                <svg>
+                  <use xlink:href="#delete"></use>
+                </svg>
+              </button>
+              <input type="file" name="foto" id="foto-${foto.idFoto}">
+            </label>
+          </div>
+      `);
     });
   }
 
