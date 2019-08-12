@@ -194,10 +194,7 @@ $(document).ready(() => {
       contentType: false,
       processData: false
     }).then(res => {
-      // WAIT TO APEND
-      if (res.length === nrFiles) {
-        appendPhotos(null, res, nome, divisao);
-      }
+      appendPhotos(null, res, nome, divisao);
     });
   });
 
@@ -230,9 +227,10 @@ $(document).ready(() => {
       },
       dataType: 'json'
     }).then(res => {
-      $(this)
-        .closest('.fotos__foto')
-        .remove();
+      console.log(res);
+      // $(this)
+      //   .closest('.fotos__foto')
+      //   .remove();
     });
   });
 
