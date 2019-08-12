@@ -329,9 +329,11 @@ router.delete('/removePhoto', (req, res) => {
   db.Foto.findOne({ where: { idFoto } }).then(foto => {
     fs.remove(`./src/${filepath}`)
       .then(() => {
-        console.log('Foto file removed!');
-        res.send({ delete: true });
-        res.end();
+        db.Foto.destroy({ where: { idFoto } }).then(() => {
+          console.log('Foto file removed!');
+          res.send({ delete: true });
+          res.end();
+        });
       })
       .catch(err => {
         console.error(err);
@@ -339,11 +341,6 @@ router.delete('/removePhoto', (req, res) => {
         res.end();
       });
   });
-
-  // db.Foto.destroy({ where: { idFoto } }).then(() => {
-  //   console.log(`foto removed ${filepath}`);
-
-  // });
 });
 
 // GET Checks for queries and retreives specified data
