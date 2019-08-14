@@ -528,7 +528,9 @@ router.delete('/deleteDivision', (req, res, next) => {
           idDivisao: divisao.idDivisao
         }
       }).then(() => {
-        fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`);
+        fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
+          .then()
+          .catch(err => console.log(err));
         res.sendStatus(200);
         res.end();
       });
