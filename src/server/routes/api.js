@@ -507,7 +507,7 @@ router.post('/editDivisions', (req, res, next) => {
 });
 
 router.delete('/deleteDivision', (req, res, next) => {
-  const { idCasa, idDivisao } = req.body;
+  const { idDivisao, nome, tipo, numero } = req.body;
 
   db.Divisao.findOne({
     where: { idDivisao },
@@ -518,20 +518,21 @@ router.delete('/deleteDivision', (req, res, next) => {
       }
     ]
   }).then(divisao => {
-    // db.Foto.destroy({
-    //   where: {
-    //     CasaIdCasa: divisao.CasaIdCasa
-    //   }
-    // }).then(() => {
-    //   db.Divisao.destroy({
-    //     where: {
-    //       CasaIdCasa: divisao.CasaIdCasa
-    //     }
-    //   }).then(() => {
-    //     res.sendStatus(200);
-    //     res.end();
-    //   });
-    // });
+    db.Foto.destroy({
+      where: {
+        DivisaoIdDivisao: divisao.idDivisao
+      }
+    }).then(() => {
+      db.Divisao.destroy({
+        where: {
+          idDivisao: divisao.idDivisao
+        }
+      }).then(() => {
+        fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`);
+        res.sendStatus(200);
+        res.end();
+      });
+    });
   });
 });
 

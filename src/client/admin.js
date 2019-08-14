@@ -29,14 +29,14 @@ $(document).ready(() => {
   $('.home__wrap').on('submit', '.home__form', function(e) {
     const data = new FormData($(this)[0]);
     e.preventDefault();
-    // $.ajax({
-    //   method: 'POST',
-    //   url: `${window.location.origin}/api/casas/upload`,
-    //   data,
-    //   cache: false,
-    //   contentType: false,
-    //   processData: false
-    // }).then(() => window.location.reload());
+    $.ajax({
+      method: 'POST',
+      url: `${window.location.origin}/api/casas/upload`,
+      data,
+      cache: false,
+      contentType: false,
+      processData: false
+    }).then(() => window.location.reload());
   });
 
   $('#editSubmit').on('click', function(e) {
@@ -79,7 +79,7 @@ $(document).ready(() => {
     const mode = $('#divisao')
       .find(':selected')
       .data('mode');
-
+    const nome = $('.popup__title').text();
     const idDivisao =
       mode !== 'create'
         ? $('#divisao')
@@ -88,7 +88,14 @@ $(document).ready(() => {
         : null;
 
     const data = {
-      idDivisao
+      nome,
+      idDivisao,
+      tipo: $('#tipo').val(),
+      numero: $('#div__numero').val(),
+      descricao: $('#descricao').val(),
+      preco: $('#preco').val(),
+      disponivel: $('#disponivel').prop('checked'),
+      quando: $('#quando').val()
     };
 
     if (mode !== 'create') {
