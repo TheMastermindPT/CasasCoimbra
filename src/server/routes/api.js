@@ -518,23 +518,25 @@ router.delete('/deleteDivision', (req, res, next) => {
       }
     ]
   }).then(divisao => {
-    db.Foto.destroy({
-      where: {
-        DivisaoIdDivisao: divisao.idDivisao
-      }
-    }).then(() => {
-      db.Divisao.destroy({
+    if (divisao !== null) {
+      db.Foto.destroy({
         where: {
-          idDivisao: divisao.idDivisao
+          DivisaoIdDivisao: divisao.idDivisao
         }
       }).then(() => {
-        fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
-          .then()
-          .catch(err => console.log(err));
-        res.sendStatus(200);
-        res.end();
+        db.Divisao.destroy({
+          where: {
+            idDivisao: divisao.idDivisao
+          }
+        }).then(() => {
+          fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
+            .then()
+            .catch(err => console.log(err));
+          res.send({ delete: true });
+          res.end();
+        });
       });
-    });
+    }
   });
 });
 

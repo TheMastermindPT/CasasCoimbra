@@ -37,6 +37,7 @@ const updateInfo = (casa, counterDiv) => {
 
 const updatePhoto = (casa, counterDiv, counterPhotos) => {
   $('#leftPhoto').on('click', () => {
+    console.log(`CounterDiv : ${counterDiv}, CounterPhotos: ${counterPhotos}`);
     if (counterDiv >= 0 && counterDiv <= casa.divisao.length) {
       if (
         counterPhotos > 0 &&
@@ -85,6 +86,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
           `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
         );
       } else {
+        // IF the div has fotoss
         counterDiv++;
         if (counterDiv !== casa.divisao.length) {
           counterPhotos = 0;
@@ -102,6 +104,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
         }
       }
     }
+    console.log(`CounterDiv : ${counterDiv}, CounterPhotos: ${counterPhotos}`);
     updateInfo(casa, counterDiv, counterPhotos);
     window.history.replaceState(
       { popup: true },
@@ -162,6 +165,14 @@ const appendPhotos = (casa = null, uploadFiles = null) => {
   }
 };
 
+const addDivision = () => {
+  $('#divisao').append(`
+  <option value="" data-mode="create" id="createDiv">
+    &nbsp&nbsp->Add Division
+  </option>
+`);
+};
+
 const openModal = (modal, element) => {
   const modalExists = modalsList.find((value, key) => {
     return modalsList[key].name === modal;
@@ -173,48 +184,57 @@ const openModal = (modal, element) => {
     $('body').css('overflow-y', 'hidden');
 
     if (modal === '#divisoes' && element) {
+      const photosForm = $('.popup__fotos-form');
       const idCasa = $(element)
         .data('id')
         .toString();
-      console.log(idCasa);
+
+      // Empties select values and fotos when opening
+      $('#divisao').html('');
+      photosForm.empty();
+      $('.popup__form')
+        .find('input, textarea')
+        .val('');
+      // ////////////////////////////
+
       $.ajax({
         method: 'GET',
         url: `${window.location.origin}/api/casas?id=${idCasa}`,
         dataType: 'json'
       }).then(casa => {
-        console.log(casa);
         $('.popup__title').text(`${casa.nome}`);
         $('.popup__form').data('id', casa.idCasa);
-        // Empties select values
-        $('#divisao').html('');
 
-        // Populates select values
-        casa.divisao.forEach(divisao => {
-          $('#divisao').append(`
-          <option value='${divisao.idDivisao}'>
-          ${divisao.tipo} ${divisao.numero ? divisao.numero : ''}
-          </option>
-        `);
-        });
+        if (casa.divisao.length > 0) {
+          // Populates select values
+          casa.divisao.forEach(divisao => {
+            $('#divisao').append(`
+              <option value='${divisao.idDivisao}'>
+              ${divisao.tipo} ${divisao.numero ? divisao.numero : ''}
+              </option>
+            `);
+          });
+
+          // Appends the option to create a new div
+          addDivision();
+
+          // Populate inputs with the values of the first division of the house
+          $('#tipo').val(casa.divisao[0].tipo);
+          $('#div__numero').val(casa.divisao[0].numero);
+          $('#descricao').val(casa.divisao[0].descricao);
+          $('#preco').val(casa.divisao[0].preco);
+          casa.divisao[0].disponivel
+            ? $('#disponivel').prop('checked', true)
+            : $('#disponivel').prop('checked', false);
+          $('#quando').val(casa.divisao[0].quando);
+
+          appendPhotos(casa);
+          return true;
+        }
 
         // Appends the option to create a new div
-        $('#divisao').append(`
-        <option value="" data-mode="create" id="createDiv">
-          &nbsp&nbsp->Add Division
-        </option>
-      `);
-
-        // Populate inputs with the values of the first division of the house
-        $('#tipo').val(casa.divisao[0].tipo);
-        $('#div__numero').val(casa.divisao[0].numero);
-        $('#descricao').val(casa.divisao[0].descricao);
-        $('#preco').val(casa.divisao[0].preco);
-        casa.divisao[0].disponivel
-          ? $('#disponivel').prop('checked', true)
-          : $('#disponivel').prop('checked', false);
-        $('#quando').val(casa.divisao[0].quando);
-
-        appendPhotos(casa);
+        addDivision();
+        return false;
       });
     }
   }
@@ -435,4 +455,4 @@ $(document).ready(() => {
   });
 });
 
-module.exports = { exitPopup, appendPhotos };
+module.exports = { exitPopup, appendPhotos, addDivision };

@@ -3,7 +3,7 @@ require('./popup.js');
 require('../views/admin.hbs');
 const cookies = require('js-cookie');
 const template = require('./template');
-const { appendPhotos } = require('./popup');
+const { appendPhotos, addDivision } = require('./popup');
 
 // GLOBALS
 let isAppended = false;
@@ -71,7 +71,14 @@ $(document).ready(() => {
       dataType: 'json',
       data
     }).then(res => {
-      window.location.reload();
+      selector.val(`${res.idDivisao}`);
+      selector.removeData('mode');
+      selector.removeAttr('data-mode');
+      selector.removeAttr('id');
+      selector.text(`${data.tipo} ${data.numero}`);
+
+      // Appends the option to create a new div
+      addDivision();
     });
   });
 
@@ -105,7 +112,12 @@ $(document).ready(() => {
         dataType: 'json',
         data
       }).then(res => {
-        console.log(res);
+        $('#divisao')
+          .find(':selected')
+          .remove();
+
+        $('#divisao option:first').attr('selected', 'selected');
+        $('#divisao').trigger('change');
       });
     }
   });
