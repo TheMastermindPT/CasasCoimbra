@@ -272,11 +272,9 @@
                 <svg class="icon white icon-circle-right popup__right" id="rightPhoto">
                     <use xlink:href="#icon-circle-right"></use>
                 </svg>
-                {{#if data}}
-                {{#each data.divisao}}
-                {{#each this.fotos}}
-                <img src="/{{split this.path @root.urlParameters.idFoto}}" alt="foto">
-                {{/each}}
+                {{#if casa}}
+                {{#each casa.divisao}}
+                <img src="/{{indexed this.fotos @root.urlParameters.idFoto }}" alt="foto">
                 {{/each}}
                 {{else}}
                 <img src="" alt="foto">
@@ -285,14 +283,14 @@
             <div class="popup__info">
 
                 <div class="popup__mapa">
-                    {{#if data}}
-                    <iframe frameborder="0" style="border:0" src="{{data.mapa}}" allowfullscreen></iframe>
+                    {{#if casa}}
+                    <iframe frameborder="0" style="border:0" src="{{casa.mapa}}" allowfullscreen></iframe>
                     {{/if}}
                 </div>
 
                 <div class="popup__description">
-                    {{#if data}}
-                    {{#each data.divisao}}
+                    {{#if casa}}
+                    {{#each casa.divisao}}
                     <p class="popup__tipo">
                         {{json this.tipo}}
                         {{#if this.numero}}

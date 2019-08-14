@@ -43,11 +43,10 @@ const hbs = exphbs.create({
   layoutsDir: path.join(process.cwd(), '/src/views/layouts'),
   partialsDir: path.join(process.cwd(), '/src/views/partials'),
   helpers: {
-    split(context, index) {
-      let string = JSON.stringify(context);
+    indexed(context, index) {
+      let string = JSON.stringify(context[index].path);
       string = trimFirstAndLast(string);
-      const fotosPaths = string.split(',');
-      return fotosPaths[index];
+      return string;
     },
     json(context) {
       let string = JSON.stringify(context);

@@ -40,34 +40,27 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     if (counterDiv >= 0 && counterDiv <= casa.divisao.length) {
       if (
         counterPhotos > 0 &&
-        counterPhotos <=
-          casa.divisao[counterDiv].fotos[0].path.split(',').length - 1
+        counterPhotos <= casa.divisao[counterDiv].fotos.length - 1
       ) {
         counterPhotos--;
         $('.popup__photos img').attr(
           'src',
-          `/${casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]}`
+          `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
         );
       } else {
         counterDiv--;
         if (counterDiv >= 0) {
-          counterPhotos =
-            casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
+          counterPhotos = casa.divisao[counterDiv].fotos.length - 1;
           $('.popup__photos img').attr(
             'src',
-            `/${
-              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
-            }`
+            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
           );
         } else {
           counterDiv = casa.divisao.length - 1;
-          counterPhotos =
-            casa.divisao[counterDiv].fotos[0].path.split(',').length - 1;
+          counterPhotos = casa.divisao[counterDiv].fotos.length - 1;
           $('.popup__photos img').attr(
             'src',
-            `/${
-              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
-            }`
+            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
           );
         }
       }
@@ -84,13 +77,12 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     if (counterDiv >= 0 && counterDiv < casa.divisao.length) {
       if (
         counterPhotos >= 0 &&
-        counterPhotos <
-          casa.divisao[counterDiv].fotos[0].path.split(',').length - 1
+        counterPhotos < casa.divisao[counterDiv].fotos.length - 1
       ) {
         counterPhotos++;
         $('.popup__photos img').attr(
           'src',
-          `/${casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]}`
+          `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
         );
       } else {
         counterDiv++;
@@ -98,16 +90,14 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
           counterPhotos = 0;
           $('.popup__photos img').attr(
             'src',
-            `/${
-              casa.divisao[counterDiv].fotos[0].path.split(',')[counterPhotos]
-            }`
+            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
           );
         } else {
           counterDiv = 0;
           counterPhotos = 0;
           $('.popup__photos img').attr(
             'src',
-            `/${casa.divisao[0].fotos[0].path.split(',')[counterPhotos]}`
+            `/${casa.divisao[0].fotos[counterPhotos].path}`
           );
         }
       }
@@ -286,7 +276,14 @@ const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
               casa.divisao[key].idDivisao === parseInt(query.get('div'), 10)
             );
           });
-          const fotoPath = divisao.fotos[0].path.split(',')[query.get('foto')];
+
+          const divNr = casa.divisao.findIndex((value, key) => {
+            return (
+              casa.divisao[key].idDivisao === parseInt(query.get('div'), 10)
+            );
+          });
+
+          const fotoPath = divisao.fotos[query.get('foto')].path;
           // //Loads Details
           $('.popup__mapa')
             .children('iframe')
@@ -295,6 +292,9 @@ const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
               <iframe frameborder="0" style="border:0" src="${casa.mapa}" allowfullscreen></iframe>
               `);
           $('.popup__photos img').attr('src', `/${fotoPath}`);
+
+          updateInfo(casa, divNr);
+
           openModal(modal);
           window.history.replaceState({ popup: true }, null, null);
           updatePhoto(casa, counterDiv, counterPhotos);

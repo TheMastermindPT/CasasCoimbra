@@ -396,7 +396,8 @@ router.get('/', (req, res) => {
   // Get all the info about the division and pull the photos that are associated with it
   if (
     Object.keys(req.query)[0] === 'id' &&
-    Object.keys(req.query)[1] === 'div'
+    Object.keys(req.query)[1] === 'div' &&
+    Object.keys(req.query).length === 2
   ) {
     db.Casa.findOne({
       include: [
@@ -441,7 +442,7 @@ router.get('/', (req, res) => {
       let casa = data;
       casa = JSON.stringify(casa);
       casa = JSON.parse(casa);
-      return casa.render('home', {
+      return res.render('home', {
         casa,
         script: 'home',
         urlParameters: {
