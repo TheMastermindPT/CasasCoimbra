@@ -98,11 +98,11 @@
                         </div>
                         <div class="popup__form-tipo">
                             <label for="tipo">Tipo:</label>
-                            <input type="text" name="tipo" id="tipo">
+                            <input type="text" name="tipo" id="tipo" required>
                         </div>
                         <div class="popup__form-numero">
                             <label for="div__numero">Numero:</label>
-                            <input type="text" name="numero" id="div__numero">
+                            <input type="number" name="numero" id="div__numero" required>
                         </div>
                         <div class="popup__form-descricao">
                             <label for="descricao">Descrição:</label>
@@ -110,18 +110,24 @@
                         </div>
                         <div class="popup__form-preco">
                             <label for="preco">Preço:</label>
-                            <input type="number" name="preco" id="preco">
+                            <input type="number" name="preco" id="preco" required>
                         </div>
                         <div class="popup__form-disponivel">
                             <label for="disponivel">Disponível:</label>
-                            <input type="checkbox" name="disponivel" id="disponivel">
+                            <input type="checkbox" name="disponivel" id="disponivel" required>
                         </div>
                         <div class="popup__form-quando">
                             <label for="quando">Quando:</label>
-                            <input type="date" name="quando" id="quando">
+                            <input type="text" name="quando" id="quando">
                         </div>
 
-                        <button type="submit" class="submit">
+
+                        <button type="button" class="delete" id="editDelete">
+                            <svg>
+                                <use xlink:href="#delete"></use>
+                            </svg>
+                        </button>
+                        <button type="button" class="submit" id="editSubmit">
                             <svg>
                                 <use xlink:href="#save"></use>
                             </svg>

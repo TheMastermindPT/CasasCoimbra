@@ -22,19 +22,85 @@ $.ajax({
 });
 
 $(document).ready(() => {
+  $('#quando').datepicker({
+    dateFormat: 'yy/mm/dd'
+  });
   // Saves Home to Database
   $('.home__wrap').on('submit', '.home__form', function(e) {
     const data = new FormData($(this)[0]);
     e.preventDefault();
+    // $.ajax({
+    //   method: 'POST',
+    //   url: `${window.location.origin}/api/casas/upload`,
+    //   data,
+    //   cache: false,
+    //   contentType: false,
+    //   processData: false
+    // }).then(() => window.location.reload());
+  });
+
+  $('#editSubmit').on('click', function(e) {
+    const idCasa = $('.popup__form').data('id');
+    const selector = $('#divisao').find(':selected');
+    const mode = $('#divisao')
+      .find(':selected')
+      .data('mode');
+    e.preventDefault();
+
+    const idDivisao =
+      mode !== 'create'
+        ? $('#divisao')
+            .find(':selected')
+            .val()
+        : null;
+
+    const data = {
+      idCasa,
+      idDivisao,
+      tipo: $('#tipo').val(),
+      numero: $('#div__numero').val(),
+      descricao: $('#descricao').val(),
+      preco: $('#preco').val(),
+      disponivel: $('#disponivel').prop('checked'),
+      quando: $('#quando').val()
+    };
 
     $.ajax({
       method: 'POST',
-      url: `${window.location.origin}/api/casas/upload`,
-      data,
-      cache: false,
-      contentType: false,
-      processData: false
-    }).then(() => window.location.reload());
+      url: `${window.location.origin}/api/casas/editDivisions`,
+      dataType: 'json',
+      data
+    }).then(res => {
+      window.location.reload();
+    });
+  });
+
+  $('#editDelete').on('click', function() {
+    const mode = $('#divisao')
+      .find(':selected')
+      .data('mode');
+
+    const idDivisao =
+      mode !== 'create'
+        ? $('#divisao')
+            .find(':selected')
+            .val()
+        : null;
+
+    const data = {
+      idDivisao
+    };
+
+    if (mode !== 'create') {
+      $.ajax({
+        method: 'DELETE',
+        url: `${window.location.origin}/api/casas/deleteDivision`,
+        dataType: 'json',
+        data
+      }).then(res => {
+        console.log(res);
+      });
+    }
   });
 
   // Select division when changing select value
@@ -51,6 +117,8 @@ $(document).ready(() => {
       .find(':selected')
       .data('mode');
 
+    const photosForm = $('.popup__fotos-form');
+
     if (mode !== 'create') {
       $.ajax({
         method: 'GET',
@@ -59,23 +127,20 @@ $(document).ready(() => {
       }).then(casa => {
         // Populate inputs with the values of the first division of the house
         $('#tipo').val(casa.divisao[0].tipo);
-
         casa.divisao[0].numero
           ? $('#div__numero').val(casa.divisao[0].numero)
           : $('#div__numero').val('');
-
         $('#descricao').val(casa.divisao[0].descricao);
         $('#preco').val(casa.divisao[0].preco);
         casa.divisao[0].disponivel
           ? $('#disponivel').prop('checked', true)
           : $('#disponivel').prop('checked', false);
-
         $('#quando').val(casa.divisao[0].quando);
         appendPhotos(casa);
       });
       return true;
     }
-
+    photosForm.empty();
     $(this)
       .parents('.popup__form')
       .find('input, textarea')

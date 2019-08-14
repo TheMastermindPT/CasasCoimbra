@@ -176,16 +176,13 @@ const openModal = (modal, element) => {
       const idCasa = $(element)
         .data('id')
         .toString();
-
-      // const idDivisao = $('#divisao')
-      //   .find(':selected')
-      //   .val();
-
+      console.log(idCasa);
       $.ajax({
         method: 'GET',
         url: `${window.location.origin}/api/casas?id=${idCasa}`,
         dataType: 'json'
       }).then(casa => {
+        console.log(casa);
         $('.popup__title').text(`${casa.nome}`);
         $('.popup__form').data('id', casa.idCasa);
         // Empties select values
@@ -202,7 +199,7 @@ const openModal = (modal, element) => {
 
         // Appends the option to create a new div
         $('#divisao').append(`
-        <option value='' data-mode="create">
+        <option value="" data-mode="create" id="createDiv">
           &nbsp&nbsp->Add Division
         </option>
       `);

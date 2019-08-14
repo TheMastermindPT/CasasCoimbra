@@ -600,11 +600,51 @@
   bottom: 3rem;
   right: 3rem;
   z-index: 1;
+  transition: all 0.2s ease-in;
   svg {
     width: 2rem;
     height: 2rem;
     fill: white;
     display: block;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.delete {
+  background-color: var(--color-darkred);
+  color: var(--color-light);
+  text-transform: capitalize;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  width: 6rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: absolute;
+  bottom: 3rem;
+  right: 10rem;
+  z-index: 1;
+  transition: all 0.2s ease-in;
+  svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+    display: block;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+  &:active {
+    transform: translateY(1px);
   }
 }
 

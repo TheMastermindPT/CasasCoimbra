@@ -361,7 +361,8 @@ router.get('/', (req, res) => {
         }
       ],
       where: {
-        numero: parseInt(req.query.id, 10)
+        // FIXED A BUG HERE FIELDS WAS NUMERO
+        idCasa: parseInt(req.query.id, 10)
       }
     }).then(data => {
       return res.json(data);
@@ -397,7 +398,7 @@ router.get('/', (req, res) => {
   if (
     Object.keys(req.query)[0] === 'id' &&
     Object.keys(req.query)[1] === 'div' &&
-    Object.keys(req.query).length === 2
+    Object.keys(req.query)[2] === 'edit'
   ) {
     db.Casa.findOne({
       include: [
@@ -405,9 +406,13 @@ router.get('/', (req, res) => {
           model: db.Divisao,
           include: {
             model: db.Foto,
+            required: false,
             where: {
-              DivisaoidDivisao: req.query.div
+              DivisaoIdDivisao: req.query.div
             }
+          },
+          where: {
+            idDivisao: req.query.div
           }
         }
       ],
@@ -454,25 +459,80 @@ router.get('/', (req, res) => {
   }
 });
 
-// GET Division with photos
-router.get('/:id/divisao=:idDivisao', (req, res) => {
-  const idCasa = parseInt(req.params.id, 10);
-  const idDivisao = parseInt(req.params.idDivisao, 10);
+router.post('/editDivisions', (req, res, next) => {
+  let {
+    idCasa,
+    idDivisao,
+    tipo,
+    numero,
+    descricao,
+    preco,
+    disponivel,
+    quando
+  } = req.body;
 
-  db.Casa.findOne({
-    where: { idCasa },
-    include: [{ model: db.Divisao }, { model: db.Foto }]
-  })
-    .then(casa => {
-      res.send(casa.divisao[idDivisao]);
-    })
-    .catch(err => {
-      console.log(err);
+  preco = parseInt(preco, 10);
+  idDivisao = parseInt(idDivisao, 10) || 'create';
+  disponivel = disponivel === 'true' ? 1 : 0;
+
+  console.log(typeof idDivisao);
+
+  if (typeof idDivisao === 'number') {
+    return db.Divisao.update(
+      {
+        tipo,
+        numero,
+        descricao,
+        preco,
+        disponivel,
+        quando
+      },
+      { where: { idDivisao } }
+    ).then(() => {
+      console.log('updated');
     });
+  }
 
-  // db.Divisao.findOne({ where: { 'CasaIdCasas': idCasa }, include: { model: db.Foto } }).then((divisao) => {
-  //     res.send(divisao);
-  // }).catch(err => { console.log(err); })
+  return db.Divisao.create({
+    CasaIdCasa: idCasa,
+    tipo,
+    numero,
+    descricao,
+    preco,
+    disponivel,
+    quando
+  }).then(created => {
+    res.send(created);
+  });
+});
+
+router.delete('/deleteDivision', (req, res, next) => {
+  const { idCasa, idDivisao } = req.body;
+
+  db.Divisao.findOne({
+    where: { idDivisao },
+    include: [
+      {
+        model: db.Foto,
+        required: false
+      }
+    ]
+  }).then(divisao => {
+    // db.Foto.destroy({
+    //   where: {
+    //     CasaIdCasa: divisao.CasaIdCasa
+    //   }
+    // }).then(() => {
+    //   db.Divisao.destroy({
+    //     where: {
+    //       CasaIdCasa: divisao.CasaIdCasa
+    //     }
+    //   }).then(() => {
+    //     res.sendStatus(200);
+    //     res.end();
+    //   });
+    // });
+  });
 });
 
 // POPULATE DATABASE

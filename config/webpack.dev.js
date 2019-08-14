@@ -1,28 +1,34 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const HandlebarsPlugin = require("handlebars-webpack-plugin");
+const HandlebarsPlugin = require('handlebars-webpack-plugin');
 
 module.exports = {
   entry: {
     home: ['webpack-hot-middleware/client?reload=true', './src/client/home.js'],
-    login: ['webpack-hot-middleware/client?reload=true', './src/client/login.js'],
-    admin: ['webpack-hot-middleware/client?reload=true', './src/client/admin.js']
+    login: [
+      'webpack-hot-middleware/client?reload=true',
+      './src/client/login.js'
+    ],
+    admin: [
+      'webpack-hot-middleware/client?reload=true',
+      './src/client/admin.js'
+    ]
   },
   mode: 'development',
   output: {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: 'http://localhost:3000/',
+    publicPath: 'http://localhost:3000/'
   },
   devServer: {
     contentBase: 'src',
     publicPath: '/',
     overlay: true,
     stats: {
-      colors: true,
+      colors: true
     },
-    hot: true,
+    hot: true
   },
   devtool: 'source-map',
   module: {
@@ -31,10 +37,10 @@ module.exports = {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader',
-          },
+            loader: 'babel-loader'
+          }
         ],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.s?[ac]ss$/,
@@ -48,10 +54,10 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [require('path').resolve(__dirname, 'node_modules')],
-            },
-          },
-        ],
+              includePaths: [require('path').resolve(__dirname, 'node_modules')]
+            }
+          }
+        ]
       },
       {
         test: /\.(html)$/,
@@ -59,16 +65,16 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              attrs: ['img:src'],
-            },
-          },
-        ],
+              attrs: ['img:src']
+            }
+          }
+        ]
       },
       {
         test: /\.hbs$/,
         use: [
           {
-            loader: "handlebars-loader",
+            loader: 'handlebars-loader',
             options: {
               partialDirs: path.join(__dirname, '/../src/views/partials')
             }
@@ -81,12 +87,12 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'imgs/[path][name].[ext]',
-            },
-          },
-        ],
-      },
-    ],
+              name: 'imgs/[path][name].[ext]'
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -97,6 +103,6 @@ module.exports = {
     })
   ],
   externals: {
-    jquery: 'jQuery',
-  },
+    jquery: 'jQuery'
+  }
 };
