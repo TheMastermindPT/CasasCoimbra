@@ -195,7 +195,7 @@ $(document).ready(() => {
       processData: false
     }).then(res => {
       console.log(res);
-      // appendPhotos(null, res, nome, divisao);
+      appendPhotos(null, res, nome, divisao);
     });
   });
 

@@ -74,10 +74,11 @@ const uploadMulti = multer({
 }).array('fotos', 10);
 
 // Copies files
-async function copyFiles(src, dest) {
+async function copyFiles(src, dest, file) {
   try {
     await fs.copy(src, dest);
     console.log('Photo was copied!');
+    return file;
   } catch (err) {
     console.error(err);
   }
@@ -111,8 +112,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
           const dest = path.join(
             `./src/assets/casas/${nome}/${tipo}${numero}/${fileName}`
           );
-          copyFiles(src, dest);
-          return file;
+          return copyFiles(src, dest, file);
         }
         return [];
       });
