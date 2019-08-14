@@ -194,7 +194,8 @@ $(document).ready(() => {
       contentType: false,
       processData: false
     }).then(res => {
-      appendPhotos(null, res, nome, divisao);
+      console.log(res);
+      // appendPhotos(null, res, nome, divisao);
     });
   });
 
@@ -227,10 +228,6 @@ $(document).ready(() => {
       },
       dataType: 'json'
     }).then(res => {
-      // Delete all the divs with the same id as this one
-
-      const test = $('.fotos__foto--show').find(`[data-id="${idFoto}"]`);
-      console.log(test);
       $(this)
         .closest('.fotos__foto')
         .remove();

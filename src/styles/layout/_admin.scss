@@ -495,7 +495,8 @@ $color-dark: #0b1b1f;
             position: relative;
 
             img {
-              transform: scale(1.2);
+              transform: scale(1.1);
+              object-fit: cover;
               transition: all 0.2s ease-in-out;
               max-width: 100%;
             }

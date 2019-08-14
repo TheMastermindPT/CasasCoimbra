@@ -86,47 +86,38 @@ async function copyFiles(src, dest) {
 // Removes content from folder, uploads new photos and updates the DB
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
-    const response = await Promise.map(files, file => {
+    const done = await Promise.map(files, file => {
       const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
-      // Verify if same filename exists in the directory
-      return fs.pathExists(path.join(`src/${newPath}`)).then(exists => {
-        // console.log(exists);
-        if (!exists) {
-          // Using Promise.map:
-          return Promise.map(files, function(fileName) {
-            // Promise.map awaits for returned promises as well.
-            const src = path.join(`./src/assets/temp/${fileName.originalname}`);
-            const dest = path.join(
-              `./src/assets/casas/${nome}/${tipo}${numero}/${fileName.originalname}`
-            );
-            return copyFiles(src, dest);
-          })
-            .then(() => {
-              // If there are no duplicate files, add entry to DB
-              return db.Foto.create({
-                path: newPath,
-                DivisaoIdDivisao: divisao,
-                CasaIdCasa: idCasa
-              })
-                .then(createdFoto => {
-                  console.log('Foto path created');
-                  return createdFoto;
-                })
-                .catch(failCreate => {
-                  console.error(failCreate);
-                });
-            })
-            .catch(allFailed => console.log(allFailed));
+
+      return db.Foto.findOrCreate({
+        where: { path: newPath },
+        defaults: {
+          DivisaoIdDivisao: divisao,
+          CasaIdCasa: idCasa,
+          path: newPath
         }
-        // Return JSON object with the path
-        // let json = [{ path: newPath }];
-        // json = JSON.stringify(json);
-        // [json] = JSON.parse(json);
+      }).then(([foto, created]) => {
+        if (created) {
+          return foto;
+        }
+        return [];
+      });
+    }).then(response => {
+      return Promise.map(response, function(file) {
+        if (!Array.isArray(file)) {
+          const fileName = file.path.split('/').pop();
+          // Promise.map awaits for returned promises as well.
+          const src = path.join(`./src/assets/temp/${fileName}`);
+          const dest = path.join(
+            `./src/assets/casas/${nome}/${tipo}${numero}/${fileName}`
+          );
+          copyFiles(src, dest);
+          return file;
+        }
         return [];
       });
     });
-    console.log('All tasks were succesful!');
-    res.send(response);
+    res.send(done);
   } catch (err) {
     console.error(err);
   }
