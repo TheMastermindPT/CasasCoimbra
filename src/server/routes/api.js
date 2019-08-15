@@ -87,7 +87,7 @@ async function copyFiles(src, dest, file) {
 // Removes content from folder, uploads new photos and updates the DB
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
-    const done = await Promise.map(files, file => {
+    const query = await Promise.map(files, file => {
       const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
 
       return db.Foto.findOrCreate({
@@ -103,19 +103,18 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
         }
         return [];
       });
-    }).then(response => {
-      return Promise.map(response, function(file) {
-        if (!Array.isArray(file)) {
-          const fileName = file.path.split('/').pop();
-          // Promise.map awaits for returned promises as well.
-          const src = path.join(`./src/assets/temp/${fileName}`);
-          const dest = path.join(
-            `./src/assets/casas/${nome}/${tipo}${numero}/${fileName}`
-          );
-          return copyFiles(src, dest, file);
-        }
-        return [];
-      });
+    });
+    const done = await Promise.map(query, function(file) {
+      if (!Array.isArray(file)) {
+        const fileName = file.path.split('/').pop();
+        // Promise.map awaits for returned promises as well.
+        const src = path.join(`./src/assets/temp/${fileName}`);
+        const dest = path.join(
+          `./src/assets/casas/${nome}/${tipo}${numero}/${fileName}`
+        );
+        return copyFiles(src, dest, file);
+      }
+      return [];
     });
     res.send(done);
   } catch (err) {
@@ -485,11 +484,12 @@ router.post('/editDivisions', (req, res, next) => {
         descricao,
         preco,
         disponivel,
-        quando
+        quando: quando || null
       },
       { where: { idDivisao } }
-    ).then(() => {
+    ).then(divisao => {
       console.log('updated');
+      res.send({ action: 'updated' });
     });
   }
 
@@ -500,9 +500,9 @@ router.post('/editDivisions', (req, res, next) => {
     descricao,
     preco,
     disponivel,
-    quando
+    quando: quando || null
   }).then(created => {
-    res.send(created);
+    res.send({ created, action: 'created' });
   });
 });
 

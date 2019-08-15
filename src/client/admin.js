@@ -7,6 +7,8 @@ const { appendPhotos, addDivision } = require('./popup');
 
 // GLOBALS
 let isAppended = false;
+// Check if admin is logged in
+let auth = cookies.get('auth');
 
 // Loads Homes in the Dashboard
 $.ajax({
@@ -40,85 +42,98 @@ $(document).ready(() => {
   });
 
   $('#editSubmit').on('click', function(e) {
-    const idCasa = $('.popup__form').data('id');
-    const selector = $('#divisao').find(':selected');
-    const mode = $('#divisao')
-      .find(':selected')
-      .data('mode');
-    e.preventDefault();
+    const confirm = window.confirm(
+      'Tens a certeza que queres guardar alterações?'
+    );
 
-    const idDivisao =
-      mode !== 'create'
-        ? $('#divisao')
-            .find(':selected')
-            .val()
-        : null;
+    if (confirm) {
+      const idCasa = $('.popup__form').data('id');
+      const selector = $('#divisao').find(':selected');
+      const mode = $('#divisao')
+        .find(':selected')
+        .data('mode');
+      e.preventDefault();
 
-    const data = {
-      idCasa,
-      idDivisao,
-      tipo: $('#tipo').val(),
-      numero: $('#div__numero').val(),
-      descricao: $('#descricao').val(),
-      preco: $('#preco').val(),
-      disponivel: $('#disponivel').prop('checked'),
-      quando: $('#quando').val()
-    };
+      const idDivisao =
+        mode !== 'create'
+          ? $('#divisao')
+              .find(':selected')
+              .val()
+          : null;
 
-    $.ajax({
-      method: 'POST',
-      url: `${window.location.origin}/api/casas/editDivisions`,
-      dataType: 'json',
-      data
-    }).then(res => {
-      selector.val(`${res.idDivisao}`);
-      selector.removeData('mode');
-      selector.removeAttr('data-mode');
-      selector.removeAttr('id');
-      selector.text(`${data.tipo} ${data.numero}`);
+      const data = {
+        idCasa,
+        idDivisao,
+        tipo: $('#tipo').val(),
+        numero: $('#div__numero').val(),
+        descricao: $('#descricao').val(),
+        preco: $('#preco').val(),
+        disponivel: $('#disponivel').prop('checked'),
+        quando: $('#quando').val()
+      };
 
-      // Appends the option to create a new div
-      addDivision();
-    });
-  });
-
-  $('#editDelete').on('click', function() {
-    const mode = $('#divisao')
-      .find(':selected')
-      .data('mode');
-    const nome = $('.popup__title').text();
-    const idDivisao =
-      mode !== 'create'
-        ? $('#divisao')
-            .find(':selected')
-            .val()
-        : null;
-
-    const data = {
-      nome,
-      idDivisao,
-      tipo: $('#tipo').val(),
-      numero: $('#div__numero').val(),
-      descricao: $('#descricao').val(),
-      preco: $('#preco').val(),
-      disponivel: $('#disponivel').prop('checked'),
-      quando: $('#quando').val()
-    };
-
-    if (mode !== 'create') {
       $.ajax({
-        method: 'DELETE',
-        url: `${window.location.origin}/api/casas/deleteDivision`,
+        method: 'POST',
+        url: `${window.location.origin}/api/casas/editDivisions`,
         dataType: 'json',
         data
       }).then(res => {
-        $('#divisao')
-          .find(':selected')
-          .remove();
+        if (res.action === 'created') {
+          selector.val(`${res.created.idDivisao}`);
+          selector.removeData('mode');
+          selector.removeAttr('data-mode');
+          selector.removeAttr('id');
+          selector.text(`${data.tipo} ${data.numero}`);
+        } else if (res.action === 'updated') {
+          selector.text(`${data.tipo} ${data.numero}`);
+        }
 
-        $('#divisao option:first').attr('selected', 'selected');
-        $('#divisao').trigger('change');
+        // Appends the option to create a new div
+        addDivision();
       });
+    }
+  });
+
+  $('#editDelete').on('click', function() {
+    const confirm = window.confirm('Tens a certeza que queres apagar?');
+    if (confirm) {
+      const mode = $('#divisao')
+        .find(':selected')
+        .data('mode');
+      const nome = $('.popup__title').text();
+      const idDivisao =
+        mode !== 'create'
+          ? $('#divisao')
+              .find(':selected')
+              .val()
+          : null;
+
+      const data = {
+        nome,
+        idDivisao,
+        tipo: $('#tipo').val(),
+        numero: $('#div__numero').val(),
+        descricao: $('#descricao').val(),
+        preco: $('#preco').val(),
+        disponivel: $('#disponivel').prop('checked'),
+        quando: $('#quando').val()
+      };
+
+      if (mode !== 'create') {
+        $.ajax({
+          method: 'DELETE',
+          url: `${window.location.origin}/api/casas/deleteDivision`,
+          dataType: 'json',
+          data
+        }).then(res => {
+          $('#divisao')
+            .find(':selected')
+            .remove();
+
+          $('#divisao option:first').attr('selected', 'selected');
+          $('#divisao').trigger('change');
+        });
+      }
     }
   });
 
@@ -175,20 +190,24 @@ $(document).ready(() => {
 
   // Deletes Home from Database
   $('.home__wrap').on('click', '.home__delete', function(e) {
-    const nome = $(this)
-      .closest('form')
-      .find('.home__nome')
-      .children('input')
-      .val();
-    e.preventDefault();
+    // eslint-disable-next-line no-alert
+    const confirm = window.confirm('Tens a certeza que queres apagar?');
 
-    $.ajax({
-      method: 'POST',
-      url: `${window.location.origin}/api/casas/delete`,
-      data: {
-        nome
-      }
-    }).then(() => window.location.reload());
+    if (confirm) {
+      const nome = $(this)
+        .closest('form')
+        .find('.home__nome')
+        .children('input')
+        .val();
+      e.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: `${window.location.origin}/api/casas/delete`,
+        data: {
+          nome
+        }
+      }).then(() => window.location.reload());
+    }
   });
 
   // Uploads Temp Photo to Server and Previews Home image
@@ -318,11 +337,14 @@ $(document).ready(() => {
     });
   });
 
-  // Check if admin is logged in
-  const auth = cookies.get('auth');
-  if (window.location.href === 'http://localhost:3000/admin/dashboard') {
+  if (window.location.pathname === '/admin/dashboard') {
     if (auth !== '2') {
       window.location.replace('/admin/login');
     }
   }
+
+  $('.admin__end').on('click', function() {
+    auth = cookies.remove('auth');
+    window.location.replace('/admin/login');
+  });
 });

@@ -166,6 +166,7 @@ const appendPhotos = (casa = null, uploadFiles = null) => {
 };
 
 const addDivision = () => {
+  $('#divisao option[data-mode="create"]').remove();
   $('#divisao').append(`
   <option value="" data-mode="create" id="createDiv">
     &nbsp&nbsp->Add Division
