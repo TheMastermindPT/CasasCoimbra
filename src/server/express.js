@@ -12,6 +12,8 @@ const app = express();
 const webpack = require('webpack');
 const bodyParser = require('body-parser');
 const config = require('../../config/webpack.dev');
+const db = require('../../models');
+const http = require('http');
 
 const compiler = webpack(config);
 const webpackDevMiddleware = require('webpack-dev-middleware')(
@@ -125,6 +127,13 @@ app.get('/admin/dashboard', (req, res) => {
 });
 
 // SERVER
-app.listen(PORT, () => {
-  console.log('Server is listening');
+db.sequelize.sync().then(function() {
+  http.createServer(app).listen(PORT, function() {
+    console.log(`Express server listening on port ${PORT}`);
+  });
 });
+
+// SERVER
+// app.listen(PORT, () => {
+//   console.log('Server is listening');
+// });

@@ -26,14 +26,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true,
         field: 'updatedAt'
       },
-      DivisaoIdDivisao: {
-        type: DataTypes.INTEGER(11),
-        references: {
-          model: 'Divisao',
-          references: 'idDivisao'
-        },
-        field: 'DivisaoIdDivisao'
-      },
       CasaIdCasa: {
         type: DataTypes.INTEGER(11),
         references: {

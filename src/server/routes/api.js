@@ -23,7 +23,7 @@ Promise.config({
 // SET STORAGE ENGINE
 const storage = multer.diskStorage({
   destination(req, file, callback) {
-    callback(null, path.join(`./src/assets/temp`)); // here you can place your destination path
+    callback(null, path.join(`./dist/assets/temp`)); // here you can place your destination path
   },
   filename(req, file, callback) {
     callback(null, `${file.originalname}`);
@@ -88,9 +88,7 @@ async function copyFiles(src, dest, file) {
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
     const query = await Promise.map(files, file => {
-      const newPath = `assets/casas/${nome}/${tipo}${numero}/${
-        file.originalname
-      }`;
+      const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
 
       return db.Foto.findOrCreate({
         where: { path: newPath },
@@ -110,9 +108,9 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
       if (!Array.isArray(file)) {
         const fileName = file.path.split('/').pop();
         // Promise.map awaits for returned promises as well.
-        const src = path.join(`./src/assets/temp/${fileName}`);
+        const src = path.join(`./dist/assets/temp/${fileName}`);
         const dest = path.join(
-          `./src/assets/casas/${nome}/${tipo}${numero}/${fileName}`
+          `./dist/assets/casas/${nome}/${tipo}${numero}/${fileName}`
         );
         return copyFiles(src, dest, file);
       }
@@ -127,7 +125,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
 
 router.post('/preview', (req, res) => {
   // Check if the folder exists and moves file from Temp folder to new folder
-  ensureExistsFolder(path.join(`src/assets/temp/`), err => {
+  ensureExistsFolder(path.join(`dist/assets/temp/`), err => {
     if (err) {
       throw err;
     } else {
@@ -146,7 +144,7 @@ router.post('/preview', (req, res) => {
 
 router.post('/uploadMulti', (req, res, next) => {
   // Check if the folder exists and moves file from Temp folder to new folder
-  ensureExistsFolder(path.join(`src/assets/temp/`), err => {
+  ensureExistsFolder(path.join(`dist/assets/temp/`), err => {
     if (err) {
       throw err;
     } else {
@@ -233,13 +231,13 @@ router.post('/upload', (req, res, next) => {
           if (req.file != null) {
             fotoPath = `assets/casas/${nome}/${nome}${fileType}`;
             // Check if the folder exists and moves file from Temp folder to new folder
-            ensureExistsFolder(path.join(`src/assets/casas/${nome}`), err => {
+            ensureExistsFolder(path.join(`dist/assets/casas/${nome}`), err => {
               if (err) {
                 throw err;
               } else {
                 copyFiles(
-                  path.join(`./src/assets/temp/${req.file.originalname}`),
-                  path.join(`./src/${fotoPath}`)
+                  path.join(`./dist/assets/temp/${req.file.originalname}`),
+                  path.join(`./dist/${fotoPath}`)
                 );
               }
             });
@@ -342,7 +340,7 @@ router.delete('/removePhoto', (req, res, next) => {
   filepath = filepath.slice(1);
 
   db.Foto.findOne({ where: { idFoto } }).then(foto => {
-    fs.remove(`./src/${filepath}`)
+    fs.remove(`./dist/${filepath}`)
       .then(() => {
         foto
           .destroy({ where: { idFoto } })
@@ -561,7 +559,7 @@ router.delete('/deleteDivision', (req, res, next) => {
               idDivisao: divisao.idDivisao
             }
           }).then(() => {
-            fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
+            fs.remove(`./dist/assets/casas/${nome}/${tipo}${numero}`)
               .then()
               .catch(oops => next());
             res.send({ delete: true });
