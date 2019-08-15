@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "heroku": "node src/server/main.js",
     "build": "webpack --config config/webpack.prod.js",
-    "start": "nodemon --watch config --watch src/server src/server/main.js",
-    "heroku": "node src/server/main.js"
+    "start": "nodemon --watch config --watch src/server src/server/main.js"
   },
   "author": "",
   "license": "ISC",
