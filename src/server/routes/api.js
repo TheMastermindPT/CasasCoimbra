@@ -141,7 +141,7 @@ router.post('/preview', (req, res) => {
   });
 });
 
-router.post('/uploadMulti', (req, res) => {
+router.post('/uploadMulti', (req, res, next) => {
   // Check if the folder exists and moves file from Temp folder to new folder
   ensureExistsFolder(path.join(`src/assets/temp/`), err => {
     if (err) {
@@ -164,7 +164,9 @@ router.post('/uploadMulti', (req, res) => {
             nome,
             numero,
             idCasa
-          );
+          )
+            .then()
+            .catch(next());
         }
       });
     }
@@ -172,7 +174,7 @@ router.post('/uploadMulti', (req, res) => {
 });
 
 // Upload Test
-router.post('/upload', (req, res) => {
+router.post('/upload', (req, res, next) => {
   upload(req, res, function(err) {
     if (err) {
       res.sendStatus(400);
@@ -217,63 +219,69 @@ router.post('/upload', (req, res) => {
           despesas: req.body.despesas,
           mapa: req.body.mapa
         }
-      }).then(([casa, created]) => {
-        let { nome } = req.body;
-        nome = nome.toLowerCase().trim();
+      })
+        .then(([casa, created]) => {
+          let { nome } = req.body;
+          nome = nome.toLowerCase().trim();
 
-        // Check if file exists
-        if (req.file != null) {
-          fotoPath = `assets/casas/${nome}/${nome}${fileType}`;
-          // Check if the folder exists and moves file from Temp folder to new folder
-          ensureExistsFolder(path.join(`src/assets/casas/${nome}`), err => {
-            if (err) {
-              throw err;
-            } else {
-              copyFiles(
-                path.join(`./src/assets/temp/${req.file.originalname}`),
-                path.join(`./src/${fotoPath}`)
-              );
-            }
-          });
-          // If file exists and home exists update the foto and the fields
-          db.Casa.update(
-            {
-              fotoMain: fotoPath,
-              tipologia: req.body.tipologia,
-              wc: req.body.wc,
-              zona: req.body.zona,
-              morada: req.body.morada,
-              mobilado,
-              proximo: req.body.proximo,
-              netTv,
-              despesas: req.body.despesas,
-              mapa: req.body.mapa
-            },
-            {
-              where: { nome: req.body.nome }
-            }
-          ).then();
-        } else if (!created) {
-          // If there is no file update only the text fields
-          db.Casa.update(
-            {
-              tipologia: req.body.tipologia,
-              wc: req.body.wc,
-              zona: req.body.zona,
-              morada: req.body.morada,
-              mobilado,
-              proximo: req.body.proximo,
-              netTv,
-              despesas: req.body.despesas,
-              mapa: req.body.mapa
-            },
-            {
-              where: { nome: req.body.nome }
-            }
-          ).then();
-        }
-        res.end();
-      });
+          // Check if file exists
+          if (req.file != null) {
+            fotoPath = `assets/casas/${nome}/${nome}${fileType}`;
+            // Check if the folder exists and moves file from Temp folder to new folder
+            ensureExistsFolder(path.join(`src/assets/casas/${nome}`), err => {
+              if (err) {
+                throw err;
+              } else {
+                copyFiles(
+                  path.join(`./src/assets/temp/${req.file.originalname}`),
+                  path.join(`./src/${fotoPath}`)
+                );
+              }
+            });
+            // If file exists and home exists update the foto and the fields
+            db.Casa.update(
+              {
+                fotoMain: fotoPath,
+                tipologia: req.body.tipologia,
+                wc: req.body.wc,
+                zona: req.body.zona,
+                morada: req.body.morada,
+                mobilado,
+                proximo: req.body.proximo,
+                netTv,
+                despesas: req.body.despesas,
+                mapa: req.body.mapa
+              },
+              {
+                where: { nome: req.body.nome }
+              }
+            )
+              .then()
+              .catch(next());
+          } else if (!created) {
+            // If there is no file update only the text fields
+            db.Casa.update(
+              {
+                tipologia: req.body.tipologia,
+                wc: req.body.wc,
+                zona: req.body.zona,
+                morada: req.body.morada,
+                mobilado,
+                proximo: req.body.proximo,
+                netTv,
+                despesas: req.body.despesas,
+                mapa: req.body.mapa
+              },
+              {
+                where: { nome: req.body.nome }
+              }
+            )
+              .then()
+              .catch(next);
+          }
+          res.end();
+        })
+        .catch(next());
     }
   });
 });
@@ -316,7 +324,7 @@ router.post('/delete', (req, res) => {
   });
 });
 
-router.delete('/removePhoto', (req, res) => {
+router.delete('/removePhoto', (req, res, next) => {
   let { filepath, idFoto } = req.body;
   filepath = filepath.slice(1);
 
@@ -330,20 +338,22 @@ router.delete('/removePhoto', (req, res) => {
       })
       .catch(err => {
         console.error(err);
-        res.send();
+        next();
       });
   });
 });
 
 // GET Checks for queries and retreives specified data
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   // If there are no queries in URL, retrieve all the homes in DB
   if (Object.keys(req.query).length === 0) {
-    db.Casa.findAll().then(casa => {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(casa);
-      res.end();
-    });
+    db.Casa.findAll()
+      .then(casa => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(casa);
+        res.end();
+      })
+      .catch(next());
   }
   // If there is only id query, retrieve the Home with the associated ID
   if (
@@ -363,9 +373,11 @@ router.get('/', (req, res) => {
         // FIXED A BUG HERE FIELDS WAS NUMERO
         idCasa: parseInt(req.query.id, 10)
       }
-    }).then(data => {
-      return res.json(data);
-    });
+    })
+      .then(data => {
+        return res.json(data);
+      })
+      .catch(next());
   }
   // Get the divison from the house and all the photos
   if (
@@ -388,9 +400,11 @@ router.get('/', (req, res) => {
       where: {
         numero: req.query.id
       }
-    }).then(data => {
-      return res.json(data);
-    });
+    })
+      .then(data => {
+        return res.json(data);
+      })
+      .catch(next());
   }
 
   // Get all the info about the division and pull the photos that are associated with it
@@ -418,9 +432,11 @@ router.get('/', (req, res) => {
       where: {
         numero: req.query.id
       }
-    }).then(data => {
-      return res.json(data);
-    });
+    })
+      .then(data => {
+        return res.json(data);
+      })
+      .catch(next());
   }
 
   // If there is id, div and foto queries fecth it from DB
@@ -442,19 +458,21 @@ router.get('/', (req, res) => {
       where: {
         numero: req.query.id
       }
-    }).then(data => {
-      let casa = data;
-      casa = JSON.stringify(casa);
-      casa = JSON.parse(casa);
-      return res.render('home', {
-        casa,
-        script: 'home',
-        urlParameters: {
-          idDivisao: req.query.div,
-          idFoto: req.query.foto
-        }
-      });
-    });
+    })
+      .then(data => {
+        let casa = data;
+        casa = JSON.stringify(casa);
+        casa = JSON.parse(casa);
+        return res.render('home', {
+          casa,
+          script: 'home',
+          urlParameters: {
+            idDivisao: req.query.div,
+            idFoto: req.query.foto
+          }
+        });
+      })
+      .catch(next());
   }
 });
 
@@ -487,10 +505,12 @@ router.post('/editDivisions', (req, res, next) => {
         quando: quando || null
       },
       { where: { idDivisao } }
-    ).then(divisao => {
-      console.log('updated');
-      res.send({ action: 'updated' });
-    });
+    )
+      .then(divisao => {
+        console.log('updated');
+        res.send({ action: 'updated' });
+      })
+      .catch(next());
   }
 
   return db.Divisao.create({
@@ -501,9 +521,11 @@ router.post('/editDivisions', (req, res, next) => {
     preco,
     disponivel,
     quando: quando || null
-  }).then(created => {
-    res.send({ created, action: 'created' });
-  });
+  })
+    .then(created => {
+      res.send({ created, action: 'created' });
+    })
+    .catch(next());
 });
 
 router.delete('/deleteDivision', (req, res, next) => {
@@ -517,27 +539,29 @@ router.delete('/deleteDivision', (req, res, next) => {
         required: false
       }
     ]
-  }).then(divisao => {
-    if (divisao !== null) {
-      db.Foto.destroy({
-        where: {
-          DivisaoIdDivisao: divisao.idDivisao
-        }
-      }).then(() => {
-        db.Divisao.destroy({
+  })
+    .then(divisao => {
+      if (divisao !== null) {
+        db.Foto.destroy({
           where: {
-            idDivisao: divisao.idDivisao
+            DivisaoIdDivisao: divisao.idDivisao
           }
         }).then(() => {
-          fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
-            .then()
-            .catch(err => console.log(err));
-          res.send({ delete: true });
-          res.end();
+          db.Divisao.destroy({
+            where: {
+              idDivisao: divisao.idDivisao
+            }
+          }).then(() => {
+            fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
+              .then()
+              .catch(err => console.log(err));
+            res.send({ delete: true });
+            res.end();
+          });
         });
-      });
-    }
-  });
+      }
+    })
+    .catch(next());
 });
 
 // POPULATE DATABASE
