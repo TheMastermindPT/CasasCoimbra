@@ -22,6 +22,7 @@
     "database": "d49agogrvjeoo2",
     "host": "ec2-54-247-85-251.eu-west-1.compute.amazonaws.com",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   }
 }

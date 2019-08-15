@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Foto = sequelize.define(
-    'Foto',
+    'foto',
     {
       idFoto: {
         type: DataTypes.INTEGER(11),
