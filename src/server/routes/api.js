@@ -367,7 +367,6 @@ router.get('/', (req, res, next) => {
       .then(casa => {
         res.setHeader('Content-Type', 'application/json');
         res.send(casa);
-        res.end();
       })
       .catch(oops => next());
   }

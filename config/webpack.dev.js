@@ -54,7 +54,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [require('path').resolve(__dirname, 'node_modules')]
+              includePaths: [path.resolve(__dirname, 'node_modules')]
             }
           }
         ]

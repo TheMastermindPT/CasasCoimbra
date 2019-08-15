@@ -14,6 +14,7 @@ $(window).ready(() => {
   const sidenav = $('.sidenav');
   const svg = $('#imoveis').find('svg');
   const contacto = $('#numero');
+  console.log('test production');
   // ///////////////////////////
 
   $.ajax({

@@ -1,8 +1,13 @@
 /* eslint-disable import/order */
-import express from 'express';
-import path from 'path';
 
 // MODULES
+require('dotenv').config();
+
+const PORT = process.env.PORT || 3000;
+const isProd = process.env.NODE_ENV === 'production' || null;
+const express = require('express');
+const path = require('path');
+
 const app = express();
 const webpack = require('webpack');
 const bodyParser = require('body-parser');
@@ -25,11 +30,14 @@ app.use(
     extended: true
   })
 );
+
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(webpackDevMiddleware);
-app.use(webpackHotMiddleware);
-const staticMiddleware = express.static('src');
+if (!isProd) {
+  app.use(webpackDevMiddleware);
+  app.use(webpackHotMiddleware);
+}
+const staticMiddleware = express.static('dist');
 app.use(staticMiddleware);
 
 const trimFirstAndLast = string => {
@@ -66,10 +74,57 @@ app.use('/admin', auth);
 app.use('/api/casas', api);
 
 app.get('/', (req, res, next) => {
-  res.render('home', { script: 'home' });
+  res.render('home', {
+    script: 'home',
+    host() {
+      if (!isProd) {
+        return `http://localhost:${PORT}`;
+      }
+      return '/scripts';
+    },
+    style() {
+      if (isProd) {
+        return '/styles/home.css';
+      }
+    }
+  });
+});
+
+app.get('/admin/login', (req, res) => {
+  res.render('login', {
+    script: 'login',
+    host() {
+      if (!isProd) {
+        return `http://localhost:${PORT}`;
+      }
+      return '/scripts';
+    },
+    style() {
+      if (isProd) {
+        return '/styles/login.css';
+      }
+    }
+  });
+});
+
+app.get('/admin/dashboard', (req, res) => {
+  res.render('admin', {
+    script: 'admin',
+    host() {
+      if (!isProd) {
+        return `http://localhost:${PORT}`;
+      }
+      return '/scripts';
+    },
+    style() {
+      if (isProd) {
+        return '/styles/admin.css';
+      }
+    }
+  });
 });
 
 // SERVER
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('Server is listening');
 });

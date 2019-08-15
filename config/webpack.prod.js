@@ -1,7 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
-
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
@@ -14,9 +11,9 @@ module.exports = {
   mode: 'production',
   output: {
     // filename: 'scripts/[name].[hash].js',
-    filename: 'scripts/[name].js',
+    filename: 'scripts/[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -24,47 +21,36 @@ module.exports = {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader',
-          },
+            loader: 'babel-loader'
+          }
         ],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.s?[ac]ss$/,
         use: [
           {
-            loader: MiniCSSExtractPlugin.loader,
+            loader: MiniCSSExtractPlugin.loader
           },
           {
-            loader: 'css-loader',
+            loader: 'css-loader'
           },
           {
-            loader: 'postcss-loader',
+            loader: 'postcss-loader'
           },
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [require('path').resolve(__dirname, 'node_modules')],
-            },
-          },
-        ],
+              includePaths: [path.resolve(__dirname, 'node_modules')]
+            }
+          }
+        ]
       },
-      // {
-      //   test: /\.(html)$/,
-      //   use: [
-      //     {
-      //       loader: 'html-loader',
-      //       options: {
-      //         attrs: ['img:src'],
-      //       },
-      //     },
-      //   ],
-      // },
       {
         test: /\.hbs$/,
         use: [
           {
-            loader: "handlebars-loader",
+            loader: 'handlebars-loader',
             options: {
               partialDirs: path.join(__dirname, '/../src/views/partials')
             }
@@ -78,8 +64,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: path.join(__dirname, '/../dist/assets/'),
-            },
+              outputPath: path.join(__dirname, '/../dist/assets/')
+            }
           },
           {
             loader: 'image-webpack-loader',
@@ -90,22 +76,22 @@ module.exports = {
               },
               // optipng.enabled: false will disable optipng
               optipng: {
-                enabled: false,
+                enabled: false
               },
               pngquant: {
                 quality: '65-90',
                 speed: 4
               },
               gifsicle: {
-                interlaced: false,
+                interlaced: false
               },
               // the webp option will enable WEBP
               webp: {
                 quality: 75
               }
             }
-          },
-        ],
+          }
+        ]
       },
       {
         test: /\.svg$/,
@@ -114,30 +100,20 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: path.join(__dirname, '/../dist/assets/svg'),
-            },
-          },
-        ],
-      },
-    ],
+              outputPath: path.join(__dirname, '/../dist/assets/svg')
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new OptimizeCssAssetsPlugin(),
     new MiniCSSExtractPlugin({
-      filename: 'styles/[name].[hash].css',
-    }),
-    new HTMLWebpackPlugin({
-      filename: path.join(__dirname, '/../dist/index.html'),
-      template: './src/views/home.hbs',
-      chunks: ['home'],
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-      },
-    }),
+      filename: 'styles/[name].css'
+    })
   ],
   externals: {
-    jquery: 'jQuery',
-  },
+    jquery: 'jQuery'
+  }
 };

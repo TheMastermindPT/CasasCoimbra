@@ -5,14 +5,6 @@ const db = require('../../../config/database');
 const router = app.Router();
 // ROUTES
 
-router.get('/login', (req, res) => {
-  res.render('login', { script: 'login' });
-});
-
-router.get('/dashboard', (req, res) => {
-  res.render('admin', { script: 'admin' });
-});
-
 router.post('/authentication', (req, res) => {
   let { username } = req.body;
   const { password } = req.body;
