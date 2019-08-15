@@ -47,7 +47,7 @@ const checkFileType = (file, callback) => {
 
 // Check if the folder already exists
 const ensureExistsFolder = (folder, cb) => {
-  fs.mkdir(folder, function(err) {
+  fs.mkdir(folder, err => {
     if (err) {
       if (err.code == 'EEXIST') {
         cb(null); // ignore the error if the folder already exists
@@ -88,7 +88,9 @@ async function copyFiles(src, dest, file) {
 async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
   try {
     const query = await Promise.map(files, file => {
-      const newPath = `assets/casas/${nome}/${tipo}${numero}/${file.originalname}`;
+      const newPath = `assets/casas/${nome}/${tipo}${numero}/${
+        file.originalname
+      }`;
 
       return db.Foto.findOrCreate({
         where: { path: newPath },
@@ -104,7 +106,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
         return [];
       });
     });
-    const done = await Promise.map(query, function(file) {
+    const done = await Promise.map(query, file => {
       if (!Array.isArray(file)) {
         const fileName = file.path.split('/').pop();
         // Promise.map awaits for returned promises as well.
@@ -116,9 +118,10 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
       }
       return [];
     });
-    res.send(done);
+    return done;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 }
 
@@ -128,7 +131,7 @@ router.post('/preview', (req, res) => {
     if (err) {
       throw err;
     } else {
-      upload(req, res, function(err) {
+      upload(req, res, err => {
         if (err) {
           res.sendStatus(400);
           res.end();
@@ -147,7 +150,7 @@ router.post('/uploadMulti', (req, res, next) => {
     if (err) {
       throw err;
     } else {
-      uploadMulti(req, res, function(err) {
+      uploadMulti(req, res, err => {
         if (err) {
           res.sendStatus(400);
           res.end();
@@ -165,8 +168,10 @@ router.post('/uploadMulti', (req, res, next) => {
             numero,
             idCasa
           )
-            .then()
-            .catch(next());
+            .then(done => res.send(done))
+            .catch(err => {
+              next();
+            });
         }
       });
     }
@@ -175,7 +180,7 @@ router.post('/uploadMulti', (req, res, next) => {
 
 // Upload Test
 router.post('/upload', (req, res, next) => {
-  upload(req, res, function(err) {
+  upload(req, res, err => {
     if (err) {
       res.sendStatus(400);
       res.end();
@@ -257,7 +262,7 @@ router.post('/upload', (req, res, next) => {
               }
             )
               .then()
-              .catch(next());
+              .catch(oops => next());
           } else if (!created) {
             // If there is no file update only the text fields
             db.Casa.update(
@@ -277,11 +282,11 @@ router.post('/upload', (req, res, next) => {
               }
             )
               .then()
-              .catch(next);
+              .catch(oops => next());
           }
           res.end();
         })
-        .catch(next());
+        .catch(oops => next());
     }
   });
 });
@@ -298,30 +303,38 @@ router.post('/delete', (req, res) => {
         model: db.Foto
       }
     ]
-  }).then(casa => {
-    // MAYBE CHANGE
+  })
+    .then(casa => {
+      // MAYBE CHANGE
 
-    const foto = db.Foto.destroy({
-      where: {
-        CasaIdCasa: casa.idCasa
-      }
-    }).then(() => {
-      const divisao = db.Divisao.destroy({
+      const foto = db.Foto.destroy({
         where: {
           CasaIdCasa: casa.idCasa
         }
-      }).then(() => {
-        const home = db.Casa.destroy({
-          where: {
-            idCasa: casa.idCasa
-          }
-        }).then(() => {
-          res.sendStatus(200);
-          res.end();
-        });
-      });
-    });
-  });
+      })
+        .then(() => {
+          const divisao = db.Divisao.destroy({
+            where: {
+              CasaIdCasa: casa.idCasa
+            }
+          })
+            .then(() => {
+              const home = db.Casa.destroy({
+                where: {
+                  idCasa: casa.idCasa
+                }
+              })
+                .then(() => {
+                  res.sendStatus(200);
+                  res.end();
+                })
+                .catch(oops => next());
+            })
+            .catch(oops => next());
+        })
+        .catch(oops => next());
+    })
+    .catch(oops => next());
 });
 
 router.delete('/removePhoto', (req, res, next) => {
@@ -331,10 +344,13 @@ router.delete('/removePhoto', (req, res, next) => {
   db.Foto.findOne({ where: { idFoto } }).then(foto => {
     fs.remove(`./src/${filepath}`)
       .then(() => {
-        foto.destroy({ where: { idFoto } }).then(() => {
-          console.log('Foto file removed!');
-          res.send({});
-        });
+        foto
+          .destroy({ where: { idFoto } })
+          .then(() => {
+            console.log('Foto file removed!');
+            res.send({});
+          })
+          .catch(oops => next());
       })
       .catch(err => {
         console.error(err);
@@ -353,7 +369,7 @@ router.get('/', (req, res, next) => {
         res.send(casa);
         res.end();
       })
-      .catch(next());
+      .catch(oops => next());
   }
   // If there is only id query, retrieve the Home with the associated ID
   if (
@@ -374,10 +390,8 @@ router.get('/', (req, res, next) => {
         idCasa: parseInt(req.query.id, 10)
       }
     })
-      .then(data => {
-        return res.json(data);
-      })
-      .catch(next());
+      .then(data => res.json(data))
+      .catch(oops => next());
   }
   // Get the divison from the house and all the photos
   if (
@@ -401,10 +415,8 @@ router.get('/', (req, res, next) => {
         numero: req.query.id
       }
     })
-      .then(data => {
-        return res.json(data);
-      })
-      .catch(next());
+      .then(data => res.json(data))
+      .catch(oops => next());
   }
 
   // Get all the info about the division and pull the photos that are associated with it
@@ -433,10 +445,8 @@ router.get('/', (req, res, next) => {
         numero: req.query.id
       }
     })
-      .then(data => {
-        return res.json(data);
-      })
-      .catch(next());
+      .then(data => res.json(data))
+      .catch(oops => next());
   }
 
   // If there is id, div and foto queries fecth it from DB
@@ -472,7 +482,7 @@ router.get('/', (req, res, next) => {
           }
         });
       })
-      .catch(next());
+      .catch(oops => next());
   }
 });
 
@@ -510,7 +520,7 @@ router.post('/editDivisions', (req, res, next) => {
         console.log('updated');
         res.send({ action: 'updated' });
       })
-      .catch(next());
+      .catch(oops => next());
   }
 
   return db.Divisao.create({
@@ -525,7 +535,7 @@ router.post('/editDivisions', (req, res, next) => {
     .then(created => {
       res.send({ created, action: 'created' });
     })
-    .catch(next());
+    .catch(oops => next());
 });
 
 router.delete('/deleteDivision', (req, res, next) => {
@@ -554,14 +564,14 @@ router.delete('/deleteDivision', (req, res, next) => {
           }).then(() => {
             fs.remove(`./src/assets/casas/${nome}/${tipo}${numero}`)
               .then()
-              .catch(err => console.log(err));
+              .catch(oops => next());
             res.send({ delete: true });
             res.end();
           });
         });
       }
     })
-    .catch(next());
+    .catch(oops => next());
 });
 
 // POPULATE DATABASE
