@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Divisao.associate = function(models) {
-    Divisao.belongsTo(models.Casa);
+    // Divisao.belongsTo(models.Casa);
     Divisao.hasMany(models.Foto);
   };
 

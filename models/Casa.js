@@ -93,7 +93,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Casa.associate = function(models) {
     Casa.hasMany(models.Divisao);
-    Casa.hasMany(models.Foto);
+    // Casa.hasMany(models.Foto);
   };
   return Casa;
 };

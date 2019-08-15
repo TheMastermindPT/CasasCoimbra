@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Foto.associate = function(models) {
-    Foto.belongsTo(models.Divisao);
+    // Foto.belongsTo(models.Divisao);
     Foto.belongsTo(models.Casa);
   };
 
