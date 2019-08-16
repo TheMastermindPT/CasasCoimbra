@@ -41,27 +41,27 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     if (counterDiv >= 0 && counterDiv <= casa.divisao.length) {
       if (
         counterPhotos > 0 &&
-        counterPhotos <= casa.divisao[counterDiv].fotos.length - 1
+        counterPhotos <= casa.divisao[counterDiv].foto.length - 1
       ) {
         counterPhotos--;
         $('.popup__photos img').attr(
           'src',
-          `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
+          `/${casa.divisao[counterDiv].foto[counterPhotos].path}`
         );
       } else {
         counterDiv--;
         if (counterDiv >= 0) {
-          counterPhotos = casa.divisao[counterDiv].fotos.length - 1;
+          counterPhotos = casa.divisao[counterDiv].foto.length - 1;
           $('.popup__photos img').attr(
             'src',
-            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
+            `/${casa.divisao[counterDiv].foto[counterPhotos].path}`
           );
         } else {
           counterDiv = casa.divisao.length - 1;
-          counterPhotos = casa.divisao[counterDiv].fotos.length - 1;
+          counterPhotos = casa.divisao[counterDiv].foto.length - 1;
           $('.popup__photos img').attr(
             'src',
-            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
+            `/${casa.divisao[counterDiv].foto[counterPhotos].path}`
           );
         }
       }
@@ -78,12 +78,12 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     if (counterDiv >= 0 && counterDiv < casa.divisao.length) {
       if (
         counterPhotos >= 0 &&
-        counterPhotos < casa.divisao[counterDiv].fotos.length - 1
+        counterPhotos < casa.divisao[counterDiv].foto.length - 1
       ) {
         counterPhotos++;
         $('.popup__photos img').attr(
           'src',
-          `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
+          `/${casa.divisao[counterDiv].foto[counterPhotos].path}`
         );
       } else {
         // IF the div has fotoss
@@ -92,14 +92,14 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
           counterPhotos = 0;
           $('.popup__photos img').attr(
             'src',
-            `/${casa.divisao[counterDiv].fotos[counterPhotos].path}`
+            `/${casa.divisao[counterDiv].foto[counterPhotos].path}`
           );
         } else {
           counterDiv = 0;
           counterPhotos = 0;
           $('.popup__photos img').attr(
             'src',
-            `/${casa.divisao[0].fotos[counterPhotos].path}`
+            `/${casa.divisao[0].foto[counterPhotos].path}`
           );
         }
       }
@@ -117,7 +117,8 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 const appendPhotos = (casa = null, uploadFiles = null) => {
   if (casa || uploadFiles) {
     const photosForm = $('.popup__fotos-form');
-    const fotos = casa && !uploadFiles ? casa.divisao[0].fotos : uploadFiles;
+    console.log(casa);
+    const fotos = casa && !uploadFiles ? casa.divisao[0].foto : uploadFiles;
 
     // Changes the layout of the thumbnails according to the number of fotos
     if (fotos.length >= 6) {
@@ -228,7 +229,6 @@ const openModal = (modal, element) => {
             ? $('#disponivel').prop('checked', true)
             : $('#disponivel').prop('checked', false);
           $('#quando').val(casa.divisao[0].quando);
-
           appendPhotos(casa);
           return true;
         }
