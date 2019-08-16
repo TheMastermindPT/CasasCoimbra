@@ -65,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
         plural: 'divisao',
         singular: 'divisao'
       },
-      tableName: 'divisao'
+      tableName: 'Divisao'
     }
   );
 

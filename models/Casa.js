@@ -86,7 +86,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: 'casa',
+      tableName: 'Casa',
       freezeTableName: true
     }
   );

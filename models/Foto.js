@@ -45,10 +45,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     {
       name: {
-        plural: 'fotos',
+        plural: 'foto',
         singular: 'foto'
       },
-      tableName: 'foto'
+      tableName: 'Foto'
     }
   );
 
