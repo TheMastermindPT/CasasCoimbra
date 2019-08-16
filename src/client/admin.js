@@ -44,6 +44,7 @@ $(document).ready(() => {
     const disponivel = $('#disponivel').val();
     const quando = $('#quando').val();
 
+    data2.append('divisao', hasDiv);
     data2.append('tipo', tipo);
     data2.append('numero', numero);
     data2.append('preco', preco);

@@ -99,6 +99,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
         }
       }).then(([foto, created]) => {
         if (created) {
+          console.log('Created foto in DB');
           return foto;
         }
         return [];
@@ -112,6 +113,7 @@ async function uploadFiles(res, files, divisao, tipo, nome, numero, idCasa) {
         const dest = path.join(
           `./dist/assets/casas/${nome}/${tipo}${numero}/${fileName}`
         );
+
         return copyFiles(src, dest, file);
       }
       return [];
@@ -155,6 +157,7 @@ router.post('/uploadMulti', (req, res, next) => {
         } else {
           const { divisao, tipo, nome, numero, idCasa } = req.body;
           const { files } = req;
+
           uploadFiles(
             res,
             files,
