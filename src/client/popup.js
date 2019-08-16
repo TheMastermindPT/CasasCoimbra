@@ -301,7 +301,7 @@ const getHomeWithQuery = (query, modal, counterDiv, counterPhotos) => {
             );
           });
 
-          const fotoPath = divisao.fotos[query.get('foto')].path;
+          const fotoPath = divisao.foto[query.get('foto')].path;
           // //Loads Details
           $('.popup__mapa')
             .children('iframe')
@@ -351,7 +351,8 @@ $(document).ready(() => {
       url: window.location.origin + url,
       method: 'GET'
     }).then(casa => {
-      const fotoPath = casa.divisao[0].fotos[0].path.split(',')[0];
+      console.log(casa);
+      const fotoPath = casa.divisao[0].foto[0].path.split(',')[0];
 
       // //Loads Details
       $('.popup__mapa')
