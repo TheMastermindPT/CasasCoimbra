@@ -24,9 +24,17 @@ $.ajax({
 });
 
 $(document).ready(() => {
+  // Adds calendar
   $('#quando').datepicker({
     dateFormat: 'yy/mm/dd'
   });
+
+  // Removes autocomplete from popup from
+  $('.popup__form').disableAutoFill({
+    submitButton: '#editSubmit',
+    randomizeInputName: true
+  });
+
   // Saves Home to Database
   $('.home__wrap').on('submit', '.home__form', function(e) {
     const data = new FormData($(this)[0]);
