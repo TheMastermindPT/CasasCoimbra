@@ -117,7 +117,6 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
 const appendPhotos = (casa = null, uploadFiles = null) => {
   if (casa || uploadFiles) {
     const photosForm = $('.popup__fotos-form');
-    console.log(casa);
     const fotos = casa && !uploadFiles ? casa.divisao[0].foto : uploadFiles;
 
     // Changes the layout of the thumbnails according to the number of fotos
@@ -351,7 +350,6 @@ $(document).ready(() => {
       url: window.location.origin + url,
       method: 'GET'
     }).then(casa => {
-      console.log(casa);
       const fotoPath = casa.divisao[0].foto[0].path.split(',')[0];
 
       // //Loads Details

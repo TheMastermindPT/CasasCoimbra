@@ -155,8 +155,6 @@ router.post('/uploadMulti', (req, res, next) => {
         } else {
           const { divisao, tipo, nome, numero, idCasa } = req.body;
           const { files } = req;
-
-          // (REMINDER) NEED TO FIND TO RET
           uploadFiles(
             res,
             files,

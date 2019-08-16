@@ -24,31 +24,66 @@ $.ajax({
 });
 
 $(document).ready(() => {
-  // Adds calendar
-  $('#quando').datepicker({
-    dateFormat: 'yy/mm/dd'
+  // Uploads Multiple fotos
+  $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
+    const hasDiv = $('#divisao')
+      .find(':selected')
+      .val();
+    const nome = $('.popup__title--divisoes').text();
+    const idCasa = $('.popup__form').data('id');
+    const data = new FormData($('.popup__fotos-form')[0]);
+    const data2 = new FormData();
+
+    const tipo = $('#tipo')
+      .val()
+      .toString()
+      .toLowerCase();
+    const numero = $('#div__numero').val();
+    const divisao = `${tipo}${numero}`;
+    const preco = $('#preco').val();
+    const disponivel = $('#disponivel').val();
+    const quando = $('#quando').val();
+
+    data2.append('tipo', tipo);
+    data2.append('numero', numero);
+    data2.append('preco', preco);
+    data2.append('disponivel', disponivel);
+    data2.append('quando', quando);
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const pairs of data2.entries()) {
+      data.append(pairs[0], pairs[1]);
+    }
+    data.append('nome', nome);
+    data.append('idCasa', idCasa);
+    if (hasDiv) {
+      $.ajax({
+        method: 'POST',
+        url: `${window.location.origin}/api/casas/uploadMulti`,
+        data,
+        cache: false,
+        contentType: false,
+        processData: false
+      }).then(res => {
+        appendPhotos(null, res, nome, divisao);
+      });
+      return true;
+    }
   });
 
-  // Removes autocomplete from popup from
-  $('.popup__form').disableAutoFill({
-    submitButton: '#editSubmit',
-    randomizeInputName: true
+  $('.popup__fotos-form').on('click', '.foto__form-label--add', function(e) {
+    const hasDiv = $('#divisao')
+      .find(':selected')
+      .val();
+    if (!hasDiv) {
+      $(this)
+        .next('input')
+        .attr('type', '');
+      alert('Fotos só podem ser adicionadas depois de criar a divisao');
+    }
   });
 
-  // Saves Home to Database
-  $('.home__wrap').on('submit', '.home__form', function(e) {
-    const data = new FormData($(this)[0]);
-    e.preventDefault();
-    $.ajax({
-      method: 'POST',
-      url: `${window.location.origin}/api/casas/upload`,
-      data,
-      cache: false,
-      contentType: false,
-      processData: false
-    }).then(() => window.location.reload());
-  });
-
+  // Saves the division data
   $('#editSubmit').on('click', function(e) {
     const confirm = window.confirm(
       'Tens a certeza que queres guardar alterações?'
@@ -61,7 +96,7 @@ $(document).ready(() => {
         .find(':selected')
         .data('mode');
       e.preventDefault();
-
+      const photosForm = $('.popup__fotos-form');
       const idDivisao =
         mode !== 'create'
           ? $('#divisao')
@@ -92,6 +127,9 @@ $(document).ready(() => {
           selector.removeAttr('data-mode');
           selector.removeAttr('id');
           selector.text(`${data.tipo} ${data.numero}`);
+          $('.foto__form-label--add')
+            .next('input')
+            .attr('type', 'file');
         } else if (res.action === 'updated') {
           selector.text(`${data.tipo} ${data.numero}`);
         }
@@ -102,6 +140,31 @@ $(document).ready(() => {
     }
   });
 
+  // Adds calendar
+  $('#quando').datepicker({
+    dateFormat: 'yy/mm/dd'
+  });
+
+  // Removes autocomplete from popup from
+  $('.popup__form').disableAutoFill({
+    randomizeInputName: true
+  });
+
+  // Saves Home to Database
+  $('.home__wrap').on('submit', '.home__form', function(e) {
+    const data = new FormData($(this)[0]);
+    e.preventDefault();
+    $.ajax({
+      method: 'POST',
+      url: `${window.location.origin}/api/casas/upload`,
+      data,
+      cache: false,
+      contentType: false,
+      processData: false
+    }).then(() => window.location.reload());
+  });
+
+  // Delete whole division
   $('#editDelete').on('click', function() {
     const confirm = window.confirm('Tens a certeza que queres apagar?');
     if (confirm) {
@@ -182,7 +245,19 @@ $(document).ready(() => {
       });
       return true;
     }
+    // Removes and appends the option to add thumbnails again
     photosForm.empty();
+    photosForm.append(`
+      <div class="fotos__foto fotos__foto--add">
+        <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
+          <svg>
+            <use xlink:href="#icon-upload"></use>
+          </svg>
+        </label>
+        <input type="file" name="fotos" id="fotos__divisao" multiple required>
+      </div>
+    `);
+
     $(this)
       .parents('.popup__form')
       .find('input, textarea')
@@ -277,39 +352,7 @@ $(document).ready(() => {
     });
   });
 
-  $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
-    const nome = $('.popup__title--divisoes').text();
-    const idCasa = $('.popup__form').data('id');
-    const data = new FormData($('.popup__fotos-form')[0]);
-    const data2 = new FormData($('.popup__form')[0]);
-    const tipo = $('#tipo')
-      .val()
-      .toString()
-      .toLowerCase();
-    const numero = $('#div__numero').val();
-    const divisao = `${tipo}${numero}`;
-    const nrFiles = $(this).get(0).files.length;
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const pairs of data2.entries()) {
-      data.append(pairs[0], pairs[1]);
-    }
-    data.append('nome', nome);
-    data.append('idCasa', idCasa);
-
-    $.ajax({
-      method: 'POST',
-      url: `${window.location.origin}/api/casas/uploadMulti`,
-      data,
-      cache: false,
-      contentType: false,
-      processData: false
-    }).then(res => {
-      console.log(res);
-      appendPhotos(null, res, nome, divisao);
-    });
-  });
-
+  // Deletes single division photo
   $('.popup__fotos-form').on('click', '.foto__delete', function() {
     const nome = $('.popup__title--divisoes').text();
     const idFoto = $(this).data('id');
