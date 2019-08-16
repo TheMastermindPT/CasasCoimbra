@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Foto = sequelize.define(
-    'foto',
+    'Foto',
     {
       idFoto: {
         type: DataTypes.INTEGER(11),
@@ -26,6 +26,14 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true,
         field: 'updatedAt'
       },
+      DivisaoIdDivisao: {
+        type: DataTypes.INTEGER(11),
+        references: {
+          model: 'Divisao',
+          references: 'idDivisao'
+        },
+        field: 'DivisaoIdDivisao'
+      },
       CasaIdCasa: {
         type: DataTypes.INTEGER(11),
         references: {
@@ -45,8 +53,14 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Foto.associate = function(models) {
-    // Foto.belongsTo(models.Divisao);
-    Foto.belongsTo(models.Casa);
+    Foto.belongsTo(models.Divisao, {
+      foreignKey: 'DivisaoIdDivisao',
+      targetKey: 'idDivisao'
+    });
+    Foto.belongsTo(models.Casa, {
+      foreignKey: 'CasaIdCasa',
+      targetKey: 'idCasa'
+    });
   };
 
   return Foto;

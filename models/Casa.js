@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Casa = sequelize.define(
-    'casa',
+    'Casa',
     {
       idCasa: {
         type: DataTypes.INTEGER(11),
@@ -92,8 +92,14 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Casa.associate = function(models) {
-    Casa.hasMany(models.Divisao);
-    // Casa.hasMany(models.Foto);
+    Casa.hasMany(models.Divisao, {
+      foreignKey: 'CasaIdCasa',
+      sourceKey: 'idCasa'
+    });
+    Casa.hasMany(models.Foto, {
+      foreignKey: 'CasaIdCasa',
+      sourceKey: 'idCasa'
+    });
   };
   return Casa;
 };

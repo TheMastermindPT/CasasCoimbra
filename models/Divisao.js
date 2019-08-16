@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Divisao = sequelize.define(
-    'divisao',
+    'Divisao',
     {
       idDivisao: {
         type: DataTypes.INTEGER(11),
@@ -70,8 +70,14 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Divisao.associate = function(models) {
-    // Divisao.belongsTo(models.Casa);
-    Divisao.hasMany(models.Foto);
+    Divisao.belongsTo(models.Casa, {
+      foreignKey: 'CasaIdCasa',
+      targetKey: 'idCasa'
+    });
+    Divisao.hasMany(models.Foto, {
+      foreignKey: 'DivisaoIdDivisao',
+      sourceKey: 'idDivisao'
+    });
   };
 
   return Divisao;
