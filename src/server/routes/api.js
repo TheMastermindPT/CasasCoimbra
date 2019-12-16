@@ -296,39 +296,18 @@ router.post('/upload', (req, res, next) => {
 router.post('/updatePositions', (req, res, next) => {
   const {info} = req.body;
 
-  res.json(info);
   
   info.forEach((element,index) => {
+
     db.Casa.update(
       {
-        position: element[0]
+        position: element[1]
       },
       {where : {
-        idCasa: element[1]
+        idCasa: element[0]
       }}
     ).then(console.log('updated'));
-  });
-
-
-  // db.Casa.findAll({ where: { idCasa: ids }}).then(casas => {
-  //   casas.forEach((element,index) => {
-  //     console.log(positions);
-  //     db.Casa.update(
-  //       {position: positions[index]}
-  //       ,{where: {idCasa : index + 1 }}
-  //       ).then(console.log('updated'));
-  //   });
-  // });
-
-    // db.Casa.update(
-    //   {
-    //     position: positions
-    //   },
-    //   {
-       
-    //   }
-    //   ).then(updated => console.log('updated'));
- 
+  }); 
 });
 
 // Delete Home
