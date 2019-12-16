@@ -9,7 +9,7 @@ const { appendPhotos, addDivision } = require('./popup');
 let isAppended = false;
 // Check if admin is logged in
 let auth = cookies.get('auth');
-
+const formDrag = $('.home__exists');
 // Loads Homes in the Dashboard
 $.ajax({
   url: `${window.location.origin}/api/casas`,
@@ -24,6 +24,50 @@ $.ajax({
 });
 
 $(document).ready(() => {
+  const savePositions = form => {
+    const data = {};
+    const info = []
+  
+    formDrag.children().each(function(index, element) {
+      const id = parseInt($(this).find('.home__edit').eq(0).data('id'),10);
+   
+      const position = parseInt(
+        $(this)
+          .eq(0)
+          .attr('data-position'),
+        10
+      );
+
+      info.push([id, position]);
+
+    });
+
+
+    $.ajax({
+      method: 'POST',
+      url: `${window.location.origin}/api/casas/updatePositions`,
+      data: {
+        info
+      },
+    }).then(res=>{console.log(res)});
+  };
+
+  // Sortable drag & drop
+  $(formDrag).sortable({
+    update(event, ui) {
+      $(this)
+        .children()
+        .each(function(index) {
+          if ($(this).data('data-position') !== index) {
+            $(this)
+              .attr('data-position', index + 1)
+              .addClass('updated');
+          }
+        });
+      savePositions($('.home__form updated').children()[0]);
+    }
+  });
+
   // Uploads Multiple fotos
   $('.popup__fotos-form').on('change', '#fotos__divisao', function() {
     const hasDiv = $('#divisao')

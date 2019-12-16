@@ -63,6 +63,12 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: '1',
         field: 'netTv'
       },
+      position: {
+        type: DataTypes.INTEGER(1),
+        allowNull: false,
+        defaultValue: '0',
+        field: 'position'
+      },
       despesas: {
         type: DataTypes.INTEGER(1),
         allowNull: false,

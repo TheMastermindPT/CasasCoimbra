@@ -206,7 +206,7 @@ router.post('/upload', (req, res, next) => {
       } else {
         netTv = 0;
       }
-
+      console.log(req.body);
       db.Casa.findOrCreate({
         where: { nome: req.body.nome },
         defaults: {
@@ -221,7 +221,8 @@ router.post('/upload', (req, res, next) => {
           proximo: req.body.proximo,
           netTv,
           despesas: req.body.despesas,
-          mapa: req.body.mapa
+          mapa: req.body.mapa,
+          position: req.body.position
         }
       })
         .then(([casa, created]) => {
@@ -254,7 +255,8 @@ router.post('/upload', (req, res, next) => {
                 proximo: req.body.proximo,
                 netTv,
                 despesas: req.body.despesas,
-                mapa: req.body.mapa
+                mapa: req.body.mapa,
+                position: req.body.position
               },
               {
                 where: { nome: req.body.nome }
@@ -274,7 +276,8 @@ router.post('/upload', (req, res, next) => {
                 proximo: req.body.proximo,
                 netTv,
                 despesas: req.body.despesas,
-                mapa: req.body.mapa
+                mapa: req.body.mapa,
+                position: req.body.position
               },
               {
                 where: { nome: req.body.nome }
@@ -288,6 +291,44 @@ router.post('/upload', (req, res, next) => {
         .catch(oops => next());
     }
   });
+});
+
+router.post('/updatePositions', (req, res, next) => {
+  const {info} = req.body;
+
+  res.json(info);
+  
+  info.forEach((element,index) => {
+    db.Casa.update(
+      {
+        position: element[0]
+      },
+      {where : {
+        idCasa: element[1]
+      }}
+    ).then(console.log('updated'));
+  });
+
+
+  // db.Casa.findAll({ where: { idCasa: ids }}).then(casas => {
+  //   casas.forEach((element,index) => {
+  //     console.log(positions);
+  //     db.Casa.update(
+  //       {position: positions[index]}
+  //       ,{where: {idCasa : index + 1 }}
+  //       ).then(console.log('updated'));
+  //   });
+  // });
+
+    // db.Casa.update(
+    //   {
+    //     position: positions
+    //   },
+    //   {
+       
+    //   }
+    //   ).then(updated => console.log('updated'));
+ 
 });
 
 // Delete Home

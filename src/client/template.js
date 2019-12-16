@@ -44,9 +44,9 @@ module.exports = {
         `);
   },
   templateAdmin(casa) {
-    $('#add_home').before(`
+    $('.home__exists').append(`
         <form method="post" class="home__form" enctype="multipart/form-data"
-        name="home-form" autocorrect="off" autofill=""off>
+        name="home-form" autocorrect="off" autofill=""off data-position="0">
         <div class="home__foto">
             <label for="casa${casa.numero}" class="foto__label">
              <img src="/${casa.fotoMain}" alt="fotoMain">
