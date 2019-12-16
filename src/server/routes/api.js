@@ -295,8 +295,6 @@ router.post('/upload', (req, res, next) => {
 
 router.post('/updatePositions', (req, res, next) => {
   const {info} = req.body;
-
-  
   info.forEach((element,index) => {
 
     db.Casa.update(
@@ -382,7 +380,7 @@ router.delete('/removePhoto', (req, res, next) => {
 router.get('/', (req, res, next) => {
   // If there are no queries in URL, retrieve all the homes in DB
   if (Object.keys(req.query).length === 0) {
-    db.Casa.findAll()
+    db.Casa.findAll({order : [['position' , 'ASC']]})
       .then(casa => {
         res.setHeader('Content-Type', 'application/json');
         res.send(casa);
