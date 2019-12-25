@@ -133,16 +133,6 @@ $color-dark: #0b1b1f;
 //HOME ROWS
 .home {
   &__form {
-    &:last-child {
-      .home__foto label {
-        border: 2px dashed var(--color-light);
-        border-radius: 4px;
-
-        &:hover {
-          border: 2px dashed darken(white, 20%);
-        }
-      }
-    }
 
     display: flex;
     font-family: 'Montserrat', sans-serif;

@@ -42,6 +42,16 @@
   fill: black;
 }
 
+.icon__english {
+  position: absolute;
+  z-index: 99999;
+  right: 2rem;
+  top: 2rem;
+  height: 4rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
 .footer__svg {
   width: 3rem;
   height: 3rem;
