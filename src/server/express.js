@@ -1,4 +1,4 @@
-p/* eslint-disable import/order */
+/* eslint-disable import/order */
 
 // MODULES
 // require('dotenv').config();
