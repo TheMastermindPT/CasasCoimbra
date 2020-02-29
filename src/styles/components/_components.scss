@@ -590,6 +590,7 @@
   text-transform: capitalize;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 3rem;
   width: 6rem;
   border-radius: 5px;
@@ -620,6 +621,7 @@
   background-color: var(--color-darkred);
   color: var(--color-light);
   text-transform: capitalize;
+  align-items: center;
   display: flex;
   justify-content: center;
   height: 3rem;

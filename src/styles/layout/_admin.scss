@@ -6,6 +6,7 @@ $color-dark: #0b1b1f;
   text-transform: capitalize;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 3rem;
   width: 6rem;
   border-radius: 5px;
@@ -335,6 +336,7 @@ $color-dark: #0b1b1f;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  
 
     & > form {
       display: flex;
