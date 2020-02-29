@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const env = require('../.env');
 const { User, Casa, Divisao, Foto } = require('../models');
 
 
