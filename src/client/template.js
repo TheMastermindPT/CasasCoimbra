@@ -30,11 +30,12 @@ module.exports = {
                                 }</span>
                             </li>
                             <li class="imovel__item">
-                                ${
-                                  casa.despesas
-                                    ? 'DESPESAS INCLUÍDAS C/LIMPEZA'
-                                    : ''
-                                }
+                            ${
+                              casa.despesas
+                                ? 'DESPESAS INCLUÍDAS C/LIMPEZA'
+                                : ''
+                            }
+                    
                             </li>
                         </ul>
                         
@@ -114,6 +115,12 @@ module.exports = {
                 <label for="netTv">Net & TV:</label>
                 <input type="checkbox" name="netTv" ${
                   casa.netTv ? 'checked' : 'unchecked'
+                }>
+            </div>
+            <div class="home__despesas">
+                <label for="despesas">Despesas Incluídas:</label>
+                <input type="checkbox" name="despesas" ${
+                  casa.despesas ? 'checked' : 'unchecked'
                 }>
             </div>
         </div>

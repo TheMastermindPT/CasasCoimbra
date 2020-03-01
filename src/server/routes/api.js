@@ -184,7 +184,7 @@ router.post('/upload', (req, res, next) => {
       res.sendStatus(400);
       res.end();
     } else {
-      let { mobilado, netTv } = req.body;
+      let { mobilado, netTv, despesas } = req.body;
       let fotoPath;
       let fileType;
       let fileName;
@@ -206,7 +206,13 @@ router.post('/upload', (req, res, next) => {
       } else {
         netTv = 0;
       }
-      console.log(req.body);
+
+       if (despesas === 'on') {
+        despesas = 1;
+      } else {
+        despesas = 0;
+      } 
+
       db.Casa.findOrCreate({
         where: { nome: req.body.nome },
         defaults: {
@@ -220,7 +226,7 @@ router.post('/upload', (req, res, next) => {
           mobilado,
           proximo: req.body.proximo,
           netTv,
-          despesas: req.body.despesas,
+          despesas,
           mapa: req.body.mapa,
           position: req.body.position
         }
@@ -254,7 +260,7 @@ router.post('/upload', (req, res, next) => {
                 mobilado,
                 proximo: req.body.proximo,
                 netTv,
-                despesas: req.body.despesas,
+                despesas,
                 mapa: req.body.mapa,
                 position: req.body.position
               },
@@ -275,7 +281,7 @@ router.post('/upload', (req, res, next) => {
                 mobilado,
                 proximo: req.body.proximo,
                 netTv,
-                despesas: req.body.despesas,
+                despesas,
                 mapa: req.body.mapa,
                 position: req.body.position
               },
@@ -542,10 +548,10 @@ router.post('/editDivisions', (req, res, next) => {
   return db.Divisao.create({
     CasaIdCasa: idCasa,
     tipo,
-    numero,
+    numero : numero || null,
     descricao,
-    preco,
-    disponivel,
+    preco :  preco || null,
+    disponivel: disponivel || null,
     quando: quando || null
   })
     .then(created => {
