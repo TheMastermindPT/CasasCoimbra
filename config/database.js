@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const { User, Casa, Divisao, Foto } = require('../models');
 
-
 if (!global.hasOwnProperty('db')) {
   let sequelize;
   // Option 1: Passing parameters separately
