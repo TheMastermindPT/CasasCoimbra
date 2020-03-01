@@ -1,7 +1,7 @@
 module.exports = {
   templateHome(wrapper, casa) {
     $('.imoveis__wrapper').eq(wrapper).append(`
-            <div class="imovel" data-modal="#imovel">
+            <div class="imovel" data-modal="#imovel" data-id=${casa.idCasa}>
                     <div class="imovel__info">
                         <ul class="imovel__list">
                             <li class="imovel__item">
@@ -35,7 +35,9 @@ module.exports = {
                                 ? 'DESPESAS INCLUÍDAS C/LIMPEZA'
                                 : ''
                             }
-                    
+                                <span>
+                               
+                                <span>
                             </li>
                         </ul>
                         

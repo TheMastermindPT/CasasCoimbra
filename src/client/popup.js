@@ -339,17 +339,17 @@ $(document).ready(() => {
   // If url has a  query, fetch home from DB
   getHomeWithView(query1, modal, counterDiv, counterPhotos, loaded);
 
-  // Fetch home from DB when clicking imovel
+  // Fetch home from DB when clicking imovel PROBLEM HERE
   $('#imoveis').on('click', '.imovel', function() {
     // Variables
-    const imovelDiv = $(this);
-    numeroCasa = $('.imovel').index(imovelDiv) + 1;
-    const url = `/api/casas?id=${numeroCasa}`;
+    const indexHome = $(this).data('id');
+    const url = `/api/casas?id=${indexHome}`;
 
     $.ajax({
       url: window.location.origin + url,
       method: 'GET'
     }).then(casa => {
+      
       const fotoPath = casa.divisao[0].foto[0].path.split(',')[0];
 
       // //Loads Details

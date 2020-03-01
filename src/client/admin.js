@@ -30,18 +30,14 @@ $(document).ready(() => {
   
     formDrag.children().each(function(index, element) {
       const id = parseInt($(this).find('.home__edit').eq(0).data('id'),10);
-   
       const position = parseInt(
         $(this)
           .eq(0)
           .attr('data-position'),
         10
       );
-
       info.push([id, position]);
-
     });
-
 
     $.ajax({
       method: 'POST',
