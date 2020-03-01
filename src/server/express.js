@@ -133,7 +133,3 @@ db.sequelize.sync().then(function() {
   });
 });
 
-// SERVER
-// app.listen(PORT, () => {
-//   console.log('Server is listening');
-// });

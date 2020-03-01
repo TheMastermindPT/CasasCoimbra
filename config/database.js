@@ -6,7 +6,7 @@ if (!global.hasOwnProperty('db')) {
   // Option 1: Passing parameters separately
   if (process.env.DATABASE_URL) {
     sequelize = new Sequelize(    
-    "postgres://wsqjoftvrcasoj:2c2fd17610760741c6a5a0c1c4e8ae8278274489574d016dfe136b808901a09b@ec2-54-247-125-38.eu-west-1.compute.amazonaws.com:5432/d8hl2ld4fimmnt");
+    "postgres://nszhhprjnicxxa:94670110c59ca4761ee70e4809e1f0066a968cd03b0fc1ae3787bb1509c1bd77@ec2-54-246-90-10.eu-west-1.compute.amazonaws.com:5432/dcccq7qv6adim9");
     console.log('production DB');
   } else {
     sequelize = new Sequelize('casascoimbra', 'root', 'root', {
