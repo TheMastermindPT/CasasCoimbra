@@ -75,6 +75,12 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: '1',
         field: 'despesas'
       },
+      limpezas: {
+        type: DataTypes.INTEGER(1),
+        allowNull: false,
+        defaultValue: '1',
+        field: 'limpezas'
+      },
       mapa: {
         type: DataTypes.STRING(255),
         allowNull: false,

@@ -1,8 +1,5 @@
 /* eslint-disable import/order */
 
-// MODULES
-// require('dotenv').config();
-
 const PORT = process.env.PORT || 5000;
 const isProd = process.env.NODE_ENV === 'production' || null;
 const express = require('express');

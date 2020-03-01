@@ -273,6 +273,7 @@
                     <use xlink:href="#icon-circle-right"></use>
                 </svg>
                 {{#if casa}}
+                <p></p>
                 {{#each casa.divisao}}
                 <img src="/{{indexed this.fotos @root.urlParameters.idFoto }}" alt="foto">
                 {{/each}}
@@ -301,6 +302,7 @@
                         {{#if this.preco}}
                         {{json this.preco}}€
                         {{else}}
+                            Nao Disponível
                         {{/if}}
                     </p>
                     <p class="popup__comment">{{json this.descricao}}</p>

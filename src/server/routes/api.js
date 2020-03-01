@@ -184,10 +184,11 @@ router.post('/upload', (req, res, next) => {
       res.sendStatus(400);
       res.end();
     } else {
-      let { mobilado, netTv, despesas } = req.body;
+      let { mobilado, netTv, despesas, limpezas } = req.body;
       let fotoPath;
       let fileType;
       let fileName;
+      
 
       // Check if there is a file to be uploaded
       if (req.file != null) {
@@ -213,6 +214,12 @@ router.post('/upload', (req, res, next) => {
         despesas = 0;
       } 
 
+      if (limpezas === 'on') {
+        limpezas = 1;
+      } else {
+        limpezas = 0;
+      } 
+
       db.Casa.findOrCreate({
         where: { nome: req.body.nome },
         defaults: {
@@ -227,6 +234,7 @@ router.post('/upload', (req, res, next) => {
           proximo: req.body.proximo,
           netTv,
           despesas,
+          limpezas,
           mapa: req.body.mapa,
           position: req.body.position
         }
@@ -261,6 +269,7 @@ router.post('/upload', (req, res, next) => {
                 proximo: req.body.proximo,
                 netTv,
                 despesas,
+                limpezas,
                 mapa: req.body.mapa,
                 position: req.body.position
               },
@@ -282,6 +291,7 @@ router.post('/upload', (req, res, next) => {
                 proximo: req.body.proximo,
                 netTv,
                 despesas,
+                limpezas,
                 mapa: req.body.mapa,
                 position: req.body.position
               },

@@ -31,13 +31,17 @@ module.exports = {
                             </li>
                             <li class="imovel__item">
                             ${
-                              casa.despesas
-                                ? 'DESPESAS INCLUÍDAS C/LIMPEZA'
+                              casa.limpezas
+                                ? 'LIMPEZAS INCLUÍDAS'
                                 : ''
                             }
-                                <span>
-                               
-                                <span>
+                            </li>
+                            <li class="imovel__item">
+                            ${
+                              casa.despesas
+                                ? 'DESPESAS INCLUÍDAS'
+                                : ''
+                            }
                             </li>
                         </ul>
                         
@@ -123,6 +127,12 @@ module.exports = {
                 <label for="despesas">Despesas Incluídas:</label>
                 <input type="checkbox" name="despesas" ${
                   casa.despesas ? 'checked' : 'unchecked'
+                }>
+            </div>
+            <div class="home__limpezas">
+                <label for="limpezas">Contas Incl/:</label>
+                <input type="checkbox" name="limpezas" ${
+                  casa.limpezas ? 'checked' : 'unchecked'
                 }>
             </div>
         </div>
