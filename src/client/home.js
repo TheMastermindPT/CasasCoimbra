@@ -60,7 +60,7 @@ $(window).ready(() => {
       // Appends Button to House
       $('.imovel__info')
         .eq(index)
-        .append(`<button class="conheca">Conheça</button>`);
+        .append(`<button class="conheca">Entrar</button>`);
     });
 
     // Appends X amount of placeholders depending on X of missing children

@@ -474,7 +474,7 @@ router.get('/', (req, res, next) => {
         }
       ],
       where: {
-        numero: req.query.id
+        idCasa: req.query.id
       }
     })
       .then(data => res.json(data))

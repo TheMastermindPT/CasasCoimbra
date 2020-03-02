@@ -148,7 +148,7 @@ $(document).ready(() => {
       const data = {
         idCasa,
         idDivisao,
-        tipo: $('#tipo').val(),
+        tipo: $('#tipo').find(':selected').val(),
         numero: $('#div__numero').val(),
         descricao: $('#descricao').val(),
         preco: $('#preco').val(),
@@ -266,6 +266,7 @@ $(document).ready(() => {
     const mode = $(this)
       .find(':selected')
       .data('mode');
+    
 
     const photosForm = $('.popup__fotos-form');
 

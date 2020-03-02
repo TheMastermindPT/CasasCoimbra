@@ -26,11 +26,17 @@ const updateInfo = (casa, counterDiv) => {
     }`
   );
 
-  $('.popup__price').html(
+  if(casa.divisao[counterDiv].preco) {
+    $('.popup__price').html(`${casa.divisao[counterDiv].preco}€`);
+  } else {
+    $('.popup__price').html(`Nao Disponível`);
+  }
+
+/*   $('.popup__price').html(
     `${
-      casa.divisao[counterDiv].preco ? `${casa.divisao[counterDiv].preco}€` : ''
+      casa.divisao[counterDiv].preco ? `${casa.divisao[counterDiv].preco}€` : 'Nao Disponível'
     }`
-  );
+  ); */
 
   $('.popup__comment').html(`${casa.divisao[counterDiv].descricao}`);
 };
