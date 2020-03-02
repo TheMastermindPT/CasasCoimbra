@@ -155,13 +155,14 @@ $(document).ready(() => {
         disponivel: $('#disponivel').prop('checked'),
         quando: $('#quando').val()
       };
-
+     
       $.ajax({
         method: 'POST',
         url: `${window.location.origin}/api/casas/editDivisions`,
         dataType: 'json',
         data
       }).then(res => {
+        console.log(res);
         if (res.action === 'created') {
           selector.val(`${res.created.idDivisao}`);
           selector.removeData('mode');

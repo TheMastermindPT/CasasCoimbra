@@ -28,7 +28,7 @@ const updateInfo = (casa, counterDiv) => {
 
   if(casa.divisao[counterDiv].preco) {
     $('.popup__price').html(`${casa.divisao[counterDiv].preco}€`);
-  } else {
+  } else if (casa.divisao[counterDiv].disponivel === null) {
     $('.popup__price').html(`Nao Disponível`);
   }
 

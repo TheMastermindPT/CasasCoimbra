@@ -534,16 +534,14 @@ router.post('/editDivisions', (req, res, next) => {
   idDivisao = parseInt(idDivisao, 10) || 'create';
   disponivel = disponivel === 'true' ? 1 : 0;
 
-  console.log(typeof idDivisao);
-
   if (typeof idDivisao === 'number') {
-    return db.Divisao.update(
+   return db.Divisao.update(
       {
         tipo,
-        numero,
+        numero: numero || null,
         descricao,
-        preco,
-        disponivel,
+        preco: preco || null,
+        disponivel: disponivel || null,
         quando: quando || null
       },
       { where: { idDivisao } }

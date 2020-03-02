@@ -32,9 +32,10 @@ module.exports = function(sequelize, DataTypes) {
         field: 'preco'
       },
       disponivel: {
-        type: DataTypes.INTEGER(4),
-        allowNull: true,
-        field: 'disponivel'
+        type: DataTypes.INTEGER(1),
+        allowNull: false,
+        field: 'disponivel',
+        defaultValue: '1',
       },
       quando: {
         type: DataTypes.DATEONLY,
