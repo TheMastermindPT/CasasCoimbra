@@ -518,7 +518,10 @@ router.get('/', (req, res, next) => {
   }
 });
 
+
+// Edits divisions of each house
 router.post('/editDivisions', (req, res, next) => {
+
   let {
     idCasa,
     idDivisao,
@@ -535,7 +538,7 @@ router.post('/editDivisions', (req, res, next) => {
   disponivel = disponivel === 'true' ? 1 : 0;
 
   if (typeof idDivisao === 'number') {
-   return db.Divisao.update(
+    db.Divisao.update(
       {
         tipo,
         numero: numero || null,
@@ -551,21 +554,21 @@ router.post('/editDivisions', (req, res, next) => {
         res.send({ action: 'updated' });
       })
       .catch(oops => next());
-  }
-
-  return db.Divisao.create({
-    CasaIdCasa: idCasa,
-    tipo,
-    numero : numero || null,
-    descricao,
-    preco :  preco || null,
-    disponivel: disponivel || null,
-    quando: quando || null
-  })
-    .then(created => {
-      res.send({ created, action: 'created' });
+  } else {
+    db.Divisao.create({
+      CasaIdCasa: idCasa,
+      tipo,
+      numero : numero || null,
+      descricao : descricao || null,
+      preco :  preco || null,
+      disponivel: disponivel || null,
+      quando: quando || null
     })
-    .catch(oops => next());
+      .then(created => {
+        res.send({ created, action: 'created' });
+      })
+      .catch(oops => next());
+  }
 });
 
 router.delete('/deleteDivision', (req, res, next) => {

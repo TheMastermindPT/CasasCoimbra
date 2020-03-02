@@ -1,3 +1,4 @@
+import onCreateDivisionCheckboxAvailable from './admin';
 const exitPopup = $('.popup');
 const modalsList = [
   {
@@ -231,9 +232,8 @@ const openModal = (modal, element) => {
           $('#div__numero').val(casa.divisao[0].numero);
           $('#descricao').val(casa.divisao[0].descricao);
           $('#preco').val(casa.divisao[0].preco);
-          casa.divisao[0].disponivel
-            ? $('#disponivel').prop('checked', true)
-            : $('#disponivel').prop('checked', false);
+
+          onCreateDivisionCheckboxAvailable(casa);
           $('#quando').val(casa.divisao[0].quando);
           appendPhotos(casa);
           return true;
@@ -241,6 +241,7 @@ const openModal = (modal, element) => {
 
         // Appends the option to create a new div
         addDivision();
+        $('#disponivel').prop('checked', true);
         return false;
       });
     }

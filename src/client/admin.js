@@ -10,6 +10,29 @@ let isAppended = false;
 // Check if admin is logged in
 let auth = cookies.get('auth');
 const formDrag = $('.home__exists');
+
+//Function to append multiple photos thumbnail
+
+const addMultiPhoto = () => {
+  $('.popup__fotos-form').append(
+    `<div class="fotos__foto fotos__foto--add">
+      <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
+        <svg>
+            <use xlink:href="#icon-upload"></use>
+        </svg>
+      </label>
+    <input type="file" name="fotos" id="fotos__divisao" multiple required>
+    </div>
+    `
+    );
+}
+
+export const onCreateDivisionCheckboxAvailable = (casa) => {
+    casa.divisao[0].disponivel
+    ? $('#disponivel').prop('checked', true)
+    : $('#disponivel').prop('checked', false);
+}
+
 // Loads Homes in the Dashboard
 $.ajax({
   url: `${window.location.origin}/api/casas`,
@@ -155,7 +178,8 @@ $(document).ready(() => {
         disponivel: $('#disponivel').prop('checked'),
         quando: $('#quando').val()
       };
-     
+      console.log(data);
+
       $.ajax({
         method: 'POST',
         url: `${window.location.origin}/api/casas/editDivisions`,
@@ -172,10 +196,11 @@ $(document).ready(() => {
           $('.foto__form-label--add')
             .next('input')
             .attr('type', 'file');
+  
+          // MULTIPHOTO ADD MAYBE//
         } else if (res.action === 'updated') {
           selector.text(`${data.tipo} ${data.numero}`);
         }
-
         // Appends the option to create a new div
         addDivision();
       });
@@ -195,9 +220,9 @@ $(document).ready(() => {
   // Saves Home to Database
   $('.home__wrap').on('submit', '.home__form', function(e) {
     const data = new FormData($(this)[0]);
-    /* for(var pair of data.entries()) {
+    for(var pair of data.entries()) {
       console.log(pair[0]+ ', '+ pair[1]); 
-   } */
+   }
   
     e.preventDefault();
     $.ajax({
@@ -284,9 +309,7 @@ $(document).ready(() => {
           : $('#div__numero').val('');
         $('#descricao').val(casa.divisao[0].descricao);
         $('#preco').val(casa.divisao[0].preco);
-        casa.divisao[0].disponivel
-          ? $('#disponivel').prop('checked', true)
-          : $('#disponivel').prop('checked', false);
+        onCreateDivisionCheckboxAvailable(casa);
         $('#quando').val(casa.divisao[0].quando);
         appendPhotos(casa);
       });
@@ -315,6 +338,7 @@ $(document).ready(() => {
       .find('input[type=checkbox]')
       .prop('checked', false);
 
+    $('#disponivel').prop('checked', true); 
     return false;
   });
 

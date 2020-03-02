@@ -124,14 +124,14 @@ module.exports = {
                 }>
             </div>
             <div class="home__despesas">
-                <label for="despesas">Despesas Incluídas:</label>
+                <label for="despesas">Contas Incluídas:</label>
                 <input type="checkbox" name="despesas" ${
                   casa.despesas ? 'checked' : 'unchecked'
                 }>
             </div>
             <div class="home__limpezas">
-                <label for="limpezas">Contas Incl/:</label>
-                <input type="checkbox" name="limpezas" checked ${
+                <label for="limpezas">Limpezas Incl/:</label>
+                <input type="checkbox" name="limpezas" ${
                   casa.limpezas ? 'checked' : 'unchecked'
                 }>
             </div>
