@@ -8,13 +8,12 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "host": "ec2-54-246-90-10.eu-west-1.compute.amazonaws.com",
-    "database": "d6pnii2gpt1ro1",
-    "username" : "hpzssqxlftvmow",
-    "port":5432,
-    "password" :"5deb4fab2c75c9b6f3291d14597fbb307b7f24b2230e41f2f8430d08b5b168ba",
-    "URI": "postgres://hpzssqxlftvmow:5deb4fab2c75c9b6f3291d14597fbb307b7f24b2230e41f2f8430d08b5b168ba@ec2-46-137-84-173.eu-west-1.compute.amazonaws.com:5432/d6pnii2gpt1ro1",
-    "Heroku CLI": "heroku pg:psql postgresql-contoured-15181 --app casascoimbra",
-    "dialect": "postgres"
+    "host": "cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+    "database": "trqxjv9cvk44lyum",
+    "username" : "y9fmh98miynewqww",
+    "port":3306,
+    "password" :"yd4fzsqjdz25kbmd",
+    "URI": "mysql://y9fmh98miynewqww:yd4fzsqjdz25kbmd@cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/trqxjv9cvk44lyum",
+    "dialect": "mysql"
   }
 }
