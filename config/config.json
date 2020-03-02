@@ -1,4 +1,5 @@
- "development": {
+ {
+   "development": {
     "username": "root",
     "password": "root",
     "database": "casascoimbra",
@@ -15,3 +16,4 @@
     "URI": "mysql://y9fmh98miynewqww:yd4fzsqjdz25kbmd@cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/trqxjv9cvk44lyum",
     "dialect": "mysql"
   }
+}
