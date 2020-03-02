@@ -70,7 +70,7 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     window.window.history.replaceState(
       { popup: true },
       null,
-      `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
+      `/api/casas?id=${casa.idCasa}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
     );
   });
 
@@ -106,10 +106,11 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
     }
     console.log(`CounterDiv : ${counterDiv}, CounterPhotos: ${counterPhotos}`);
     updateInfo(casa, counterDiv, counterPhotos);
+    // UPDATES URL on click left/right
     window.history.replaceState(
       { popup: true },
       null,
-      `/api/casas?id=${casa.numero}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
+      `/api/casas?id=${casa.idCasa}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
     );
   });
 };
@@ -339,7 +340,7 @@ $(document).ready(() => {
   // If url has a  query, fetch home from DB
   getHomeWithView(query1, modal, counterDiv, counterPhotos, loaded);
 
-  // Fetch home from DB when clicking imovel PROBLEM HERE
+  // Fetch home from DB when clicking imovel 
   $('#imoveis').on('click', '.imovel', function() {
     // Variables
     const indexHome = $(this).data('id');

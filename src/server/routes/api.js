@@ -481,7 +481,7 @@ router.get('/', (req, res, next) => {
       .catch(oops => next());
   }
 
-  // If there is id, div and foto queries fecth it from DB
+  // If there is id, div and foto queries fecth it from DB and send it to render (IMPORTANT)
   if (
     Object.keys(req.query)[0] === 'id' &&
     Object.keys(req.query)[1] === 'div' &&
@@ -498,7 +498,7 @@ router.get('/', (req, res, next) => {
         }
       ],
       where: {
-        numero: req.query.id
+        idCasa: req.query.id
       }
     })
       .then(data => {
