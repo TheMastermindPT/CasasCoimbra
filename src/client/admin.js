@@ -327,6 +327,7 @@ $(document).ready(() => {
         <input type="file" name="fotos" id="fotos__divisao" multiple required>
       </div>
     `);
+    
 
     $(this)
       .parents('.popup__form')
@@ -459,12 +460,15 @@ $(document).ready(() => {
     });
   });
 
+  // Kicks people from dashboard if not authenticated
   if (window.location.pathname === '/admin/dashboard') {
     if (auth !== '2') {
       window.location.replace('/admin/login');
     }
   }
 
+
+  // Logs out of session
   $('.admin__end').on('click', function() {
     auth = cookies.remove('auth');
     window.location.replace('/admin/login');

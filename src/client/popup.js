@@ -188,19 +188,84 @@ const openModal = (modal, element) => {
   });
 
   if (modalExists) {
+   
+
     $(modal).addClass('popup--visible');
     $('.popup__box').addClass('popup--open');
     $('body').css('overflow-y', 'hidden');
 
     if (modal === '#divisoes' && element) {
+
+      // VARIABLES ////////////////////////////
       const photosForm = $('.popup__fotos-form');
-      const idCasa = $(element)
+      const idCasaString = $(element)
         .data('id')
         .toString();
+        const idCasa = $(this)
+        .parents('.popup__form')
+        .data('id');
+      const idDivisao = $(this)
+        .find(':selected')
+        .val();
+      const mode = $(this)
+        .find(':selected')
+        .data('mode');
+      ////////////////////////////////////////
 
-      // Empties select values and fotos when opening
-      $('#divisao').html('');
-     /*  photosForm.empty(); */
+
+        // Empties select values and fotos when opening
+        $('#divisao').html('');
+       
+       // Select division when changing select value
+      $('.popup__form').on('change, load', '#divisao', function() {
+      if (mode !== 'create') {
+      $.ajax({
+        method: 'GET',
+        url: `${window.location.origin}/api/casas?id=${idCasa}&div=${idDivisao}&edit`,
+        dataType: 'json'
+      }).then(casa => {
+        // Populate inputs with the values of the first division of the house
+        $('#tipo').val(casa.divisao[0].tipo);
+        casa.divisao[0].numero
+          ? $('#div__numero').val(casa.divisao[0].numero)
+          : $('#div__numero').val('');
+        $('#descricao').val(casa.divisao[0].descricao);
+        $('#preco').val(casa.divisao[0].preco);
+        onCreateDivisionCheckboxAvailable(casa);
+        $('#quando').val(casa.divisao[0].quando);
+        appendPhotos(casa);
+      });
+      return true;
+      }
+      // Removes and appends the option to add thumbnails again
+      photosForm.empty();
+      photosForm.append(`
+        <div class="fotos__foto fotos__foto--add">
+          <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
+            <svg>
+              <use xlink:href="#icon-upload"></use>
+            </svg>
+          </label>
+          <input type="file" name="fotos" id="fotos__divisao" multiple required>
+        </div>
+      `);
+    
+
+      $(this)
+        .parents('.popup__form')
+        .find('input, textarea')
+        .val('');
+
+      $(this)
+        .parents('.popup__form')
+        .find('input[type=checkbox]')
+        .prop('checked', false);
+
+      $('#disponivel').prop('checked', true); 
+        return false;
+      
+      });
+
       $('.popup__form')
         .find('input, textarea')
         .val('');
@@ -208,7 +273,7 @@ const openModal = (modal, element) => {
 
       $.ajax({
         method: 'GET',
-        url: `${window.location.origin}/api/casas?id=${idCasa}`,
+        url: `${window.location.origin}/api/casas?id=${idCasaString}`,
         dataType: 'json'
       }).then(casa => {
         $('.popup__title').text(`${casa.nome}`);
@@ -388,6 +453,7 @@ $(document).ready(() => {
       modal = `${$(this).data('modal')}`;
       // Checks if already opened a link before
       openModal(modal, this);
+      
       if (!loaded && window.location.hash) {
         window.history.replaceState({ popup: true }, null, modal);
       } else {
