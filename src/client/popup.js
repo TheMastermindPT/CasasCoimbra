@@ -200,7 +200,7 @@ const openModal = (modal, element) => {
 
       // Empties select values and fotos when opening
       $('#divisao').html('');
-      photosForm.empty();
+     /*  photosForm.empty(); */
       $('.popup__form')
         .find('input, textarea')
         .val('');

@@ -469,9 +469,11 @@
     }
 
     img {
-      display: block;
+      display: flex;
+      justify-content: center;
       height: 100%;
       max-width: 100%;
+      
       margin: 0 auto;
       outline: none;
       -webkit-user-select: none;

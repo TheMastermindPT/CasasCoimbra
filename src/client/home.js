@@ -4,6 +4,8 @@ const template = require('./template');
 
 const { exitPopup } = popup;
 
+
+
 $(window).ready(() => {
   // VARIABLES ON LOAD /////////
   const imoveisWrapper = $('.imoveis__wrapper');
@@ -14,7 +16,7 @@ $(window).ready(() => {
   const sidenav = $('.sidenav');
   const svg = $('#imoveis').find('svg');
   const contacto = $('#numero');
-  console.log('test production');
+  const foto = $('.popup__photos img');
   // ///////////////////////////
 
   $.ajax({
