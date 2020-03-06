@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server/main.js",
     "build": "webpack --config config/webpack.prod.js",
-    "nodemon": "nodemon --watch config --watch src/server src/server/main.js"
+    "nodemon": "nodemon --watch config --watch src/server src/server/main.js",
+    "forever": "forever start src/server/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "express-hbs": "^2.3.0",
     "extract-loader": "^2.0.1",
     "file-loader": "^1.1.11",
+    "forever-monitor": "^2.0.0",
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.3",
     "handlebars-loader": "^1.7.1",

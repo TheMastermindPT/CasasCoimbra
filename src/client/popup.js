@@ -122,6 +122,8 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
       `/api/casas?id=${casa.idCasa}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
     );
   });
+
+  
 };
 
 const appendPhotos = (casa = null, uploadFiles = null) => {

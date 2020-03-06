@@ -59,7 +59,8 @@ const hbs = exphbs.create({
       let string = JSON.stringify(context);
       string = trimFirstAndLast(string);
       return string;
-    }
+    },
+    
   }
 });
 

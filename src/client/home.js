@@ -19,6 +19,8 @@ $(window).ready(() => {
   const foto = $('.popup__photos img');
   // ///////////////////////////
 
+
+
   $.ajax({
     url: `${window.location.origin}/api/casas`,
     method: 'GET'
