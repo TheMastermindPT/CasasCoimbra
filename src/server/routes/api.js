@@ -556,9 +556,9 @@ router.post('/editDivisions', (req, res, next) => {
         tipo,
         numero : numero || null,
         descricao,
-        preco,
+        preco : preco || null,
         disponivel,
-        quando
+        quando :quando || null
       },
       { where: { idDivisao } }
     )
