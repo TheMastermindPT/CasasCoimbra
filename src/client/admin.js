@@ -243,7 +243,9 @@ $(document).ready(() => {
         dataType: 'json',
         data
       }).then(res => {
-        console.log(res);
+        console.log(res.created,window.location.href);
+       
+
         if (res.action === 'created') {
           selector.val(`${res.created.idDivisao}`);
           selector.removeData('mode');
@@ -415,7 +417,7 @@ $(document).ready(() => {
   });
 
   // Deletes single division photo
-  $('.popup__fotos-form').on('click', '.foto__delete', function() {
+  $('.popup__fotos-form').on('click', '.foto__delete', function(event) {
     const nome = $('.popup__title--divisoes').text();
     const idFoto = $(this).data('id');
     const idDivisao = $('#divisao')
@@ -448,7 +450,14 @@ $(document).ready(() => {
         .closest('.fotos__foto')
         .remove();
     });
+
+    const isEmptyFoto = $('.popup__fotos-form').children('.fotos__foto--show').length;
+    if(isEmptyFoto - 1 === 0) {
+      $('.popup-fotos-form').css('justify-content', 'center');
+    }
   });
+
+  
 
   // Kicks people from dashboard if not authenticated
   if (window.location.pathname === '/admin/dashboard') {

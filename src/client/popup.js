@@ -122,8 +122,6 @@ const updatePhoto = (casa, counterDiv, counterPhotos) => {
       `/api/casas?id=${casa.idCasa}&div=${casa.divisao[counterDiv].idDivisao}&foto=${counterPhotos}`
     );
   });
-
-  
 };
 
 const appendPhotos = (casa = null, uploadFiles = null) => {
@@ -131,12 +129,21 @@ const appendPhotos = (casa = null, uploadFiles = null) => {
     const photosForm = $('.popup__fotos-form');
     const fotos = casa && !uploadFiles ? casa.divisao[0].foto : uploadFiles;
 
+    
+
     // Changes the layout of the thumbnails according to the number of fotos
     if (fotos.length >= 6) {
       photosForm.css('justify-content', 'flex-start');
     } else {
       photosForm.css('justify-content', 'center');
     }
+
+    $('.popup__fotos-form').on('click', '.foto__delete', function(event) {
+      const isEmptyFoto = $('.popup__fotos-form').children('.fotos__foto--show').length;
+      if(isEmptyFoto - 1 === 0) {
+       photosForm.css('justify-content', 'center');
+      }
+    });
 
     casa ? photosForm.empty() : null;
 
