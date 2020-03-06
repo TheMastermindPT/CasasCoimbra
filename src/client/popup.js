@@ -27,9 +27,9 @@ const updateInfo = (casa, counterDiv) => {
     }`
   );
 
-  if(casa.divisao[counterDiv].preco) {
+  if(casa.divisao[counterDiv].preco && casa.divisao[counterDiv].disponivel === 1) {
     $('.popup__price').html(`${casa.divisao[counterDiv].preco}€`);
-  } else if ((casa.divisao[counterDiv].disponivel === null || casa.divisao[counterDiv].disponivel === 0) && casa.divisao[counterDiv].quando === null ) {
+  } else if (casa.divisao[counterDiv].disponivel == 0 && casa.divisao[counterDiv].quando === null ) {
     $('.popup__price').html(`Nao Disponível`);  
   } else {
     $('.popup__price').html(`Disponível em ${casa.divisao[counterDiv].quando}`);

@@ -552,9 +552,9 @@ router.post('/editDivisions', (req, res, next) => {
     db.Divisao.update(
       {
         tipo,
-        numero: numero || null,
+        numero,
         descricao,
-        preco: preco || null,
+        preco,
         disponivel,
         quando: quando || null
       },
@@ -569,9 +569,9 @@ router.post('/editDivisions', (req, res, next) => {
     db.Divisao.create({
       CasaIdCasa: idCasa,
       tipo,
-      numero : numero || null,
-      descricao : descricao || null,
-      preco :  preco || null,
+      numero,
+      descricao,
+      preco,
       disponivel,
       quando: quando || null
     })
