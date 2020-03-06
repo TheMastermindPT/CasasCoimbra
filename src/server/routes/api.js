@@ -550,10 +550,11 @@ router.post('/editDivisions', (req, res, next) => {
   }
 
   if (typeof idDivisao === 'number') {
+    console.log('update');
     db.Divisao.update(
       {
         tipo,
-        numero,
+        numero : numero || null,
         descricao,
         preco,
         disponivel,
@@ -567,14 +568,15 @@ router.post('/editDivisions', (req, res, next) => {
       })
       .catch(oops => next());
   } else {
+    console.log('create');
     db.Divisao.create({
       CasaIdCasa: idCasa,
       tipo,
-      numero,
+      numero : numero || null,
       descricao,
-      preco,
+      preco : preco || null,
       disponivel,
-      quando 
+      quando :quando || null
     })
       .then(created => {
         res.send({ created, action: 'created' });

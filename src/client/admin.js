@@ -230,9 +230,9 @@ $(document).ready(() => {
         tipo: $('#tipo').find(':selected').val(),
         numero: $('#div__numero').val(),
         descricao: $('#descricao').val(),
-        preco: $('#preco').val() || null,
+        preco: $('#preco').val() ? $('#preco').val() : null,
         disponivel: $('#disponivel').prop('checked'),
-        quando : $('#quando').val() || null
+        quando : $('#quando').val() ? $('#quando').val() : null
       };
 
       console.log(data);
