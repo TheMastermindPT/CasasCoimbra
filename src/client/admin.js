@@ -14,6 +14,7 @@ let isAppended = false;
 // Check if admin is logged in
 let auth = cookies.get('auth');
 const formDrag = $('.home__exists');
+const disponivel = $('#disponivel');
 moment.tz.setDefault('Europe/London');
 
 //Function to append multiple photos thumbnail
@@ -52,6 +53,48 @@ $.ajax({
 });
 
 $(document).ready(() => {
+
+
+  // Check if room available if so price is unlocked else price is locked and date availability locked
+
+  const checkIfAvailable = () => {
+  
+    if($(disponivel).prop('checked')) {
+      $('#quando').prop('disabled', true);
+      $('#quando').css('background-color', 'grey');
+      $('#quando').css('border', '1px solid grey');
+      $('#quando').val('');
+
+      $('#preco').prop('disabled', false);
+      $('#preco').css('background-color', '#0b1b1f');
+      $('#preco').css('border', '1px solid #0b1b1f');
+
+    } else {
+      $('#quando').prop('disabled', false);
+      $('#quando').css('background-color', '#0b1b1f');
+      $('#quando').css('border', '1px solid #0b1b1f');
+     
+      $('#preco').prop('disabled', true);
+      $('#preco').css('background-color', 'grey');
+      $('#preco').css('border', '1px solid grey');
+      $('#preco').val('');
+    }
+  }
+
+
+  // On load disable datepicker
+  $(disponivel).prop('checked');
+  $('#preco').prop('disabled', false);
+  $('#quando').prop('disabled', true);
+  $('#quando').val('');
+  $('#quando').css('background-color', 'grey');
+  $('#quando').css('border', '1px solid grey');
+
+
+  $('.popup__edit').on('change', disponivel, function() {
+    checkIfAvailable(); 
+  });
+
   // Adds calendar
   $('#quando').datepicker({
     dateFormat: 'dd/mm/yy',
@@ -180,18 +223,20 @@ $(document).ready(() => {
               .val()
           : null;
 
+
       const data = {
         idCasa,
         idDivisao,
         tipo: $('#tipo').find(':selected').val(),
         numero: $('#div__numero').val(),
         descricao: $('#descricao').val(),
-        preco: $('#preco').val(),
+        preco: $('#preco').val() || null,
         disponivel: $('#disponivel').prop('checked'),
-        quando : $('#quando').val()
+        quando : $('#quando').val() || null
       };
 
       console.log(data);
+      
       $.ajax({
         method: 'POST',
         url: `${window.location.origin}/api/casas/editDivisions`,

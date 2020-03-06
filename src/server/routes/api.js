@@ -533,11 +533,13 @@ router.post('/editDivisions', (req, res, next) => {
     quando
   } = req.body;
 
-
-  quando = quando.split('-')[0].split('/');
-  quando  = new Date(quando[2], quando[1] -1, quando[0]); 
-  
-
+  if(quando) {
+    quando = quando.split('-')[0].split('/');
+    quando  = new Date(quando[2], quando[1] -1, quando[0]); 
+  } else {
+    quando = null;
+  }
+ 
   preco = parseInt(preco, 10);
   idDivisao = parseInt(idDivisao, 10) || 'create';
 
@@ -546,7 +548,6 @@ router.post('/editDivisions', (req, res, next) => {
   } else {
     disponivel = 0;
   }
- 
 
   if (typeof idDivisao === 'number') {
     db.Divisao.update(
@@ -556,7 +557,7 @@ router.post('/editDivisions', (req, res, next) => {
         descricao,
         preco,
         disponivel,
-        quando: quando || null
+        quando
       },
       { where: { idDivisao } }
     )
@@ -573,7 +574,7 @@ router.post('/editDivisions', (req, res, next) => {
       descricao,
       preco,
       disponivel,
-      quando: quando || null
+      quando 
     })
       .then(created => {
         res.send({ created, action: 'created' });
