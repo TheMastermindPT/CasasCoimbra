@@ -302,10 +302,10 @@
                         {{#if this.preco}}
                         {{json this.preco}}€
                         {{else}}
-                            Nao Disponível
+                            Disponível em {{json this.quando}}
                         {{/if}}
                     </p>
-                    <p class="popup__comment">{{json this.descricao}}</p>
+                    <p class="popup__comment"></p>
                     {{/each}}
                     {{else}}
                     <p class="popup__tipo"></p>

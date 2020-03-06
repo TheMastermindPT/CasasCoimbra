@@ -2,14 +2,19 @@ require('./main');
 require('./popup.js');
 require('../views/admin.hbs');
 const cookies = require('js-cookie');
+const timezone = require('moment-timezone');
+const moment = require('moment');
 const template = require('./template');
 const { appendPhotos, addDivision } = require('./popup');
+
+
 
 // GLOBALS
 let isAppended = false;
 // Check if admin is logged in
 let auth = cookies.get('auth');
 const formDrag = $('.home__exists');
+moment.tz.setDefault('Europe/London');
 
 //Function to append multiple photos thumbnail
 
@@ -47,6 +52,13 @@ $.ajax({
 });
 
 $(document).ready(() => {
+  // Adds calendar
+  $('#quando').datepicker({
+    dateFormat: 'dd/mm/yy',
+    gotoCurrent: true,
+    hideIfNoPrevNext: true
+  });
+
   const savePositions = form => {
     const data = {};
     const info = []
@@ -176,10 +188,10 @@ $(document).ready(() => {
         descricao: $('#descricao').val(),
         preco: $('#preco').val(),
         disponivel: $('#disponivel').prop('checked'),
-        quando: $('#quando').val()
+        quando : $('#quando').val()
       };
-      console.log(data);
 
+      console.log(data);
       $.ajax({
         method: 'POST',
         url: `${window.location.origin}/api/casas/editDivisions`,
@@ -207,10 +219,6 @@ $(document).ready(() => {
     }
   });
 
-  // Adds calendar
-  $('#quando').datepicker({
-    dateFormat: 'yy/mm/dd'
-  });
 
   // Removes autocomplete from popup from
   $('.popup__form').disableAutoFill({
@@ -279,69 +287,6 @@ $(document).ready(() => {
     }
   });
 
-  // Select division when changing select value
-  $('.popup__form').on('change', '#divisao', function() {
-    const idCasa = $(this)
-      .parents('.popup__form')
-      .data('id');
-
-    const idDivisao = $(this)
-      .find(':selected')
-      .val();
-
-    const mode = $(this)
-      .find(':selected')
-      .data('mode');
-    
-
-    const photosForm = $('.popup__fotos-form');
-
-    if (mode !== 'create') {
-      $.ajax({
-        method: 'GET',
-        url: `${window.location.origin}/api/casas?id=${idCasa}&div=${idDivisao}&edit`,
-        dataType: 'json'
-      }).then(casa => {
-        // Populate inputs with the values of the first division of the house
-        $('#tipo').val(casa.divisao[0].tipo);
-        casa.divisao[0].numero
-          ? $('#div__numero').val(casa.divisao[0].numero)
-          : $('#div__numero').val('');
-        $('#descricao').val(casa.divisao[0].descricao);
-        $('#preco').val(casa.divisao[0].preco);
-        onCreateDivisionCheckboxAvailable(casa);
-        $('#quando').val(casa.divisao[0].quando);
-        appendPhotos(casa);
-      });
-      return true;
-    }
-    // Removes and appends the option to add thumbnails again
-    photosForm.empty();
-    photosForm.append(`
-      <div class="fotos__foto fotos__foto--add">
-        <label for="fotos__divisao" class="foto__form-label foto__form-label--add">
-          <svg>
-            <use xlink:href="#icon-upload"></use>
-          </svg>
-        </label>
-        <input type="file" name="fotos" id="fotos__divisao" multiple required>
-      </div>
-    `);
-    
-
-    $(this)
-      .parents('.popup__form')
-      .find('input, textarea')
-      .val('');
-
-    $(this)
-      .parents('.popup__form')
-      .find('input[type=checkbox]')
-      .prop('checked', false);
-
-    $('#disponivel').prop('checked', true); 
-    return false;
-  });
 
   // Deletes Home from Database
   $('.home__wrap').on('click', '.home__delete', function(e) {
