@@ -24,12 +24,11 @@ This application provides:
 
 ### Homepage  
 ![Homepage screenshot](screenshots/homepage.gif)
-<<<<<<< HEAD
+
 
 ### Login to the Admin page
 ![Navigation screenshot](screenshots/login.gif)
 =======
->>>>>>> d383df291c7d2404a32f9b49d2cbe234b9aa0b81
 
 *Screenshots are for demonstration. Some dynamic data (such as images) may not be included in this archive.*
 
