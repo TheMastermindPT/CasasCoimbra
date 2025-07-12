@@ -25,9 +25,11 @@ This application provides:
 ### Homepage  
 ![Homepage screenshot](screenshots/homepage_mobile.png)
 
-### Login 
-![Navigation screenshot](screenshots/login.png)
+### Services 
+![Navigation screenshot](screenshots/services.png)
 
+### Login to the Admin page
+![Navigation screenshot](screenshots/login.png)
 
 *Screenshots are for demonstration. Some dynamic data (such as images) may not be included in this archive.*
 
