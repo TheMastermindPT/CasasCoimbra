@@ -1,33 +1,67 @@
-# CasasCoimbra
-This project included crafting a captivating landing page and an efficient client information management back office.
+Casas Coimbra
+Casas Coimbra is a web application for managing and showcasing student rental properties in Coimbra, Portugal.
+Originally built for a local property owner, this project includes a property listing website and an admin dashboard for managing properties and room availability.
 
-    JavaScript: Empowered the site with dynamic features, enhancing interactivity.
-    CSS and SASS: Designed visually appealing, functional web pages.
-    Node.js: Ensured swift and seamless server-side data handling.
-    jQuery: Implemented responsive elements, enhancing user experiences.
-    PHP: Provided robust server-side logic with efficient data handling.
-    SQL: Managed data seamlessly, preserving integrity.
-    WebPack: Optimized site performance through asset bundling.
-    Responsive Design: Ensured a flawless user experience on all devices.
-    Google Maps Integration: Enhanced property showcase with location details.
-    Customer Support Integration: Real-time assistance via Facebook and WhatsApp.
-    SASS: Created aesthetically pleasing and robust designs.
-    Cutting-edge Technologies: Proficiency in modern web development tools.
+Project Overview
+This application provides:
 
-I demonstrated my broad web development skills through the creation of a comprehensive website. This project included the design of an engaging landing page and a streamlined back office for managing client information. 
+A responsive public-facing website for property listings and service information.
 
-JavaScript was key in adding dynamic features to the website, boosting user interactivity and creating engaging elements. CSS and SASS were employed to create a visually appealing interface that combined function with style.
+An administrative dashboard (protected by login) for managing properties, rooms, and images.
 
-Node.js was used to enhance server-side data handling, optimizing user interactions and data processing. The addition of jQuery allowed for dynamic and responsive website elements, contributing to a smooth user experience and interactive content. 
+Features for uploading and managing property photos.
 
-PHP was utilized for robust server-side logic, ensuring efficient and reliable back-end operations and data handling. SQL was used for effective database management, enabling smooth data retrieval and storage and maintaining data integrity.
+Custom UI/UX with SCSS for consistent styling.
 
-WebPack was a valuable asset in boosting the website's performance, allowing for effective bundling and optimization of web assets. This resulted in a visually stunning, responsive, and fast website. 
+jQuery and Handlebars for DOM manipulation and templating.
 
-The website was designed with a focus on responsive design, ensuring an excellent user experience on any device by adapting to different screen sizes seamlessly. A dynamic property showcase was a key feature, using Google Maps Integration via JavaScript and the Google Maps API to provide users with a clear view of property locations. 
+A Node.js/Express backend.
 
-Detailed room photos were integrated into the showcase with JavaScript, enhancing the presentation and offering users a captivating visual experience. Facebook and WhatsApp support channels were integrated to facilitate customer support, with JavaScript and jQuery enabling real-time assistance and community engagement for direct communication between users and the client's team.
+Note: This is an archived project, presented as originally developed. The stack and patterns reflect best practices at the time of implementation.
 
-SASS was crucial in creating a visually pleasing and functionally robust design, contributing to visually stunning and responsive web pages, and ensuring an engaging user interface. 
+Screenshots
+Homepage
 
-This project highlighted my expertise in cutting-edge web development technologies and libraries, from HTML and CSS to Handlebars templating, demonstrating my ability to leverage modern web development solutions.
+Navigation
+
+Admin Dashboard
+
+Screenshots are for demonstration. Some dynamic data (such as images) may not be included in this archive.
+
+Tech Stack
+Frontend: HTML, SCSS, jQuery, Handlebars
+
+Backend: Node.js, Express
+
+Database: Hardcoded JSON (for demonstration)
+
+Development: MAMP
+
+Features
+Property Listings: Grid of available properties with details and image galleries.
+
+Admin Dashboard: Manage properties, room details, and photo uploads via a secure backend.
+
+Custom Navigation: Responsive side navigation with smooth transitions.
+
+FAQ, Service Pages, and More: Modular structure for easy updates.
+
+Mobile-Friendly: Responsive layout for desktop and mobile users.
+
+Reflections & Improvements
+This project represents my early full-stack experience.
+If revisiting today, I would consider:
+
+Migrating to a component-based framework (React or Vue).
+
+Integrating a database (MongoDB, PostgreSQL) for persistent storage.
+
+Refactoring with ES6+ syntax and modular code structure.
+
+Adding automated tests and improving accessibility.
+
+License
+This project is released under the MIT License.
+
+
+
