@@ -125,7 +125,7 @@ app.get('/admin/dashboard', (req, res) => {
 });
 
 // SERVER
-db.sequelize.sync().then(function() {
+db.sequelize.sync({ force: true }).then(function() {
   http.createServer(app).listen(PORT, function() {
     console.log(`Express server listening on port ${PORT}`);
   });

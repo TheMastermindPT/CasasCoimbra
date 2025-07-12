@@ -267,10 +267,7 @@ $(document).ready(() => {
   });
 
 
-  // Removes autocomplete from popup from
-  $('.popup__form').disableAutoFill({
-    randomizeInputName: true
-  });
+ 
 
   // Saves Home to Database
   $('.home__wrap').on('submit', '.home__form', function(e) {

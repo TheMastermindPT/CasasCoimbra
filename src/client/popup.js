@@ -1,4 +1,5 @@
-import onCreateDivisionCheckboxAvailable from './admin';
+import { onCreateDivisionCheckboxAvailable } from './admin';
+
 const exitPopup = $('.popup');
 const modalsList = [
   {
@@ -540,4 +541,4 @@ $(document).ready(() => {
   });
 });
 
-module.exports = { exitPopup, appendPhotos, addDivision };
+export  { exitPopup, appendPhotos, addDivision };
