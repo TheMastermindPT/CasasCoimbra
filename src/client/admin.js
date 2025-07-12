@@ -1,11 +1,9 @@
 require('./main');
-require('./popup.js');
 require('../views/admin.hbs');
 const cookies = require('js-cookie');
 const timezone = require('moment-timezone');
 const moment = require('moment');
 const template = require('./template');
-const { appendPhotos, addDivision } = require('./popup');
 
 
 
@@ -16,6 +14,9 @@ let auth = cookies.get('auth');
 const formDrag = $('.home__exists');
 const disponivel = $('#disponivel');
 moment.tz.setDefault('Europe/London');
+
+
+
 
 //Function to append multiple photos thumbnail
 
@@ -39,6 +40,8 @@ export const onCreateDivisionCheckboxAvailable = (casa) => {
     : $('#disponivel').prop('checked', false);
 }
 
+
+
 // Loads Homes in the Dashboard
 $.ajax({
   url: `${window.location.origin}/api/casas`,
@@ -54,7 +57,7 @@ $.ajax({
 
 $(document).ready(() => {
 
-
+const { appendPhotos, addDivision } = require('./popup');
   // Check if room available if so price is unlocked else price is locked and date availability locked
 
   const checkIfAvailable = () => {
